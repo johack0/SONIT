@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SONIT · Progetto DXP — Documentazione</title>
+<meta name="description" content="Hub della documentazione del progetto di restyling del sito Sonit Srl: stato dell'arte, alberatura, worklog e diario delle modifiche.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003A83'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial' font-size='16' font-weight='bold' fill='%23fff' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blu:#003A83;
+    --blu-scuro:#00265a;
+    --blu-chiaro:#CFDDEC;
+    --blu-tenue:#f2f6fb;
+    --ink:#16202e;
+    --ink-soft:#4a5768;
+    --line:#dde4ee;
+    --crit:#b3261e;
+    --warn:#b26a00;
+    --ok:#1b6b3a;
+    --info:#0b5ed7;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:#fff;line-height:1.55;font-size:15px;
+  }
+  .shell{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* hero */
+  header.hero{
+    background:linear-gradient(160deg,var(--blu) 0%,var(--blu-scuro) 100%);
+    color:#fff;padding:52px 0 46px;position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-90px;top:-90px;width:340px;height:340px;
+    border:1px solid rgba(255,255,255,.14);border-radius:50%;
+  }
+  header.hero::before{
+    content:"";position:absolute;right:20px;bottom:-140px;width:240px;height:240px;
+    border:1px solid rgba(255,255,255,.1);border-radius:50%;
+  }
+  .kicker{font-size:11.5px;text-transform:uppercase;letter-spacing:.18em;font-weight:700;opacity:.72}
+  header.hero h1{font-size:36px;line-height:1.12;margin:10px 0 12px;letter-spacing:-.025em;max-width:22ch}
+  header.hero p{margin:0;max-width:62ch;font-size:16.5px;color:#dbe6f5}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:26px;margin-top:30px;position:relative;z-index:1}
+  .hero-meta div{font-size:12.5px}
+  .hero-meta span{display:block;opacity:.62;text-transform:uppercase;letter-spacing:.1em;font-size:10.5px;margin-bottom:3px}
+
+  /* sections */
+  section{padding:44px 0}
+  section + section{border-top:1px solid var(--line)}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.13em;color:var(--blu);margin:0 0 20px}
+  h3{margin:0 0 6px;font-size:18px;letter-spacing:-.01em}
+
+  /* doc cards */
+  .docs{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  a.doc{
+    display:block;border:1px solid var(--line);border-radius:10px;padding:22px;
+    text-decoration:none;color:inherit;background:#fff;transition:.16s;position:relative;
+  }
+  a.doc:hover{border-color:var(--blu);box-shadow:0 8px 22px -14px rgba(0,58,131,.5);transform:translateY(-2px)}
+  a.doc .num{font-family:var(--mono);font-size:11.5px;color:var(--blu);letter-spacing:.08em}
+  a.doc p{margin:6px 0 14px;font-size:13.6px;color:var(--ink-soft)}
+  a.doc .go{font-size:12.5px;font-weight:700;color:var(--blu)}
+  .doc.soon{opacity:.55;pointer-events:none;border-style:dashed}
+
+  ul.files{list-style:none;padding:0;margin:18px 0 0;border-top:1px solid var(--line)}
+  ul.files li{border-bottom:1px solid var(--line)}
+  ul.files a{display:flex;justify-content:space-between;gap:14px;padding:11px 2px;text-decoration:none;color:var(--ink);font-size:13.6px}
+  ul.files a:hover{color:var(--blu)}
+  ul.files .k{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);white-space:nowrap}
+
+  /* phases */
+  ol.phases{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+  ol.phases li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;padding:11px 12px;border-radius:7px;background:var(--blu-tenue)}
+  ol.phases li.done{background:#eef7f1}
+  ol.phases li.now{background:#e8f0fe;box-shadow:inset 0 0 0 1px #bcd3fb}
+  ol.phases li.next{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+  ol.phases .id{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--blu)}
+  ol.phases .nm{font-size:14px}
+  ol.phases .nm small{display:block;color:var(--ink-soft);font-size:12.3px}
+
+  /* findings */
+  .kpis{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:24px}
+  .kpi{border:1px solid var(--line);border-radius:9px;padding:15px 16px}
+  .kpi b{display:block;font-size:27px;color:var(--blu);line-height:1.05;letter-spacing:-.02em}
+  .kpi span{display:block;font-size:12.2px;color:var(--ink-soft);margin-top:4px}
+  ol.find{margin:0;padding-left:20px}
+  ol.find li{margin-bottom:9px;font-size:14px}
+  ol.find code{font-family:var(--mono);font-size:12.4px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro)}
+
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2.5px 8px;border-radius:20px;white-space:nowrap}
+  .t-ok{background:#e7f4ec;color:var(--ok)}
+  .t-now{background:#e8f0fe;color:var(--info)}
+  .t-todo{background:#eef1f5;color:var(--ink-soft)}
+  .t-crit{background:#fdecea;color:var(--crit)}
+
+  .box{border:1px solid var(--line);border-left:4px solid var(--warn);background:#fffaf0;padding:15px 17px;border-radius:0 8px 8px 0;font-size:14px}
+  .box p{margin:0}
+  .box strong{color:var(--blu-scuro)}
+
+  footer{background:var(--blu-tenue);border-top:1px solid var(--line);padding:26px 0;font-size:12.4px;color:var(--ink-soft)}
+  footer p{margin:0 0 5px}
+  footer code{font-family:var(--mono);font-size:11.8px}
+
+  @media (max-width:640px){
+    header.hero{padding:38px 0 34px}
+    header.hero h1{font-size:27px}
+    section{padding:34px 0}
+    ol.phases li{grid-template-columns:44px minmax(0,1fr);row-gap:6px}
+    ol.phases li .tag{grid-column:2}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell">
+    <p class="kicker">Sonit Srl · Progetto DXP</p>
+    <h1>Restyling sito: documentazione di progetto</h1>
+    <p>Area di lavoro condivisa con l'avanzamento del progetto: analisi dello stato dell'arte, architettura delle informazioni, contenuti, design e sviluppo.</p>
+    <div class="hero-meta">
+      <div><span>Fase corrente</span>F1 · Stato dell'arte</div>
+      <div><span>Ultimo aggiornamento</span>05/08/2026</div>
+      <div><span>Kick-off</span>28/07/2026</div>
+      <div><span>Approvazioni</span>Giorgio · operativo: Giorgio e Beatrice</div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="shell">
+    <h2>Documenti</h2>
+    <div class="docs">
+
+      <a class="doc" href="/docs/stato-arte-sonit">
+        <p class="num">DOC 01 · v0.1</p>
+        <h3>Stato dell'arte e worklog</h3>
+        <p>Analisi del sito online, alberatura attuale, inventario contenuti, criticità, gap analysis sugli obiettivi, fasi di progetto, worklog e diario delle modifiche.</p>
+        <p class="go">Apri il documento →</p>
+      </a>
+
+      <div class="doc soon">
+        <p class="num">DOC 02</p>
+        <h3>Architettura delle informazioni</h3>
+        <p>Nuova sitemap con il razionale di ogni pagina e sezione, strategia di separazione B2B / B2C fotovoltaico.</p>
+        <p class="go">In preparazione</p>
+      </div>
+
+      <div class="doc soon">
+        <p class="num">DOC 03</p>
+        <h3>Contenuti e wireframe</h3>
+        <p>Sistema di messaggi, contenuti per sezione e wireframe strutturali low fidelity.</p>
+        <p class="go">In preparazione</p>
+      </div>
+
+    </div>
+
+    <ul class="files">
+      <li><a href="/SONIT%20_%20Kick%20Off%20DXP%20-%202026_07_28%2012_31%20CEST%20-%20Appunti%20di%20Gemini.docx">
+        Verbale kick-off del 28/07/2026 <span class="k">.docx · download</span></a></li>
+      <li><a href="https://www.sonit.it/" target="_blank" rel="noopener">
+        Sito attualmente online <span class="k">sonit.it ↗</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <h2>Avanzamento</h2>
+    <ol class="phases">
+      <li class="done"><span class="id">F0</span><span class="nm">Kick-off<small>Obiettivi aziendali, vincoli, governance</small></span><span class="tag t-ok">Completata</span></li>
+      <li class="now"><span class="id">F1</span><span class="nm">Stato dell'arte<small>Analisi sito, alberatura attuale, gap analysis</small></span><span class="tag t-now">In corso</span></li>
+      <li class="next"><span class="id">F2</span><span class="nm">Architettura delle informazioni<small>Sitemap con razionale, presentazione al cliente</small></span><span class="tag t-todo">Da avviare</span></li>
+      <li class="next"><span class="id">F3</span><span class="nm">Contenuti e wireframe<small>Contenuti per sezione, wireframe low fidelity</small></span><span class="tag t-todo">Da avviare</span></li>
+      <li class="next"><span class="id">F4</span><span class="nm">Direzione visiva<small>Due proposte di design su base blu di brand</small></span><span class="tag t-todo">Da avviare</span></li>
+      <li class="next"><span class="id">F5</span><span class="nm">Design completo<small>Tutte le pagine con i contenuti definitivi</small></span><span class="tag t-todo">Da avviare</span></li>
+      <li class="next"><span class="id">F6</span><span class="nm">Sviluppo<small>Implementazione, form, SEO tecnico, accessibilità</small></span><span class="tag t-todo">Da avviare</span></li>
+      <li class="next"><span class="id">F7</span><span class="nm">Go-live<small>Pubblicazione, redirect, analytics, collaudo</small></span><span class="tag t-todo">Da avviare</span></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <h2>Sintesi dell'analisi</h2>
+    <div class="kpis">
+      <div class="kpi"><b>10</b><span>pagine pubbliche raggiungibili</span></div>
+      <div class="kpi"><b>7 / 10</b><span>pagine con canonical rotto</span></div>
+      <div class="kpi"><b>~180</b><span>parole medie per pagina</span></div>
+      <div class="kpi"><b>0</b><span>strumenti di analytics installati</span></div>
+      <div class="kpi"><b>3</b><span>business unit senza pagina dedicata</span></div>
+      <div class="kpi"><b>20</b><span>criticità classificate</span></div>
+    </div>
+
+    <p style="margin-bottom:16px;color:var(--ink-soft)">Le voci che pesano di più, in ordine di urgenza:</p>
+    <ol class="find">
+      <li><span class="tag t-crit">Critica</span> <code>canonical</code> e <code>og:url</code> contengono codice PHP non interpretato su 7 pagine su 10.</li>
+      <li><span class="tag t-crit">Critica</span> Nessun messaggio di posizionamento: payoff "Reti | Sistemi | Impianti" e hero con citazione generica.</li>
+      <li><span class="tag t-crit">Critica</span> Le 4 voci di servizio non corrispondono alle 3 business unit; il fotovoltaico è una voce di elenco dentro "Impianti e Sistemi".</li>
+      <li><span class="tag t-crit">Critica</span> Certificazioni, partner e download PDF: totalmente assenti. <code>/partner.php</code> è dichiarata in sitemap ma risponde 404.</li>
+      <li><span class="tag t-crit">Critica</span> Form unico per tutti i pubblici, nessuna pagina di conferma, nessun tracciamento delle conversioni.</li>
+      <li><span class="tag t-crit">Critica</span> <code>/privacy.php</code> senza informativa; l'unica informativa reale è su un dominio terzo.</li>
+      <li>La sezione "Lavori" del menu porta a una pagina vuota: "Album non presenti…".</li>
+      <li>Refuso "Effic<strong>e</strong>ntamento" propagato in URL, title, H1, menu e keywords.</li>
+      <li><code>user-scalable=no</code> blocca lo zoom su mobile; oltre metà delle immagini senza <code>alt</code>; immagini fino a 346 KB senza formati moderni.</li>
+    </ol>
+
+    <p style="margin:20px 0 0;color:var(--ink-soft)">Da conservare: i dati strutturati JSON-LD (ricchi e corretti), il contenuto tecnico della pagina Telecomunicazioni e il blu di brand <code style="font-family:var(--mono);font-size:12.4px">#003A83</code> già presente nel CSS.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <h2>Prossimo passo</h2>
+    <div class="box">
+      <p><strong>Decisione da prendere per avviare la fase F2:</strong> il fotovoltaico B2C va gestito come sezione interna alla pagina della business unit o come landing autonoma con percorso proprio? La scelta cambia sitemap, navigazione e struttura dei form. In parallelo serve il caricamento dei materiali sul Drive condiviso: brochure e company profile in PDF, elenco certificazioni, elenco partner pubblicabili e dati aggiornati di organico.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <p><strong>SONIT · Progetto DXP.</strong> Documentazione interna di progetto, non indicizzata.</p>
+    <p>Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
