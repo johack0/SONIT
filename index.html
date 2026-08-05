@@ -103,6 +103,13 @@
   .box p{margin:0}
   .box strong{color:var(--blu-scuro)}
 
+
+  .txtgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(238px,1fr))}
+  .txtgrid a{display:block;border:1px solid var(--line);border-radius:9px;padding:12px 14px;text-decoration:none;color:inherit;transition:.15s}
+  .txtgrid a:hover{border-color:var(--blu);background:var(--blu-tenue)}
+  .txtgrid b{display:block;font-size:14px}
+  .txtgrid span{display:block;font-size:11.8px;color:var(--ink-soft);margin-top:3px}
+  .txtgrid code{font-family:var(--mono);font-size:11.5px}
   footer{background:var(--blu-tenue);border-top:1px solid var(--line);padding:26px 0;font-size:12.4px;color:var(--ink-soft)}
   footer p{margin:0 0 5px}
   footer code{font-family:var(--mono);font-size:11.8px}
@@ -138,16 +145,16 @@
     <div class="docs">
 
       <a class="doc" href="/docs/stato-arte-sonit">
-        <p class="num">DOC 01 · v0.1</p>
+        <p class="num">DOC 01 · v0.4</p>
         <h3>Stato dell'arte e worklog</h3>
         <p>Analisi del sito online, alberatura attuale, inventario contenuti, criticità, gap analysis sugli obiettivi, fasi di progetto, worklog e diario delle modifiche.</p>
         <p class="go">Apri il documento →</p>
       </a>
 
       <a class="doc" href="/docs/alberatura-attuale">
-        <p class="num">DOC 02 · v1.0</p>
+        <p class="num">DOC 02 · v1.2</p>
         <h3>Alberatura del sito online</h3>
-        <p>Struttura completa di sonit.it: albero con le sezioni interne di ogni pagina, confronto menu / sitemap / realtà, mappa dei link interni, blocchi di template, schede pagina e anomalie strutturali.</p>
+        <p>Struttura completa di sonit.it: viste verticale e orizzontale cliccabili, albero con le sezioni interne di ogni pagina, confronto menu / sitemap / realtà, mappa dei link interni, blocchi di template, schede pagina con i testi estratti e anomalie strutturali.</p>
         <p class="go">Apri il documento →</p>
       </a>
 
@@ -173,6 +180,14 @@
       <li><a href="https://www.sonit.it/" target="_blank" rel="noopener">
         Sito attualmente online <span class="k">sonit.it ↗</span></a></li>
     </ul>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <h2>Testi del sito attuale</h2>
+    <p style="margin:-6px 0 18px;color:var(--ink-soft);max-width:70ch">Un file per pagina, con il testo riportato alla lettera così come è online: contenuto, blocchi ripetuti del template, attributi alt, campi dei form e link. Base di partenza per la riscrittura in fase F3. Raggiungibili anche cliccando i nodi dei diagrammi nel Doc 02.</p>
+    <div class="txtgrid"><a href="/docs/testi/index"><b>Home</b><span><code>index.php</code> · ~199 parole</span></a><a href="/docs/testi/sonit-srl"><b>Chi Siamo</b><span><code>sonit-srl.php</code> · ~251 parole</span></a><a href="/docs/testi/servizi-sonit"><b>Servizi e Soluzioni</b><span><code>servizi-sonit.php</code> · ~127 parole</span></a><a href="/docs/testi/impianti-sistemi"><b>Impianti e Sistemi</b><span><code>impianti-sistemi.php</code> · ~245 parole</span></a><a href="/docs/testi/telecomunicazioni"><b>Telecomunicazioni</b><span><code>telecomunicazioni.php</code> · ~284 parole</span></a><a href="/docs/testi/efficentamento-energetico"><b>Efficentamento Energetico</b><span><code>efficentamento-energetico.php</code> · ~237 parole</span></a><a href="/docs/testi/consulenza"><b>Consulenza</b><span><code>consulenza.php</code> · ~167 parole</span></a><a href="/docs/testi/foto"><b>Lavori</b><span><code>foto.php</code> · pagina vuota</span></a><a href="/docs/testi/contatti"><b>Contatti</b><span><code>contatti.php</code> · ~173 parole</span></a><a href="/docs/testi/privacy"><b>Privacy / Termini / Cookies</b><span><code>privacy.php</code> · senza contenuto</span></a></div>
   </div>
 </section>
 
