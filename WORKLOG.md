@@ -1,9 +1,10 @@
 # SONIT · Progetto DXP — Worklog
 
 Registro operativo del progetto di restyling di [sonit.it](https://www.sonit.it/).
+Se stai riprendendo il lavoro dopo una pausa, parti da [`RIPRESA.md`](RIPRESA.md).
 Documentazione online: <https://sonit-jhkstudio.vercel.app> · Indice generale: [README.md](README.md)
 
-Ultimo aggiornamento: **05/08/2026** — contenuti delle 11 pagine scritti, wireframe prossimo passo
+Ultimo aggiornamento: **05/08/2026** — contenuti scritti, wireframe pianificati, progetto documentato per la ripresa
 
 ---
 
@@ -14,7 +15,7 @@ Ultimo aggiornamento: **05/08/2026** — contenuti delle 11 pagine scritti, wire
 | **F0** | Kick-off | Verbale, obiettivi condivisi, governance | ✅ completata 28/07/2026 |
 | **F1** | Stato dell'arte | Doc 01, Doc 02, testi estratti | ✅ completata 05/08/2026 |
 | **F2** | Architettura delle informazioni | Doc 03, decisioni D-01 → D-07 validate | ✅ completata 05/08/2026 |
-| **F3** | Contenuti e wireframe | Doc 04 (contenuti, 11 pagine) + wireframe low fidelity | 🔵 contenuti scritti, wireframe da avviare |
+| **F3** | Contenuti e wireframe | Doc 04 (contenuti, 11 pagine), Doc 05 (piano wireframe) | 🔵 contenuti in approvazione, wireframe pianificati |
 | **F4** | Direzione visiva | **Due** proposte di design | ⬜ da avviare |
 | **F5** | Design completo | Tutte le pagine, desktop e mobile | ⬜ da avviare |
 | **F6** | Sviluppo | Ambiente di staging | ⬜ da avviare |
@@ -50,7 +51,9 @@ Legenda stato: ✅ fatto · 🔵 in corso · ⏳ atteso dal cliente · ⬜ da fa
 | W-012 | Stesura contenuti per pagina, con riuso e correzione dei testi esistenti | F3 | W-011 | Team contenuti | ✅ 11 pagine, 67 blocchi |
 | W-038 | Collegamento contenuti ↔ nodi dell'alberatura proposta | F3 | W-012 | Team dev | ✅ |
 | W-039 | Chiusura dei 19 blocchi in attesa di materiali dal cliente | F3 | W-007 | Team contenuti | ⏳ |
-| W-013 | Wireframe low fidelity di tutte le pagine | F3 | W-012 | Team design | 🔵 prossimo |
+| W-040 | Piano dei wireframe e documento di ripresa (Doc 05 + `RIPRESA.md`) | F3 | W-012 | Team dev | ✅ |
+| W-041 | Approvazione dei contenuti da parte di Giorgio | F3 | W-012 | Cliente | ⏳ |
+| W-013 | Wireframe low fidelity di tutte le pagine | F3 | W-041 | Team design | 🔵 prossimo, pianificato nel Doc 05 |
 | W-014 | Definizione formato case study, senza foto reali di cantiere | F3 | W-011 | Team contenuti | ⬜ |
 | W-015 | Selezione libreria immagini standard coerente con le linee guida | F3 | W-011 | Team design | ⬜ |
 | W-016 | Due proposte di direzione visiva su base blu `#003A83` | F4 | W-013 | Team design | ⬜ |
@@ -129,6 +132,9 @@ Elenco completo, con severità e rimedio: [Doc 01 · criticità](https://sonit-j
 ## Diario delle modifiche
 
 Voci in ordine cronologico inverso.
+
+### 05/08/2026 — Doc 05 e punto di ripresa
+Documentato tutto il necessario per riprendere il progetto da fermo dopo l'approvazione. `RIPRESA.md` è il file da leggere per primo: stato per fase, decisioni già chiuse da non rimettere in discussione, alberatura approvata, materiali attesi in ordine di priorità, difetti del sito attuale da non dimenticare in sviluppo, mappa di dove sta cosa e comandi di rigenerazione. Il [Doc 05](https://sonit-jhkstudio.vercel.app/docs/piano-wireframe) contiene il piano dei wireframe: cosa va approvato prima e cosa invece non li blocca, criteri e tre breakpoint, dodici componenti ricorrenti da disegnare una volta sola, ordine di produzione in otto blocchi di lavoro, le 67 sezioni con il layout previsto pagina per pagina, gli schemi testuali di home, template business unit e landing B2C, e una checklist di validazione in tredici punti. Il documento è generato dalla stessa sorgente dei contenuti, quindi l'elenco delle sezioni non può divergere.
 
 ### 05/08/2026 — Doc 04: contenuti del nuovo sito
 Scritti i contenuti di tutte le 11 pagine della nuova alberatura, un file per nodo in `docs/contenuti/`: 67 blocchi di copy, circa 2.900 parole contro le 1.100 del sito attuale. Ogni pagina porta obiettivo, pubblico, azione attesa, `title` e `meta description` proposti con conteggio caratteri, e il copy diviso nei blocchi in cui compare scorrendo. Ogni blocco è etichettato per provenienza: 20 da riuso del sito attuale, 28 di testo nuovo già pronto, 19 in attesa di materiali dal cliente. I nodi dei diagrammi dell'alberatura proposta sono diventati cliccabili e aprono i contenuti della pagina; ogni scheda del Doc 03 ha il pulsante verso i contenuti e ogni file di contenuto rimanda alla sua scheda. Prossimo passo: wireframe strutturali sui blocchi approvati (W-013), in parallelo al sollecito dei materiali mancanti.

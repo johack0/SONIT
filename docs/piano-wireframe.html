@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SONIT — Piano dei wireframe e punto di ripresa</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;
+    --crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;--info:#0b5ed7;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55;font-size:15px}
+  .wrap{display:grid;grid-template-columns:264px minmax(0,1fr);max-width:1400px;margin:0 auto}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;background:var(--blu);color:#fff;padding:28px 20px 40px}
+  aside .brand{font-weight:800;letter-spacing:.14em;font-size:20px;margin:0 0 2px}
+  aside .brand span{font-weight:400;opacity:.75}
+  aside .sub{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:22px}
+  aside nav a{display:block;color:#dbe6f5;text-decoration:none;font-size:13.2px;padding:5px 8px;border-radius:5px}
+  aside nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+  aside nav .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;opacity:.55;margin:18px 0 6px 8px}
+  aside .back{display:block;margin-top:24px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;color:#bcd3fb;text-decoration:none}
+  aside .back+.back{border-top:0;margin-top:4px;padding-top:0}
+  aside .back:hover{color:#fff}
+  aside .meta{margin-top:18px;font-size:11.5px;opacity:.65}
+  main{padding:44px 52px 90px;min-width:0}
+  .sheet .hd .cnt{margin-left:auto;font-size:12px;font-weight:700;text-decoration:none;color:#fff;
+    background:var(--blu);border-radius:16px;padding:4px 11px;white-space:nowrap}
+  .sheet .hd .cnt:hover{background:var(--blu-scuro)}
+  .sheet .hd .tag{margin-left:auto}
+  .sheet .hd .tag + .cnt{margin-left:0}
+  .diagram .canvas a:hover rect:first-child{fill:rgba(0,58,131,.06)}
+  main [id]{scroll-margin-top:66px}
+  .upbar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:-44px -52px 26px;padding:11px 52px;
+    background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line);font-size:12.5px}
+  .upbar a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--blu);font-weight:600;padding:4px 10px;border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
+  header.top{border-bottom:3px solid var(--blu);padding-bottom:22px;margin-bottom:34px}
+  header.top .kicker{color:var(--blu);font-size:11.5px;text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+  h1{font-size:32px;line-height:1.15;margin:8px 0 10px;letter-spacing:-.02em}
+  h2{font-size:21px;margin:52px 0 14px;padding-top:14px;border-top:1px solid var(--line);letter-spacing:-.01em}
+  h2:first-of-type{border-top:0}
+  h3{font-size:16px;margin:26px 0 8px;color:var(--blu-scuro)}
+  h4{font-size:13.5px;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+  p{margin:0 0 12px}
+  ul,ol{margin:0 0 14px;padding-left:20px}
+  li{margin-bottom:5px}
+  code{font-family:var(--mono);font-size:12.5px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro);word-break:break-word}
+  .lead{font-size:16.5px;color:var(--ink-soft);max-width:70ch}
+  .tbl-wrap{overflow-x:auto;margin:0 0 18px}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:600px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--blu-chiaro);white-space:nowrap}
+  tbody tr:hover{background:#fafcff}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .t-riusa{background:#e7f4ec;color:var(--ok)}
+  .t-riscrivi{background:#e8f0fe;color:var(--info)}
+  .t-sposta{background:#fff4e0;color:var(--warn)}
+  .t-elimina{background:#fdecea;color:var(--crit)}
+  .t-nuovo{background:var(--blu);color:#fff}
+  .t-neutro{background:#eef1f5;color:var(--ink-soft)}
+  .box{border:1px solid var(--line);border-left:4px solid var(--blu);background:var(--blu-tenue);padding:14px 16px;border-radius:0 6px 6px 0;margin:0 0 18px}
+  .box.warn{border-left-color:var(--warn);background:#fffaf0}
+  .box.ok{border-left-color:var(--ok);background:#f3faf5}
+  .box p:last-child{margin-bottom:0}
+  .box strong{color:var(--blu-scuro)}
+  pre.tree{font-family:var(--mono);font-size:12.5px;line-height:1.72;background:#0e1a2b;color:#d7e3f4;padding:22px;border-radius:8px;overflow-x:auto;margin:0 0 18px}
+  pre.tree b{color:#7fb2ff;font-weight:600}
+  pre.tree i{color:#8e9db4;font-style:normal}
+  pre.tree em{color:#7ee0b0;font-style:normal}
+  pre.tree u{color:#ffcf8f;text-decoration:none}
+  .diagram{border:1px solid var(--line);border-radius:10px;padding:18px 18px 10px;margin:0 0 16px;background:#fff}
+  .diagram > .cap{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .diagram > .cap b{font-size:14.5px}
+  .diagram > .cap i{font-style:normal;font-size:12.3px;color:var(--ink-soft)}
+  .diagram .canvas{overflow-x:auto;padding-bottom:6px}
+  .diagram .canvas svg{display:block;min-width:780px}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 22px;font-size:12.4px;color:var(--ink-soft)}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:0 0 18px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .card .n{font-size:25px;font-weight:800;color:var(--blu);line-height:1.1;letter-spacing:-.02em}
+  .card .l{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .sheet{border:1px solid var(--line);border-radius:9px;margin:0 0 14px;overflow:hidden}
+  .sheet .hd{background:var(--blu-tenue);padding:11px 16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+  .sheet .hd b{font-size:15px}
+  .sheet .hd code{background:#fff}
+  .sheet .hd .tag{margin-left:auto}
+  .sheet .bd{padding:14px 16px}
+  .sheet dl{display:grid;grid-template-columns:126px minmax(0,1fr);gap:5px 14px;margin:0;font-size:13.4px}
+  .sheet dt{color:var(--ink-soft);font-size:12.2px;text-transform:uppercase;letter-spacing:.05em}
+  .sheet dd{margin:0}
+  .blocks{counter-reset:b;list-style:none;padding:0;margin:0}
+  .blocks li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.6px}
+  .blocks li:last-child{border-bottom:0}
+  .blocks li::before{counter-increment:b;content:counter(b);font-family:var(--mono);font-size:11.5px;color:var(--blu);font-weight:700;
+    background:var(--blu-tenue);border-radius:5px;text-align:center;padding:2px 0;height:20px}
+  .blocks b{display:block}
+  .blocks span{color:var(--ink-soft);font-size:13px}
+  footer.doc{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr}
+    aside{position:static;height:auto}
+    main{padding:28px 20px 60px}
+    .upbar{margin:-28px -20px 20px;padding:10px 20px}
+    h1{font-size:25px}
+    .sheet dl{grid-template-columns:1fr}
+  }
+  @media print{aside,.upbar{display:none}.wrap{display:block}main{padding:0}h2{page-break-after:avoid}.sheet,.diagram{page-break-inside:avoid}table{font-size:10.5px}}
+
+  .pg{border:1px solid var(--line);border-radius:10px;margin:0 0 16px;overflow:hidden}
+  .pg .ph{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--blu-tenue);padding:10px 16px;border-bottom:1px solid var(--line)}
+  .pg .ph b{font-size:14.5px}
+  .pg .ph code{background:#fff}
+  .pg .ph .tag{margin-left:auto}
+  .pg .ph .lnk{font-size:12px;font-weight:700;text-decoration:none;color:#fff;background:var(--blu);border-radius:16px;padding:4px 11px}
+  .pg .ph .lnk:hover{background:var(--blu-scuro)}
+  .pg table{min-width:640px}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-size:12px;white-space:nowrap;width:38px}
+  td.nt{color:var(--ink-soft);font-size:12.6px}
+  .d{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:1px 6px;border-radius:20px;vertical-align:1px}
+  .d-r{background:#e7f4ec;color:var(--ok)}
+  .d-n{background:#e8f0fe;color:var(--info)}
+  .d-c{background:#fff4e0;color:var(--warn)}
+  pre.wf{font-family:var(--mono);font-size:12px;line-height:1.55;background:#0e1a2b;color:#d7e3f4;padding:20px;border-radius:8px;overflow-x:auto;margin:0 0 18px}
+  pre.wf b{color:#7fb2ff;font-weight:600}
+  pre.wf i{color:#8e9db4;font-style:normal}
+  pre.wf u{color:#ffcf8f;text-decoration:none}
+  ul.ck{list-style:none;padding:0}
+  ul.ck li{padding:7px 0 7px 26px;border-bottom:1px solid var(--line);position:relative;font-size:14px}
+  ul.ck li::before{content:"☐";position:absolute;left:2px;color:var(--blu);font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<aside>
+  <p class="brand">SONIT<span>&nbsp;/ DXP</span></p>
+  <p class="sub">Piano wireframe · Doc 05</p>
+  <nav>
+    <div class="grp">Ripresa</div>
+    <a href="#stato">Dove siamo</a>
+    <a href="#approvare">Cosa approvare prima</a>
+    <a href="#ripresa">Primi passi al rientro</a>
+    <div class="grp">Piano</div>
+    <a href="#criteri">Criteri e impostazione</a>
+    <a href="#componenti">Componenti ricorrenti</a>
+    <a href="#ordine">Ordine di produzione</a>
+    <a href="#sezioni">Sezioni pagina per pagina</a>
+    <div class="grp">Schemi</div>
+    <a href="#schema-home">Schema home</a>
+    <a href="#schema-bu">Schema business unit</a>
+    <a href="#schema-b2c">Schema landing B2C</a>
+    <div class="grp">Chiusura</div>
+    <a href="#validazione">Checklist di validazione</a>
+    <a href="#dopo">Cosa viene dopo</a>
+  </nav>
+  <a class="back" href="/">← Indice dei documenti</a>
+  <a class="back" href="/docs/contenuti/">← Doc 04 · Contenuti</a>
+  <p class="meta">Versione 1.0<br>05/08/2026</p>
+</aside>
+
+<main>
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <span>·</span>
+  <a href="/docs/architettura-informazioni">Doc 03 · Architettura</a>
+  <a href="/docs/contenuti/">Doc 04 · Contenuti</a>
+  <span>Stai leggendo: Doc 05 · Piano wireframe</span>
+</div>
+
+<header class="top">
+  <p class="kicker">Progetto DXP · Documento 05 · Fase F3 → F4</p>
+  <h1>Piano dei wireframe e punto di ripresa</h1>
+  <p class="lead">Tutto quello che serve per riprendere il lavoro dopo l'approvazione dei contenuti: stato del progetto, cosa va approvato, in che ordine si disegnano i wireframe e quali sezioni contiene ogni pagina.</p>
+</header>
+
+<!-- STATO -->
+<h2 id="stato">Dove siamo</h2>
+<div class="grid">
+  <div class="card"><div class="n">F0 → F3</div><div class="l">fasi completate: kick-off, analisi, architettura, contenuti</div></div>
+  <div class="card"><div class="n">11</div><div class="l">pagine con contenuti scritti</div></div>
+  <div class="card"><div class="n">67</div><div class="l">sezioni da portare in wireframe</div></div>
+  <div class="card"><div class="n">19</div><div class="l">sezioni con contenuto segnaposto</div></div>
+  <div class="card"><div class="n">7 / 7</div><div class="l">decisioni di struttura validate</div></div>
+  <div class="card"><div class="n">13</div><div class="l">materiali ancora attesi dal cliente</div></div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Fase</th><th>Deliverable</th><th>Stato</th></tr></thead>
+  <tbody>
+    <tr><td>F0 · Kick-off</td><td>Obiettivi, vincoli, governance</td><td><span class="tag t-ok">Completata 28/07/2026</span></td></tr>
+    <tr><td>F1 · Stato dell'arte</td><td><a href="/docs/stato-arte-sonit">Doc 01</a>, <a href="/docs/alberatura-attuale">Doc 02</a>, testi estratti</td><td><span class="tag t-ok">Completata</span></td></tr>
+    <tr><td>F2 · Architettura</td><td><a href="/docs/architettura-informazioni">Doc 03</a> + 7 decisioni validate</td><td><span class="tag t-ok">Completata</span></td></tr>
+    <tr><td>F3 · Contenuti</td><td><a href="/docs/contenuti/">Doc 04</a>: 11 pagine, 67 blocchi</td><td><span class="tag t-info">Scritti, in attesa di approvazione</span></td></tr>
+    <tr><td>F3 · Wireframe</td><td>Wireframe low fidelity di tutte le pagine</td><td><span class="tag t-neutro">Pianificata, questo documento</span></td></tr>
+    <tr><td>F4 · Direzione visiva</td><td>Due proposte di design</td><td><span class="tag t-neutro">Da avviare</span></td></tr>
+    <tr><td>F5 → F7</td><td>Design completo, sviluppo, go-live</td><td><span class="tag t-neutro">Da avviare</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <p><strong>Il punto esatto in cui il lavoro si è fermato.</strong> Struttura e contenuti sono decisi e scritti. Il passo successivo non richiede altre decisioni di architettura: richiede due cose, l'approvazione dei contenuti da parte di Giorgio e i materiali che il cliente deve caricare. I wireframe si possono iniziare appena arriva la prima delle due, perché la struttura delle sezioni non cambia con i materiali: cambia solo cosa ci sta dentro.</p>
+</div>
+
+<!-- APPROVARE -->
+<h2 id="approvare">Cosa approvare prima dei wireframe</h2>
+<p>Non serve approvare tutto. Servono tre cose, in ordine di impatto.</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>#</th><th>Da approvare</th><th>Chi</th><th>Se non arriva</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>Ordine e presenza delle sezioni</b> di ogni pagina, come elencate nel <a href="/docs/contenuti/">Doc 04</a>. È la parte che definisce il wireframe.</td><td>Giorgio</td><td>I wireframe si rifanno: è il costo più alto di tutta la fase</td></tr>
+    <tr><td>2</td><td><b>Messaggio principale della home</b>: "Una sola regia su reti, impianti ed energia" e la riga di offerta sotto.</td><td>Giorgio e Beatrice</td><td>Cambia l'hero e la doppia CTA, quindi la prima schermata</td></tr>
+    <tr><td>3</td><td><b>I numeri aziendali</b> da pubblicare: quali dati e con quali valori aggiornati.</td><td>Giorgio</td><td>Il blocco resta nel wireframe con dati segnaposto, si chiude dopo</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Il copy nel dettaglio della singola frase <strong>non</strong> blocca i wireframe: a bassa fedeltà conta la gerarchia, non la parola esatta. Le rifiniture di testo si fanno in fase di design, quando si vede quanto spazio ha ogni blocco.</p>
+
+<!-- RIPRESA -->
+<h2 id="ripresa">Primi passi al rientro</h2>
+<ol>
+  <li><strong>Leggere <code>WORKLOG.md</code></strong>: contiene fasi, attività con stato, decisioni chiuse, materiali attesi e diario. È il punto di verità sullo stato del progetto.</li>
+  <li><strong>Verificare cosa è arrivato dal cliente</strong> sul Drive condiviso e aggiornare le voci A-01 → A-13 del worklog. Ogni materiale che arriva chiude uno o più blocchi segnaposto del Doc 04.</li>
+  <li><strong>Registrare l'approvazione</strong> dei contenuti nel diario, indicando cosa è stato approvato e cosa è stato chiesto di cambiare.</li>
+  <li><strong>Aggiornare i testi</strong> se ci sono modifiche: si modifica <code>docs/contenuti/_sorgente_testi.py</code> e si rigenera con <code>python3 docs/contenuti/_genera.py</code>. Non si editano i singoli HTML.</li>
+  <li><strong>Partire dai wireframe nell'ordine indicato qui sotto</strong>, cominciando dall'impalcatura e dalla home.</li>
+</ol>
+
+<div class="box warn">
+  <p><strong>Da non perdere per strada.</strong> Ci sono quattro cose che vanno portate in F6 e che è facile dimenticare a distanza di settimane: il <code>canonical</code> rotto su 7 pagine su 10 va corretto nel nuovo sito; <code>/partner.php</code> in sitemap e in 404 si chiude con la nuova pagina partner; GA4 e Search Console vanno attivati <em>prima</em> del go-live per avere una baseline; i testi legali vanno portati su dominio proprio. Sono le voci W-022, W-026 e W-025 del worklog.</p>
+</div>
+
+<!-- CRITERI -->
+<h2 id="criteri">Criteri e impostazione dei wireframe</h2>
+<ul>
+  <li><strong>Bassa fedeltà, davvero.</strong> Nessun colore di brand, nessuna immagine definitiva, tipografia di sistema. Si valuta struttura, ordine e peso dei blocchi: se si guarda il colore, si sta valutando la cosa sbagliata.</li>
+  <li><strong>Tre larghezze</strong> per ogni pagina: mobile 375, tablet 768, desktop 1280. Il mobile non è una riduzione del desktop: per le pagine con form, il form cambia posizione.</li>
+  <li><strong>Griglia a 12 colonne</strong> su desktop, 8 su tablet, 4 su mobile, con larghezza massima del contenuto testuale di circa 65 caratteri per riga.</li>
+  <li><strong>Testo reale, non lorem ipsum.</strong> Si usano i contenuti del Doc 04: è l'unico modo per vedere se un blocco è troppo lungo o troppo corto prima del design.</li>
+  <li><strong>Ogni sezione porta il suo numero</strong> del Doc 04, così il confronto tra wireframe e contenuti è immediato in revisione.</li>
+  <li><strong>Le sezioni segnaposto si disegnano comunque</strong>, con un contrassegno visibile: la struttura non deve aspettare i materiali.</li>
+  <li><strong>Ogni pagina finisce con una CTA</strong> pertinente al proprio pubblico. Nessuna pagina senza uscita, nessun form generico replicato.</li>
+</ul>
+
+<!-- COMPONENTI -->
+<h2 id="componenti">Componenti ricorrenti da disegnare una volta sola</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Componente</th><th>Contenuto</th><th>Dove compare</th></tr></thead>
+  <tbody>
+    <tr><td>Header</td><td>Logo · telefono · link "Area riservata" · menu a 6 voci con sottomenu su Soluzioni</td><td>Tutte le pagine</td></tr>
+    <tr><td>Menu mobile</td><td>Le stesse 6 voci, sottomenu espandibile, telefono come pulsante di chiamata</td><td>Tutte le pagine, sotto 768px</td></tr>
+    <tr><td>Footer</td><td>Dati societari e P.IVA · colonna soluzioni · colonna azienda · legali · social · area riservata</td><td>Tutte le pagine</td></tr>
+    <tr><td>CTA di chiusura</td><td>Titolo breve + una riga + pulsante, contestuale alla pagina</td><td>Tutte tranne la landing B2C</td></tr>
+    <tr><td>Fascia numeri</td><td>4 dati con etichetta</td><td>Home, Chi siamo</td></tr>
+    <tr><td>Card business unit</td><td>Titolo, 2 righe, link</td><td>Home, Soluzioni</td></tr>
+    <tr><td>Striscia loghi</td><td>Placeholder neutri, scroll orizzontale su mobile</td><td>Home, Partner</td></tr>
+    <tr><td>Scheda progetto</td><td>Contesto · problema · soluzione · esito</td><td>Home, Progetti, pagine business unit</td></tr>
+    <tr><td>Blocco varco B2C</td><td>Fondo distinto, una riga, un pulsante</td><td>Home, Fotovoltaico B2B, Contatti</td></tr>
+    <tr><td>Form B2B</td><td>9 campi con qualificazione, 2 colonne</td><td>Contatti</td></tr>
+    <tr><td>Form B2C</td><td>7 campi, colonna singola, sempre visibile in alto</td><td>Fotovoltaico per la casa</td></tr>
+    <tr><td>Cookie bar</td><td>Testo breve, un pulsante, link alla cookie policy sul dominio Sonit</td><td>Tutte le pagine</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ORDINE -->
+<h2 id="ordine">Ordine di produzione</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th class="num">#</th><th>Blocco di lavoro</th><th>Perché in questa posizione</th></tr></thead>
+  <tbody><tr><td class="num">1</td><td><b>Impalcatura</b><br><span class="nt">Header, menu e footer · Griglia e breakpoint · Blocchi ricorrenti: CTA di chiusura, fascia numeri, card BU, striscia loghi</span></td><td>Va per primo: definisce l&#x27;ossatura di tutte le altre pagine.</td></tr><tr><td class="num">2</td><td><b>Home</b><br><span class="nt"><a href="#wf-home">Home</a></span></td><td>È la pagina che decide la gerarchia dei messaggi. Va validata prima delle altre.</td></tr><tr><td class="num">3</td><td><b>Hub soluzioni</b><br><span class="nt"><a href="#wf-soluzioni">Soluzioni integrate</a></span></td><td>Contenuti completi, nessun blocco in attesa: si può disegnare per intero.</td></tr><tr><td class="num">4</td><td><b>Tre business unit</b><br><span class="nt"><a href="#wf-telecomunicazioni">Telecomunicazioni</a> · <a href="#wf-impianti">Impianti civili e industriali</a> · <a href="#wf-fotovoltaico">Fotovoltaico ed efficientamento</a></span></td><td>Condividono un solo template: si disegna una volta e si declina.</td></tr><tr><td class="num">5</td><td><b>Percorso B2C</b><br><span class="nt"><a href="#wf-fotovoltaico-casa">Fotovoltaico per la casa</a></span></td><td>Layout diverso dal resto: il form è protagonista, non un blocco in coda.</td></tr><tr><td class="num">6</td><td><b>Chi siamo</b><br><span class="nt"><a href="#wf-chi-siamo">Chi siamo</a></span></td><td>Struttura pronta, il blocco numeri resta con dati segnaposto.</td></tr><tr><td class="num">7</td><td><b>Pagine di prova</b><br><span class="nt"><a href="#wf-certificazioni">Certificazioni</a> · <a href="#wf-partner">Partner e fornitori</a> · <a href="#wf-progetti">Progetti</a></span></td><td>Struttura disegnabile subito, contenuti segnaposto fino ai materiali.</td></tr><tr><td class="num">8</td><td><b>Conversione</b><br><span class="nt"><a href="#wf-contatti">Contatti</a></span></td><td>Include il wireframe della pagina di conferma /grazie.</td></tr></tbody>
+</table>
+</div>
+
+<!-- SEZIONI -->
+<h2 id="sezioni">Sezioni pagina per pagina</h2>
+<p>Ogni sezione corrisponde a un blocco di contenuto del <a href="/docs/contenuti/">Doc 04</a>, nello stesso ordine e con la stessa numerazione. La colonna layout è la proposta di impaginazione da verificare in wireframe.</p>
+<div class="pg" id="wf-home">
+  <div class="ph"><b>Home</b><code>/</code><span class="tag t-warn">4 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/home">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Hero</b> <span class="d d-n">nuovo</span></td><td>Hero a piena larghezza, testo a sinistra, spazio visivo a destra</td><td class="nt">due CTA affiancate, una per pubblico</td></tr><tr><td class="num">02</td><td><b>Sonit in numeri</b> <span class="d d-c">segnaposto</span></td><td>Fascia numeri, 4 colonne su desktop, 2 su tablet, 1 su mobile</td><td class="nt">primo blocco di prova</td></tr><tr><td class="num">03</td><td><b>Le tre business unit come sistema</b> <span class="d d-n">nuovo</span></td><td>Introduzione + 3 card affiancate</td><td class="nt">le card sono cliccabili per intero</td></tr><tr><td class="num">04</td><td><b>Come lavoriamo, in cinque passi</b> <span class="d d-r">riuso</span></td><td>Cinque passi in orizzontale su desktop, verticali su mobile</td><td class="nt">numerazione visibile</td></tr><tr><td class="num">05</td><td><b>Certificazioni</b> <span class="d d-c">segnaposto</span></td><td>Fascia su fondo pieno, loghi o sigle + CTA</td><td class="nt">richiamo alla pagina</td></tr><tr><td class="num">06</td><td><b>Partner e fornitori</b> <span class="d d-c">segnaposto</span></td><td>Striscia loghi su una riga, scroll orizzontale su mobile</td><td class="nt">nessun logo inventato nel wireframe</td></tr><tr><td class="num">07</td><td><b>Un progetto in evidenza</b> <span class="d d-c">segnaposto</span></td><td>Card progetto larga, 2 colonne testo + spazio schema</td><td class="nt">una sola scheda</td></tr><tr><td class="num">08</td><td><b>Fotovoltaico per i privati</b> <span class="d d-n">nuovo</span></td><td>Blocco distinto, fondo diverso dal resto della pagina</td><td class="nt">è il varco verso il B2C</td></tr><tr><td class="num">09</td><td><b>Contatti rapidi</b> <span class="d d-r">riuso</span></td><td>Due colonne: dati sedi a sinistra, CTA e mappa a destra</td><td class="nt">niente form completo</td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-chi-siamo">
+  <div class="ph"><b>Chi siamo</b><code>/chi-siamo</code><span class="tag t-warn">2 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/chi-siamo">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Chi siamo oggi</b> <span class="d d-n">nuovo</span></td><td>Intro su una colonna stretta, max 65 caratteri per riga</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Crescita e struttura</b> <span class="d d-c">segnaposto</span></td><td>Testo + elenco ruoli in 2 colonne</td><td class="nt">i numeri ripresi in evidenza</td></tr><tr><td class="num">03</td><td><b>Valori e responsabilità</b> <span class="d d-r">riuso</span></td><td>Blocco valori su fondo tenue, una colonna</td><td class="nt"></td></tr><tr><td class="num">04</td><td><b>Dove siamo</b> <span class="d d-r">riuso</span></td><td>Due schede sedi affiancate + nota copertura nazionale</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Download brochure e company profile</b> <span class="d d-c">segnaposto</span></td><td>Fascia download con due pulsanti file</td><td class="nt">peso e formato indicati</td></tr><tr><td class="num">06</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura, larghezza piena</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-soluzioni">
+  <div class="ph"><b>Soluzioni integrate</b><code>/soluzioni</code><span class="tag t-ok">Completa</span>
+    <a class="lnk" href="/docs/contenuti/soluzioni">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>L&#x27;ecosistema integrato</b> <span class="d d-n">nuovo</span></td><td>Apertura su colonna stretta, senza elementi laterali</td><td class="nt">è il messaggio principale della pagina</td></tr><tr><td class="num">02</td><td><b>Cosa realizziamo</b> <span class="d d-r">riuso</span></td><td>Elenco competenze su 2 colonne</td><td class="nt"></td></tr><tr><td class="num">03</td><td><b>Le tre business unit</b> <span class="d d-n">nuovo</span></td><td>3 card business unit affiancate, pari altezza</td><td class="nt">ingresso al livello 2</td></tr><tr><td class="num">04</td><td><b>Come lavoriamo, in cinque passi</b> <span class="d d-r">riuso</span></td><td>Cinque passi verticali con numerazione</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Consulenza e pratiche autorizzative</b> <span class="d d-r">riuso</span></td><td>Blocco con ancora #consulenza, 2 colonne</td><td class="nt">target del redirect da /consulenza.php</td></tr><tr><td class="num">06</td><td><b>Manutenzione e pronto intervento</b> <span class="d d-r">riuso</span></td><td>Blocco breve su fondo tenue</td><td class="nt"></td></tr><tr><td class="num">07</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-telecomunicazioni">
+  <div class="ph"><b>Telecomunicazioni</b><code>/soluzioni/telecomunicazioni</code><span class="tag t-warn">2 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/telecomunicazioni">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-r">riuso</span></td><td>Apertura 2 colonne: testo + spazio visivo</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>La filiera completa</b> <span class="d d-r">riuso</span></td><td>Sei fasi in sequenza verticale, con la riga di beneficio rientrata</td><td class="nt">è il cuore della pagina, va il doppio dello spazio</td></tr><tr><td class="num">03</td><td><b>Consulenza e pratiche</b> <span class="d d-r">riuso</span></td><td>Blocco richiamo consulenza, una colonna</td><td class="nt"></td></tr><tr><td class="num">04</td><td><b>Certificazioni pertinenti</b> <span class="d d-c">segnaposto</span></td><td>Fascia certificazioni pertinenti + CTA</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Progetti collegati</b> <span class="d d-c">segnaposto</span></td><td>Una o due card progetto</td><td class="nt"></td></tr><tr><td class="num">06</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura contestuale</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-impianti">
+  <div class="ph"><b>Impianti civili e industriali</b><code>/soluzioni/impianti</code><span class="tag t-warn">2 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/impianti">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-r">riuso</span></td><td>Apertura 2 colonne</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Ambiti di intervento</b> <span class="d d-r">riuso</span></td><td>Elenco ambiti su 2 colonne</td><td class="nt"></td></tr><tr><td class="num">03</td><td><b>Civile e industriale</b> <span class="d d-n">nuovo</span></td><td>Due blocchi affiancati: civile / industriale</td><td class="nt">confronto visivo esplicito</td></tr><tr><td class="num">04</td><td><b>Consulenza e pratiche</b> <span class="d d-r">riuso</span></td><td>Blocco richiamo consulenza</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Certificazioni pertinenti</b> <span class="d d-c">segnaposto</span></td><td>Fascia certificazioni + CTA</td><td class="nt"></td></tr><tr><td class="num">06</td><td><b>Progetti collegati</b> <span class="d d-c">segnaposto</span></td><td>Card progetto</td><td class="nt"></td></tr><tr><td class="num">07</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-fotovoltaico">
+  <div class="ph"><b>Fotovoltaico ed efficientamento</b><code>/soluzioni/fotovoltaico</code><span class="tag t-warn">2 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/fotovoltaico">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-r">riuso</span></td><td>Apertura 2 colonne</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Ambiti di intervento</b> <span class="d d-r">riuso</span></td><td>Elenco ambiti su 2 colonne</td><td class="nt"></td></tr><tr><td class="num">03</td><td><b>Taglie e contesti</b> <span class="d d-c">segnaposto</span></td><td>Blocco taglie e contesti, 3 esempi affiancati</td><td class="nt">segnala visivamente la scala industriale</td></tr><tr><td class="num">04</td><td><b>Incentivi e detrazioni</b> <span class="d d-r">riuso</span></td><td>Blocco incentivi su fondo tenue</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Il nostro ruolo nella filiera dell&#x27;energia</b> <span class="d d-c">segnaposto</span></td><td>Blocco filiera energia, una colonna</td><td class="nt"></td></tr><tr><td class="num">06</td><td><b>Sei un privato?</b> <span class="d d-n">nuovo</span></td><td>Blocco varco B2C, fondo diverso, in coda alla pagina</td><td class="nt">stesso trattamento del blocco privati in home</td></tr><tr><td class="num">07</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura B2B</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-fotovoltaico-casa">
+  <div class="ph"><b>Fotovoltaico per la casa</b><code>/fotovoltaico-casa</code><span class="tag t-warn">1 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/fotovoltaico-casa">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura e form in evidenza</b> <span class="d d-n">nuovo</span></td><td>Hero con form visibile a destra già alla prima schermata</td><td class="nt">su mobile il form scende sotto il testo, con CTA di ancoraggio</td></tr><tr><td class="num">02</td><td><b>Come funziona</b> <span class="d d-n">nuovo</span></td><td>Quattro passi in orizzontale su desktop</td><td class="nt"></td></tr><tr><td class="num">03</td><td><b>Quanto serve per una casa</b> <span class="d d-c">segnaposto</span></td><td>Blocco dimensionamento, testo + spazio per schema</td><td class="nt"></td></tr><tr><td class="num">04</td><td><b>Detrazioni e pratiche</b> <span class="d d-r">riuso</span></td><td>Blocco detrazioni su fondo tenue</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Perché noi</b> <span class="d d-n">nuovo</span></td><td>Blocco chi installa, 2 colonne</td><td class="nt"></td></tr><tr><td class="num">06</td><td><b>Domande frequenti</b> <span class="d d-n">nuovo</span></td><td>FAQ a fisarmonica</td><td class="nt">le risposte chiuse per default</td></tr><tr><td class="num">07</td><td><b>Form preventivo</b> <span class="d d-n">nuovo</span></td><td>Form completo a piena larghezza in chiusura</td><td class="nt">secondo punto di conversione della pagina</td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-certificazioni">
+  <div class="ph"><b>Certificazioni</b><code>/certificazioni</code><span class="tag t-warn">3 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/certificazioni">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-r">riuso</span></td><td>Apertura una colonna</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Le nostre certificazioni</b> <span class="d d-c">segnaposto</span></td><td>Griglia certificazioni: scheda per certificazione</td><td class="nt">struttura pronta, contenuto da materiali</td></tr><tr><td class="num">03</td><td><b>Cosa significano per il committente</b> <span class="d d-c">segnaposto</span></td><td>Elenco a due colonne: certificazione + effetto pratico</td><td class="nt"></td></tr><tr><td class="num">04</td><td><b>Sicurezza e formazione</b> <span class="d d-c">segnaposto</span></td><td>Blocco sicurezza, una colonna</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-partner">
+  <div class="ph"><b>Partner e fornitori</b><code>/partner</code><span class="tag t-warn">2 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/partner">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-n">nuovo</span></td><td>Apertura una colonna</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Partner e fornitori</b> <span class="d d-c">segnaposto</span></td><td>Griglia loghi per categoria di fornitura</td><td class="nt">placeholder neutri nel wireframe</td></tr><tr><td class="num">03</td><td><b>Committenti</b> <span class="d d-c">segnaposto</span></td><td>Elenco categorie di committenti</td><td class="nt"></td></tr><tr><td class="num">04</td><td><b>Vuoi lavorare con noi come partner?</b> <span class="d d-n">nuovo</span></td><td>Blocco proposta di collaborazione + CTA</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-progetti">
+  <div class="ph"><b>Progetti</b><code>/progetti</code><span class="tag t-warn">1 blocchi segnaposto</span>
+    <a class="lnk" href="/docs/contenuti/progetti">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-n">nuovo</span></td><td>Apertura una colonna stretta</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Formato della scheda progetto</b> <span class="d d-n">nuovo</span></td><td>Spiegazione del formato in quattro passi</td><td class="nt"></td></tr><tr><td class="num">03</td><td><b>I progetti</b> <span class="d d-c">segnaposto</span></td><td>Elenco schede progetto, una per riga su desktop</td><td class="nt">filtro per business unit se le schede superano 4</td></tr><tr><td class="num">04</td><td><b>Chiusura</b> <span class="d d-n">nuovo</span></td><td>CTA di chiusura</td><td class="nt"></td></tr></tbody>
+  </table></div>
+</div><div class="pg" id="wf-contatti">
+  <div class="ph"><b>Contatti</b><code>/contatti</code><span class="tag t-ok">Completa</span>
+    <a class="lnk" href="/docs/contenuti/contatti">Contenuti →</a></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th class="num">#</th><th>Sezione</th><th>Layout previsto</th><th>Nota</th></tr></thead>
+    <tbody><tr><td class="num">01</td><td><b>Apertura</b> <span class="d d-n">nuovo</span></td><td>Apertura una colonna</td><td class="nt"></td></tr><tr><td class="num">02</td><td><b>Form richiesta</b> <span class="d d-n">nuovo</span></td><td>Form su 2 colonne di campi, larghezza contenuta</td><td class="nt">campi di qualificazione raggruppati</td></tr><tr><td class="num">03</td><td><b>Sedi e riferimenti</b> <span class="d d-r">riuso</span></td><td>Due schede sedi + riferimenti</td><td class="nt"></td></tr><tr><td class="num">04</td><td><b>Sei un privato?</b> <span class="d d-n">nuovo</span></td><td>Blocco varco privati</td><td class="nt"></td></tr><tr><td class="num">05</td><td><b>Pagina di conferma · /grazie</b> <span class="d d-n">nuovo</span></td><td>Pagina /grazie separata, layout minimo centrato</td><td class="nt">wireframe a sé, non una sezione</td></tr></tbody>
+  </table></div>
+</div>
+
+<!-- SCHEMI -->
+<h2 id="schema-home">Schema della home</h2>
+<pre class="wf">
+<i>desktop 1280 · le sezioni numerate come nel Doc 04</i>
+
+╭─ <b>HEADER</b>
+│  logo · telefono · area riservata
+│  Chi siamo   Soluzioni ▾   Certificazioni   Partner   Progetti   Contatti
+├──────────────────────────────────────────────────────────────
+│  <b>01 · HERO</b>
+│  ┌ testo, 7 colonne ──────────────┐  ┌ spazio visivo, 5 col ┐
+│  │ Una sola regia su reti,        │  │                      │
+│  │ impianti ed energia.           │  │                      │
+│  │ riga di offerta, 2 righe       │  │                      │
+│  │ [ Sono un'impresa ] [ privato ]│  │                      │
+│  └────────────────────────────────┘  └──────────────────────┘
+├──────────────────────────────────────────────────────────────
+│  <b>02 · NUMERI</b>        45  ·  5 anni  ·  2 sedi  ·  Italia
+├──────────────────────────────────────────────────────────────
+│  <b>03 · TRE BUSINESS UNIT</b>
+│  intro su 2 righe
+│  ┌ TLC ─────────┐  ┌ Impianti ────┐  ┌ Fotovoltaico ┐
+│  └──────────────┘  └──────────────┘  └──────────────┘
+├──────────────────────────────────────────────────────────────
+│  <b>04 · METODO IN 5 PASSI</b>       1 → 2 → 3 → 4 → 5
+├──────────────────────────────────────────────────────────────
+│  <b>05 · CERTIFICAZIONI</b>          <u>segnaposto</u> · sigle + CTA
+├──────────────────────────────────────────────────────────────
+│  <b>06 · PARTNER</b>                 <u>segnaposto</u> · striscia loghi
+├──────────────────────────────────────────────────────────────
+│  <b>07 · PROGETTO IN EVIDENZA</b>    <u>segnaposto</u> · una scheda
+├──────────────────────────────────────────────────────────────
+│  <b>08 · FOTOVOLTAICO PRIVATI</b>    fondo distinto → landing B2C
+├──────────────────────────────────────────────────────────────
+│  <b>09 · CONTATTI RAPIDI</b>         sedi  ·  CTA + mappa
+├──────────────────────────────────────────────────────────────
+│  <b>FOOTER</b>
+│  dati societari · soluzioni · azienda · legali · social
+╰──────────────────────────────────────────────────────────────
+
+<i>mobile 375: stesso ordine, colonna singola. Le due CTA dell'hero restano
+affiancate se ci stanno, altrimenti impilate con quella B2B per prima.</i>
+</pre>
+
+<h2 id="schema-bu">Schema delle pagine business unit</h2>
+<pre class="wf">
+<i>un solo template per Telecomunicazioni, Impianti e Fotovoltaico B2B</i>
+
+╭─ HEADER
+├──────────────────────────────────────────────────────────────
+│  <b>01 · APERTURA</b>
+│  ┌ cosa facciamo e per chi, 2 paragrafi ┐  ┌ spazio visivo ┐
+│  └──────────────────────────────────────┘  └───────────────┘
+├──────────────────────────────────────────────────────────────
+│  <b>02 · AMBITI DI INTERVENTO</b>     elenco su 2 colonne
+├──────────────────────────────────────────────────────────────
+│  <b>03 · COME LAVORIAMO</b>
+│    fase 1 ─ descrizione della lavorazione
+│             <i>› per il committente: il beneficio</i>
+│    fase 2 ─ …
+│    <i>su Telecomunicazioni sono 6 fasi: va il doppio dello spazio</i>
+├──────────────────────────────────────────────────────────────
+│  <b>04 · CONSULENZA E PRATICHE</b>    richiamo del blocco trasversale
+├──────────────────────────────────────────────────────────────
+│  <b>05 · CERTIFICAZIONI PERTINENTI</b>  <u>segnaposto</u> + CTA
+├──────────────────────────────────────────────────────────────
+│  <b>06 · PROGETTI COLLEGATI</b>       <u>segnaposto</u> · 1–2 schede
+├──────────────────────────────────────────────────────────────
+│  <b>07 · CTA DI CHIUSURA</b>          contestuale alla business unit
+│  <i>solo su Fotovoltaico: prima della CTA, il varco verso il B2C</i>
+├──────────────────────────────────────────────────────────────
+│  FOOTER
+╰──────────────────────────────────────────────────────────────
+</pre>
+
+<h2 id="schema-b2c">Schema della landing B2C</h2>
+<pre class="wf">
+<i>/fotovoltaico-casa · unica pagina con il form in prima schermata</i>
+
+╭─ HEADER ridotto      <i>logo · telefono · torna al sito</i>
+├──────────────────────────────────────────────────────────────
+│  <b>01 · HERO + FORM</b>
+│  ┌ promessa, 7 colonne ───────────┐  ┌ form, 5 colonne ─────┐
+│  │ Il fotovoltaico per la tua     │  │ nome e cognome       │
+│  │ casa, dal sopralluogo          │  │ comune               │
+│  │ all'accensione.                │  │ telefono             │
+│  │ 3 righe di promessa            │  │ email                │
+│  │ [ Chiama ]                     │  │ [ Richiedi ]         │
+│  └────────────────────────────────┘  └──────────────────────┘
+├──────────────────────────────────────────────────────────────
+│  <b>02 · COME FUNZIONA</b>
+│  1 sopralluogo → 2 progetto → 3 installazione → 4 attivazione
+├──────────────────────────────────────────────────────────────
+│  <b>03 · CHE IMPIANTO TI SERVE</b>    <u>segnaposto taglie</u>
+├──────────────────────────────────────────────────────────────
+│  <b>04 · DETRAZIONI E PRATICHE</b>    fondo tenue
+├──────────────────────────────────────────────────────────────
+│  <b>05 · CHI VIENE A INSTALLARE</b>   2 colonne
+├──────────────────────────────────────────────────────────────
+│  <b>06 · DOMANDE FREQUENTI</b>        fisarmonica, risposte chiuse
+├──────────────────────────────────────────────────────────────
+│  <b>07 · FORM COMPLETO</b>            secondo punto di conversione
+├──────────────────────────────────────────────────────────────
+│  FOOTER ridotto
+╰──────────────────────────────────────────────────────────────
+
+<i>mobile 375: il form dell'hero scende sotto la promessa, con un pulsante di
+ancoraggio in prima schermata. Nessun contenuto industriale, nessuna taglia
+in MW: la separazione dei pubblici è anche visiva.</i>
+</pre>
+
+<!-- VALIDAZIONE -->
+<h2 id="validazione">Checklist di validazione dei wireframe</h2>
+<p>Da verificare prima di portare i wireframe al cliente.</p>
+<ul class="ck">
+  <li>Ogni pagina ha tutte le sezioni previste dal Doc 04, nello stesso ordine, con la stessa numerazione</li>
+  <li>Ogni sezione segnaposto è contrassegnata come tale e non sembra contenuto definitivo</li>
+  <li>Ogni pagina ha una CTA di chiusura pertinente al proprio pubblico</li>
+  <li>Nessuna pagina contiene il form B2B generico fuori da <code>/contatti</code></li>
+  <li>Il varco verso il B2C compare in home, sulla pagina fotovoltaico B2B e nei contatti, e in nessun altro punto</li>
+  <li>La landing B2C non contiene riferimenti a impianti industriali o taglie in MW</li>
+  <li>Le tre larghezze sono disegnate per ogni pagina, non solo il desktop</li>
+  <li>I form mostrano tutti i campi previsti, compresi consenso privacy e antispam</li>
+  <li>La pagina di conferma <code>/grazie</code> è disegnata come pagina a sé</li>
+  <li>Header e footer sono identici su tutte le pagine, con lo stato attivo del menu corretto</li>
+  <li>Il link all'area riservata è in header e non ci sono form di login nelle pagine pubbliche</li>
+  <li>I testi usati sono quelli del Doc 04, non testo finto</li>
+  <li>Nessun blocco supera in altezza ciò che il suo contenuto reale richiede</li>
+</ul>
+
+<!-- DOPO -->
+<h2 id="dopo">Cosa viene dopo i wireframe</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Fase</th><th>Cosa si produce</th><th>Cosa serve avere chiuso prima</th></tr></thead>
+  <tbody>
+    <tr><td>F4 · Direzione visiva</td><td>Due proposte di design con direzioni diverse, sulla home e su una pagina interna</td><td>Wireframe approvati; palette derivata dal blu di brand <code>#003A83</code>; libreria immagini standard selezionata, senza foto reali di cantiere</td></tr>
+    <tr><td>F5 · Design completo</td><td>Design system e tutte le pagine, desktop e mobile, con i contenuti definitivi</td><td>Direzione visiva scelta; materiali del cliente arrivati, altrimenti restano segnaposto anche nel design</td></tr>
+    <tr><td>F6 · Sviluppo</td><td>Sito in staging con form, SEO tecnico, accessibilità, performance</td><td>Design approvato; caselle email di destinazione; testi legali; PDF di brochure e company profile</td></tr>
+    <tr><td>F7 · Go-live</td><td>Pubblicazione, redirect 301, analytics, collaudo</td><td>Accessi a dominio, DNS e hosting; GA4 e Search Console attivati prima del lancio per la baseline</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box ok">
+  <p><strong>Riassunto in una riga.</strong> Struttura decisa, contenuti scritti, piano dei wireframe pronto: al rientro si aggiorna il worklog con ciò che è arrivato, si registra l'approvazione e si disegna partendo dall'impalcatura e dalla home, seguendo l'ordine di produzione di questo documento.</p>
+</div>
+
+<footer class="doc">
+  <p><strong>SONIT · Progetto DXP — Documento 05: piano dei wireframe e punto di ripresa.</strong> Versione 1.0 del 05/08/2026. Costruito sui contenuti del <a href="/docs/contenuti/">Documento 04</a> e sull'architettura validata del <a href="/docs/architettura-informazioni">Documento 03</a>. Le sezioni elencate sono generate dalla stessa sorgente dei contenuti: restano allineate a ogni rigenerazione.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/contenuti/">Contenuti</a> · <a href="/docs/architettura-informazioni">Architettura</a> · <a href="/docs/alberatura-attuale">Alberatura attuale</a> · <a href="/docs/stato-arte-sonit">Stato dell'arte</a></p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

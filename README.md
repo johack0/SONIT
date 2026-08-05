@@ -12,11 +12,13 @@ La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag:
 
 | Percorso | Contenuto |
 |---|---|
+| `RIPRESA.md` | **Punto di ripresa: da leggere per primo al rientro** |
 | `index.html` | Hub della documentazione: elenco documenti, avanzamento fasi, sintesi dell'analisi |
 | `docs/stato-arte-sonit.html` | **Doc 01** — Stato dell'arte: analisi del sito online, criticità, gap analysis, fasi, worklog, diario |
 | `docs/alberatura-attuale.html` | **Doc 02** — Alberatura del sito attuale: viste verticale e orizzontale, schede pagina, anomalie strutturali |
 | `docs/architettura-informazioni.html` | **Doc 03** — Nuova alberatura e organizzazione dei contenuti (fase F2, decisioni validate) |
 | `docs/contenuti/` | **Doc 04** — Contenuti del nuovo sito: un file per pagina della nuova alberatura, copy pronto blocco per blocco |
+| `docs/piano-wireframe.html` | **Doc 05** — Piano dei wireframe e punto di ripresa: ordine di produzione, sezioni per pagina, schemi, checklist |
 | `docs/testi/` | Testi estratti dal sito online, un file per pagina, riportati alla lettera |
 | `WORKLOG.md` | Worklog operativo: fasi, attività con stato, decisioni chiuse, materiali attesi, diario delle modifiche |
 | `SONIT _ Kick Off DXP … .docx` | Verbale del kick-off del 28/07/2026 |
@@ -83,7 +85,7 @@ Tutti i documenti sono collegati tra loro:
 | F0 | Kick-off, obiettivi e governance | ✅ completata 28/07/2026 |
 | F1 | Stato dell'arte, alberatura attuale, testi estratti | ✅ completata 05/08/2026 |
 | F2 | Architettura delle informazioni | ✅ completata 05/08/2026, decisioni validate |
-| F3 | Contenuti e wireframe low fidelity | 🔵 contenuti scritti (11 pagine), wireframe da avviare |
+| F3 | Contenuti e wireframe low fidelity | 🔵 contenuti scritti (11 pagine), wireframe pianificati (Doc 05) |
 | F4 | Due proposte di direzione visiva | ⬜ da avviare |
 | F5 | Design completo di tutte le pagine | ⬜ da avviare |
 | F6 | Sviluppo | ⬜ da avviare |
@@ -115,6 +117,8 @@ Dettaglio delle attività, delle dipendenze e delle decisioni prese: **[WORKLOG.
 
 I documenti sono HTML statici autoconsistenti: nessuna build, nessuna dipendenza esterna, CSS e SVG inline.
 
+> **Riprendi da qui:** se stai tornando sul progetto dopo una pausa, leggi [`RIPRESA.md`](RIPRESA.md) prima di ogni altra cosa.
+
 ```bash
 # anteprima locale
 python3 -m http.server 4000
@@ -133,4 +137,5 @@ vercel deploy --prod
 - Ogni modifica sostanziale va registrata nel **diario delle modifiche** del Doc 01 e in `WORKLOG.md`, aggiungendo la voce in cima.
 - I testi estratti da `docs/testi/` **non si correggono**: sono la fotografia del sito attuale. Le correzioni si fanno nei nuovi contenuti.
 - I contenuti in `docs/contenuti/` sono **generati**: i testi stanno in `docs/contenuti/_sorgente_testi.py`, si modificano lì e si rigenera con `python3 docs/contenuti/_genera.py`. Non si editano i singoli HTML, altrimenti la prossima rigenerazione li sovrascrive.
+- Il Doc 05 legge le stesse sorgenti: dopo ogni modifica ai testi, rigenerare anche con `python3 docs/_genera-piano-wireframe.py` così l'elenco delle sezioni resta allineato.
 - Nuovi documenti: si aggiunge la card in `index.html` e i link incrociati nelle barre di navigazione degli altri documenti.
