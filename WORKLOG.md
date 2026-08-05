@@ -3,7 +3,7 @@
 Registro operativo del progetto di restyling di [sonit.it](https://www.sonit.it/).
 Documentazione online: <https://sonit-jhkstudio.vercel.app> · Indice generale: [README.md](README.md)
 
-Ultimo aggiornamento: **05/08/2026**
+Ultimo aggiornamento: **05/08/2026** — architettura validata, fase F3 sbloccata
 
 ---
 
@@ -13,8 +13,8 @@ Ultimo aggiornamento: **05/08/2026**
 |---|---|---|---|
 | **F0** | Kick-off | Verbale, obiettivi condivisi, governance | ✅ completata 28/07/2026 |
 | **F1** | Stato dell'arte | Doc 01, Doc 02, testi estratti | ✅ completata 05/08/2026 |
-| **F2** | Architettura delle informazioni | Doc 03 + presentazione al cliente | 🔵 proposta pronta, da validare |
-| **F3** | Contenuti e wireframe | Contenuti per sezione + wireframe low fidelity | ⬜ da avviare |
+| **F2** | Architettura delle informazioni | Doc 03, decisioni D-01 → D-07 validate | ✅ completata 05/08/2026 |
+| **F3** | Contenuti e wireframe | Contenuti per sezione + wireframe low fidelity | 🔵 sbloccata, in attesa dei materiali |
 | **F4** | Direzione visiva | **Due** proposte di design | ⬜ da avviare |
 | **F5** | Design completo | Tutte le pagine, desktop e mobile | ⬜ da avviare |
 | **F6** | Sviluppo | Ambiente di staging | ⬜ da avviare |
@@ -41,12 +41,13 @@ Legenda stato: ✅ fatto · 🔵 in corso · ⏳ atteso dal cliente · ⬜ da fa
 | W-033 | Estrazione dei testi di tutte le 10 pagine in `docs/testi/` | F1 | W-002 | Team dev | ✅ |
 | W-034 | Collegamento bidirezionale testi ↔ alberatura | F1 | W-033 | Team dev | ✅ |
 | W-008 | Nuova architettura delle informazioni e sitemap con razionale | F2 | W-004 | Team dev | ✅ |
-| W-009 | Strategia B2B / B2C fotovoltaico e punti di separazione | F2 | W-008 | Team dev + cliente | ✅ proposta |
+| W-009 | Strategia B2B / B2C fotovoltaico e punti di separazione | F2 | W-008 | Team dev + cliente | ✅ |
 | W-035 | Mappatura riuso dei contenuti estratti, blocco per blocco | F2 | W-033, W-008 | Team dev | ✅ |
-| W-036 | Sistema di messaggi: posizionamento e pilastri di prova | F2 | W-008 | Team dev | ✅ proposta |
+| W-036 | Sistema di messaggi: posizionamento e pilastri di prova | F2 | W-008 | Team dev | ✅ |
 | W-010 | Presentazione architettura al cliente e raccolta feedback | F2 | W-008 | Referente progetto | 🔵 prossimo |
-| W-011 | Validazione delle decisioni aperte D-01 → D-07 | F2 | W-010 | Cliente | ⬜ |
-| W-012 | Stesura contenuti per pagina, con riuso e correzione dei testi esistenti | F3 | W-011, W-007 | Team contenuti | ⬜ |
+| W-037 | Aggiornamento Doc 03 con le decisioni validate | F2 | W-011 | Team dev | ✅ |
+| W-011 | Validazione delle decisioni D-01 → D-07 | F2 | W-010 | Cliente | ✅ 05/08/2026 |
+| W-012 | Stesura contenuti per pagina, con riuso e correzione dei testi esistenti | F3 | W-011, W-007 | Team contenuti | 🔵 sbloccata |
 | W-013 | Wireframe low fidelity di tutte le pagine | F3 | W-012 | Team design | ⬜ |
 | W-014 | Definizione formato case study, senza foto reali di cantiere | F3 | W-011 | Team contenuti | ⬜ |
 | W-015 | Selezione libreria immagini standard coerente con le linee guida | F3 | W-011 | Team design | ⬜ |
@@ -62,26 +63,28 @@ Legenda stato: ✅ fatto · 🔵 in corso · ⏳ atteso dal cliente · ⬜ da fa
 | W-025 | Privacy policy, cookie policy e termini su dominio proprio | F6 | W-019 | Team dev + cliente | ⬜ |
 | W-026 | Setup GA4 e Search Console prima del go-live, per avere una baseline | F6 | — | Team dev | ⬜ |
 | W-027 | Mappa redirect 301 dai vecchi URL `.php` | F6 | W-011 | Team dev | ⬜ |
-| W-028 | Decisione su area riservata WebApp (`app.sonit.it`) | F6 | — | Cliente | ⏳ |
+| W-028 | Area riservata: link in header, fuori dal flusso commerciale (esito D-07) | F6 | W-019 | Team dev | ⬜ |
 | W-029 | Configurazione hosting: cache, HSTS, header di sicurezza | F6 | W-019 | Team dev | ⬜ |
 | W-030 | Collaudo pre-go-live: canonical, form, redirect, accessibilità, performance | F7 | W-019…W-029 | Team dev | ⬜ |
 | W-031 | Pubblicazione e verifica post-lancio: indicizzazione, errori, conversioni | F7 | W-030 | Team dev | ⬜ |
 
 ---
 
-## Decisioni aperte
+## Decisioni chiuse
 
-Dettaglio e proposte nel [Doc 03](https://sonit-jhkstudio.vercel.app/docs/architettura-informazioni#decisioni).
+Tutte validate il **05/08/2026**. Dettaglio e conseguenze operative nel [Doc 03](https://sonit-jhkstudio.vercel.app/docs/architettura-informazioni#decisioni).
 
-| # | Decisione | Proposta del team | Stato |
-|---|---|---|---|
-| D-01 | B2C fotovoltaico: pagina autonoma o sezione della pagina business unit? | Pagina autonoma `/fotovoltaico-casa`, fuori dal menu | ⏳ da validare |
-| D-02 | La consulenza resta una pagina o diventa un blocco trasversale? | Blocco trasversale in `/soluzioni` e nelle pagine BU | ⏳ da validare |
-| D-03 | Menu principale a 6 voci: va bene questo peso? | Sei voci, con `Soluzioni` unica voce con sottomenu | ⏳ da validare |
-| D-04 | Si nomina "general contractor" o si descrive la capacità? | Descrivere ora, adottare l'etichetta a riposizionamento compiuto | ⏳ da validare |
-| D-05 | I numeri aziendali sono pubblicabili? | Sì: sono la prova più efficace di solidità | ⏳ da validare |
-| D-06 | Si pubblica "Lavora con noi"? | Predisposta, da attivare se serve all'organico | ⏳ da validare |
-| D-07 | Area riservata: header, footer o fuori dal sito pubblico? | Link discreto in header, accanto al telefono | ⏳ da validare |
+| # | Decisione | Esito |
+|---|---|---|
+| D-01 | B2C fotovoltaico: pagina autonoma o sezione della pagina business unit? | ✅ **Pagina autonoma** `/fotovoltaico-casa`, fuori dal menu |
+| D-02 | La consulenza resta una pagina o diventa un blocco trasversale? | ✅ **Blocco trasversale**, ancora `/soluzioni#consulenza` |
+| D-03 | Menu principale a 6 voci: va bene questo peso? | ✅ **Sei voci**, sottomenu solo su Soluzioni |
+| D-04 | Si nomina "general contractor" o si descrive la capacità? | ✅ **Si descrive la capacità**: "Una sola regia su reti, impianti ed energia" |
+| D-05 | I numeri aziendali sono pubblicabili? | ✅ **Sì**, blocco numeri in home + versione estesa in `/chi-siamo` |
+| D-06 | Si pubblica "Lavora con noi"? | ✅ **Predisposta, non pubblicata** al lancio |
+| D-07 | Area riservata: header, footer o fuori dal sito pubblico? | ✅ **Link in header** accanto al telefono; form di login fuori dalla home |
+
+Nessuna decisione di struttura resta aperta: le dipendenze residue sono solo i materiali dal cliente.
 
 ## Materiali attesi dal cliente
 
@@ -94,7 +97,6 @@ Dettaglio e proposte nel [Doc 03](https://sonit-jhkstudio.vercel.app/docs/archit
 | A-05 | Numeri aggiornati: organico, ruoli interni, cantieri | home, `/chi-siamo` |
 | A-06 | 3–5 progetti candidabili a case study | `/progetti` |
 | A-07 | Caselle email di destinazione, distinte B2B e B2C | form |
-| A-08 | Decisione sull'area riservata WebApp | header o footer |
 | A-09 | Accessi a dominio, DNS e hosting attuali | go-live |
 | A-10 | Esistono account Google Analytics o Search Console? | baseline dei dati |
 | A-11 | Pagina Facebook aziendale — l'attuale link è un profilo personale | footer |
@@ -125,6 +127,9 @@ Elenco completo, con severità e rimedio: [Doc 01 · criticità](https://sonit-j
 ## Diario delle modifiche
 
 Voci in ordine cronologico inverso.
+
+### 05/08/2026 — Decisioni di architettura validate
+Chiuse tutte e sette le decisioni aperte (D-01 → D-07), tutte in linea con la proposta del team: pagina autonoma `/fotovoltaico-casa` fuori dal menu per il B2C, consulenza come blocco trasversale, menu a sei voci con sottomenu solo su Soluzioni, capacità descritta senza l'etichetta "general contractor" in hero, numeri aziendali pubblicati in home e in Chi siamo, "Lavora con noi" predisposta ma non pubblicata, area riservata come link discreto in header con il form di login fuori dalla homepage. L'architettura è congelata: 9 pagine al lancio, 6 voci di menu, 1 percorso B2C separato, 2 pagine predisposte. Fase F2 chiusa, F3 sbloccata: le dipendenze residue sono solo i materiali attesi dal cliente.
 
 ### 05/08/2026 — Doc 03: nuova architettura delle informazioni
 Pubblicata la proposta di alberatura per il nuovo sito, con viste verticale e orizzontale, albero con le sezioni di ogni pagina, confronto prima/dopo, schede delle 11 pagine previste, sistema di messaggi, struttura della home, template delle pagine business unit, percorso B2C, specifica dei form, slug e redirect. Mappati tutti i blocchi di testo estratti con verdetto di riuso: circa il 45% del contenuto attuale è riusabile con interventi minimi. Aperte 7 decisioni da validare (D-01 → D-07). Aggiunti `README.md` e questo worklog.

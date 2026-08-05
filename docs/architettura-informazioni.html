@@ -134,11 +134,11 @@
     <a href="#form">Form e conversioni</a>
     <a href="#slug">Slug e redirect</a>
     <a href="#serve">Cosa serve dal cliente</a>
-    <a href="#decisioni">Decisioni da validare</a>
+    <a href="#decisioni">Decisioni validate</a>
   </nav>
   <a class="back" href="/">← Indice dei documenti</a>
   <a class="back" href="/docs/alberatura-attuale">← Doc 02 · Alberatura attuale</a>
-  <p class="meta">Versione 1.0<br>05/08/2026</p>
+  <p class="meta">Versione 1.1<br>05/08/2026</p>
 </aside>
 
 <main>
@@ -301,7 +301,7 @@
 └─ <i>fuori dal menu principale</i>
     ├─ <b>/privacy-policy</b> e <b>/cookie-policy</b> <u>testi legali su dominio proprio</u>
     ├─ <b>/grazie</b> pagina di conferma invio <i>(oggi inesistente: serve per misurare)</i>
-    ├─ Area riservata → <code>app.sonit.it</code> <i>(link di servizio, non blocco commerciale)</i>
+    ├─ Area riservata → <code>app.sonit.it</code> <i>(link in header accanto al telefono · D-07)</i>
     ├─ <b>/it-cybersecurity</b> <i>predisposta, pubblicazione 2027</i>
     └─ <b>/lavora-con-noi</b> <i>predisposta, se utile alla crescita dell'organico</i>
 </pre>
@@ -514,7 +514,7 @@
 
 <h3>Messaggio principale</h3>
 <div class="box">
-  <p><strong>Una sola regia su reti, impianti ed energia.</strong> Sonit progetta, realizza e mantiene infrastrutture di telecomunicazione, impianti civili e industriali e impianti fotovoltaici, con squadre interne e un unico responsabile per commessa. È la formulazione operativa di "general contractor" senza usare l'etichetta prima che il mercato la riconosca.</p>
+  <p><strong>Una sola regia su reti, impianti ed energia.</strong> Sonit progetta, realizza e mantiene infrastrutture di telecomunicazione, impianti civili e industriali e impianti fotovoltaici, con squadre interne e un unico responsabile per commessa. È la formulazione operativa di "general contractor" senza usare l'etichetta prima che il mercato la riconosca — scelta confermata con la decisione D-04.</p>
 </div>
 
 <h3>Tre pilastri e le loro prove</h3>
@@ -649,28 +649,34 @@
 </div>
 
 <!-- ===== DECISIONI ===== -->
-<h2 id="decisioni">Decisioni da validare prima dei wireframe</h2>
+<h2 id="decisioni">Decisioni validate</h2>
+<p>Le sette decisioni aperte sono state chiuse il <strong>05/08/2026</strong>. Tutte confermano la proposta del team: l'architettura qui descritta è quella su cui si costruisce la fase F3.</p>
+
 <div class="tbl-wrap">
 <table>
-  <thead><tr><th>#</th><th>Decisione</th><th>Proposta</th><th>Impatto se cambia</th></tr></thead>
+  <thead><tr><th>#</th><th>Decisione</th><th>Esito</th><th>Conseguenza operativa</th></tr></thead>
   <tbody>
-    <tr><td>D-01</td><td>Il B2C fotovoltaico è una pagina autonoma o una sezione della pagina BU?</td><td>Pagina autonoma <code>/fotovoltaico-casa</code> fuori dal menu</td><td>Cambia menu, home, struttura dei form</td></tr>
-    <tr><td>D-02</td><td>La consulenza resta una pagina o diventa un blocco trasversale?</td><td>Blocco trasversale in <code>/soluzioni</code> e nelle pagine BU</td><td>Una voce di menu in più o in meno</td></tr>
-    <tr><td>D-03</td><td>Il menu principale ha 6 voci: Chi siamo, Soluzioni, Certificazioni, Partner, Progetti, Contatti. Va bene questo peso?</td><td>Sei voci, con Soluzioni come unica voce con sottomenu</td><td>Accorpare Certificazioni e Partner ridurrebbe l'evidenza chiesta in kick-off</td></tr>
-    <tr><td>D-04</td><td>Si nomina "general contractor" sul sito o si descrive la capacità senza l'etichetta?</td><td>Descrivere la capacità ora, adottare l'etichetta quando il riposizionamento è compiuto</td><td>Cambia il messaggio principale in hero</td></tr>
-    <tr><td>D-05</td><td>I numeri aziendali sono pubblicabili?</td><td>Sì, sono la prova più efficace di solidità</td><td>Senza numeri servono altre prove, prove meno efficaci</td></tr>
-    <tr><td>D-06</td><td>Si pubblica "Lavora con noi"?</td><td>Predisposta, da attivare se la crescita dell'organico lo richiede</td><td>Nessuno sull'architettura</td></tr>
-    <tr><td>D-07</td><td>Area riservata: in header, in footer o rimossa dal sito pubblico?</td><td>Link discreto in header, accanto al telefono</td><td>Nessuno sull'architettura</td></tr>
+    <tr><td>D-01</td><td>Il B2C fotovoltaico è una pagina autonoma o una sezione della pagina BU?</td><td><span class="tag t-riusa">Pagina autonoma</span></td><td><code>/fotovoltaico-casa</code> fuori dal menu, con contenuti, taglie e form solo per privati. Si raggiunge dalla CTA in hero, dal blocco in home e dal rimando in coda a <code>/soluzioni/fotovoltaico</code></td></tr>
+    <tr><td>D-02</td><td>La consulenza resta una pagina o diventa un blocco trasversale?</td><td><span class="tag t-riusa">Blocco trasversale</span></td><td>Blocco con ancora in <code>/soluzioni#consulenza</code> e richiamo nelle tre pagine business unit con taglio pertinente. Redirect da <code>/consulenza.php</code> all'ancora</td></tr>
+    <tr><td>D-03</td><td>Il menu principale a 6 voci va bene?</td><td><span class="tag t-riusa">Sei voci</span></td><td>Chi siamo · Soluzioni · Certificazioni · Partner · Progetti · Contatti. Sottomenu solo su Soluzioni, con le tre business unit</td></tr>
+    <tr><td>D-04</td><td>Si nomina "general contractor" o si descrive la capacità?</td><td><span class="tag t-riusa">Si descrive la capacità</span></td><td>Hero: "Una sola regia su reti, impianti ed energia", con la riga di offerta sotto. L'etichetta si adotterà quando il riposizionamento sarà compiuto, senza rifare il sito</td></tr>
+    <tr><td>D-05</td><td>I numeri aziendali sono pubblicabili?</td><td><span class="tag t-riusa">Sì</span></td><td>Blocco "Sonit in numeri" in home subito sotto l'hero e versione estesa in <code>/chi-siamo</code>: dipendenti diretti, anni di crescita, sedi, area servita. Restano da confermare i dati aggiornati</td></tr>
+    <tr><td>D-06</td><td>Si pubblica "Lavora con noi"?</td><td><span class="tag t-neutro">Predisposta, non pubblicata</span></td><td>Progettata e sviluppata, fuori dal menu al lancio. Si attiva quando serve, senza interventi sulla struttura</td></tr>
+    <tr><td>D-07</td><td>Area riservata: dove si colloca?</td><td><span class="tag t-riusa">Link in header</span></td><td>Link testuale accanto al telefono, in alto a destra. Il form di login esce dalla homepage: il click porta direttamente su <code>app.sonit.it</code></td></tr>
   </tbody>
 </table>
 </div>
 
+<div class="box ok">
+  <p><strong>Cosa cambia rispetto alla bozza.</strong> Niente: le sette scelte confermano la proposta. Restano quindi 9 pagine pubblicate al lancio, 6 voci di menu, 1 percorso B2C separato e 2 pagine predisposte ma non pubblicate. Le uniche dipendenze aperte sono i materiali dal cliente, non più decisioni di struttura.</p>
+</div>
+
 <div class="box">
-  <p><strong>Passo successivo.</strong> Validata questa architettura, la fase F3 produce i contenuti sezione per sezione e i wireframe strutturali a bassa fedeltà, partendo dai blocchi già mappati qui: circa il 45% del testo arriva dal riuso, il resto si scrive sui materiali che il cliente carica sul Drive condiviso.</p>
+  <p><strong>Passo successivo.</strong> Architettura validata: la fase F3 produce i contenuti sezione per sezione e i wireframe strutturali a bassa fedeltà, partendo dai blocchi già mappati qui: circa il 45% del testo arriva dal riuso, il resto si scrive sui materiali che il cliente carica sul Drive condiviso.</p>
 </div>
 
 <footer class="doc">
-  <p><strong>SONIT · Progetto DXP — Documento 03: nuova alberatura e organizzazione dei contenuti.</strong> Versione 1.0 del 05/08/2026. Basato sugli obiettivi di kick-off del 28/07/2026, sull'analisi del <a href="/docs/stato-arte-sonit">Documento 01</a> e sui testi estratti raccolti nel <a href="/docs/alberatura-attuale#schede">Documento 02</a>.</p>
+  <p><strong>SONIT · Progetto DXP — Documento 03: nuova alberatura e organizzazione dei contenuti.</strong> Versione 1.1 del 05/08/2026 — decisioni D-01 → D-07 validate. Basato sugli obiettivi di kick-off del 28/07/2026, sull'analisi del <a href="/docs/stato-arte-sonit">Documento 01</a> e sui testi estratti raccolti nel <a href="/docs/alberatura-attuale#schede">Documento 02</a>.</p>
   <p><a href="/">Indice dei documenti</a> · <a href="/docs/alberatura-attuale">Alberatura attuale</a> · <a href="/docs/stato-arte-sonit">Stato dell'arte</a></p>
 </footer>
 

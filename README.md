@@ -1,7 +1,7 @@
 # SONIT · Progetto DXP — Restyling sito
 
 Documentazione di progetto per il rifacimento del sito **[sonit.it](https://www.sonit.it/)** di Sonit Srl.
-Repo di lavoro: contiene analisi, alberature, testi estratti dal sito attuale e la proposta di architettura del nuovo sito.
+Repo di lavoro: contiene analisi, alberature, testi estratti dal sito attuale e l'architettura validata del nuovo sito.
 
 **Documentazione online:** <https://sonit-jhkstudio.vercel.app>
 La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag: noindex`). La protezione Vercel Authentication è attiva: per condividerla con il cliente va disattivata o va generato un link di bypass.
@@ -15,9 +15,9 @@ La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag:
 | `index.html` | Hub della documentazione: elenco documenti, avanzamento fasi, sintesi dell'analisi |
 | `docs/stato-arte-sonit.html` | **Doc 01** — Stato dell'arte: analisi del sito online, criticità, gap analysis, fasi, worklog, diario |
 | `docs/alberatura-attuale.html` | **Doc 02** — Alberatura del sito attuale: viste verticale e orizzontale, schede pagina, anomalie strutturali |
-| `docs/architettura-informazioni.html` | **Doc 03** — Nuova alberatura e organizzazione dei contenuti (proposta fase F2) |
+| `docs/architettura-informazioni.html` | **Doc 03** — Nuova alberatura e organizzazione dei contenuti (fase F2, decisioni validate) |
 | `docs/testi/` | Testi estratti dal sito online, un file per pagina, riportati alla lettera |
-| `WORKLOG.md` | Worklog operativo: fasi, attività con stato, decisioni aperte, diario delle modifiche |
+| `WORKLOG.md` | Worklog operativo: fasi, attività con stato, decisioni chiuse, materiali attesi, diario delle modifiche |
 | `SONIT _ Kick Off DXP … .docx` | Verbale del kick-off del 28/07/2026 |
 | `vercel.json` | Configurazione hosting: clean URLs, header `noindex` |
 
@@ -59,14 +59,14 @@ Tutti i documenti sono collegati tra loro:
 |---|---|---|
 | F0 | Kick-off, obiettivi e governance | ✅ completata 28/07/2026 |
 | F1 | Stato dell'arte, alberatura attuale, testi estratti | ✅ completata 05/08/2026 |
-| F2 | Architettura delle informazioni | 🔵 proposta pronta, da validare con il cliente |
-| F3 | Contenuti e wireframe low fidelity | ⬜ da avviare |
+| F2 | Architettura delle informazioni | ✅ completata 05/08/2026, decisioni validate |
+| F3 | Contenuti e wireframe low fidelity | 🔵 sbloccata, in attesa dei materiali dal cliente |
 | F4 | Due proposte di direzione visiva | ⬜ da avviare |
 | F5 | Design completo di tutte le pagine | ⬜ da avviare |
 | F6 | Sviluppo | ⬜ da avviare |
 | F7 | Go-live, redirect, analytics, collaudo | ⬜ da avviare |
 
-Dettaglio delle attività, delle dipendenze e delle decisioni aperte: **[WORKLOG.md](WORKLOG.md)**.
+Dettaglio delle attività, delle dipendenze e delle decisioni prese: **[WORKLOG.md](WORKLOG.md)**.
 
 ---
 
