@@ -91,11 +91,20 @@
   .sw .txt{padding:6px 8px;font-family:var(--mono);font-size:11px}
   .sw .txt small{display:block;font-family:-apple-system,sans-serif;color:var(--ink-soft);font-size:10.5px}
   .diario td:first-child{white-space:nowrap;font-family:var(--mono);font-size:12px}
+
+  .upbar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    margin:-44px -52px 26px;padding:11px 52px;background:rgba(255,255,255,.94);
+    backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line);font-size:12.5px}
+  .upbar a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--blu);font-weight:600;
+    padding:4px 10px;border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
   footer.doc{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
   @media (max-width:900px){
     .wrap{grid-template-columns:1fr}
     aside{position:static;height:auto}
     main{padding:28px 20px 60px}
+    .upbar{margin:-28px -20px 20px;padding:10px 20px}
     h1{font-size:26px}
   }
   @media print{
@@ -145,13 +154,20 @@
     <a href="/docs/alberatura-attuale" style="color:#bcd3fb;text-decoration:none">→ Doc 02 · Alberatura attuale</a>
   </p>
   <p class="meta" style="margin-top:14px">
-    Versione 0.2<br>
+    Versione 0.3<br>
     Aggiornato: 05/08/2026<br>
     Rilevamento sito: 05/08/2026
   </p>
 </aside>
 
 <main>
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <span>·</span>
+  <a href="/docs/alberatura-attuale">Doc 02 · Alberatura attuale</a>
+  <span>Stai leggendo: Doc 01 · Stato dell'arte</span>
+</div>
 
 <header class="top">
   <p class="kicker">Progetto DXP · Documento 01</p>
@@ -191,6 +207,12 @@
 <table>
   <thead><tr><th>Ambito</th><th>Obiettivo</th><th>Impatto sul progetto</th></tr></thead>
   <tbody>
+    <tr>
+      <td>05/08/2026</td>
+      <td>0.3</td>
+      <td>Team dev</td>
+      <td>Aggiunte al <a href="/docs/alberatura-attuale">Documento 02</a> le due viste grafiche dell'alberatura, verticale e orizzontale, con legenda dello stato di ciascuna pagina. Inserita in testa a ogni documento una barra di navigazione persistente con il ritorno all'indice e il collegamento all'altro documento.</td>
+    </tr>
     <tr><td>Posizionamento</td><td>Vetrina che comunichi affidabilità, solidità e struttura organizzativa crescente, in vista del posizionamento come <strong>general contractor</strong>.</td><td>Nuovo sistema di messaggi, prove di solidità (numeri, certificazioni, partner), nuova gerarchia della homepage.</td></tr>
     <tr><td>Offerta</td><td>Le tre BU (TLC, impiantistica civile/industriale, fotovoltaico) comunicate come <strong>ecosistema integrato</strong>, non come servizi separati.</td><td>Hub "soluzioni integrate" + 3 pagine BU coerenti; racconto delle sinergie elettrico↔fotovoltaico.</td></tr>
     <tr><td>Target</td><td>Prevalentemente <strong>B2B</strong> (vetrina istituzionale); <strong>B2C</strong> solo sul fotovoltaico, con contatto diretto (form/email) e netta separazione dal B2B.</td><td>Doppio percorso: sezione impianti industriali (MW) vs sezione residenziale (kW). Form e CTA distinti.</td></tr>
@@ -742,7 +764,7 @@ sonit.it  <i>(www, HTTPS, nginx, pagine .php — builder SitoFelice)</i>
 </div>
 
 <footer class="doc">
-  <p><strong>SONIT · Progetto DXP — Documento 01: stato dell'arte.</strong> Versione 0.2 del 05/08/2026. Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>. Fonti: sito online, <code>robots.txt</code>, <code>sitemap.xml</code>, fogli di stile e dati strutturati del sito attuale, verbale del kick-off del 28/07/2026, obiettivi condivisi.</p>
+  <p><strong>SONIT · Progetto DXP — Documento 01: stato dell'arte.</strong> Versione 0.3 del 05/08/2026. Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>. Fonti: sito online, <code>robots.txt</code>, <code>sitemap.xml</code>, fogli di stile e dati strutturati del sito attuale, verbale del kick-off del 28/07/2026, obiettivi condivisi.</p>
   <p>Approvazione documenti ufficiali: Giorgio. Riferimenti operativi: Giorgio e Beatrice. Ogni comunicazione va inviata a entrambi gli indirizzi.</p>
 </footer>
 
