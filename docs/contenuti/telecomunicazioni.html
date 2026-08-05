@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contenuti · Telecomunicazioni · /soluzioni/telecomunicazioni</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{--blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;--crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:#fff;line-height:1.6;font-size:15px}
+  .shell{max-width:980px;margin:0 auto;padding:0 26px 80px}
+  .upbar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--line);margin:0 -26px 24px;padding:11px 26px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px}
+  .upbar a{display:inline-flex;text-decoration:none;color:var(--blu);font-weight:600;padding:4px 10px;
+    border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
+  header.hd{padding:22px 0 20px;border-bottom:3px solid var(--blu);margin-bottom:26px}
+  header.hd .kick{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--blu);font-weight:700}
+  header.hd h1{font-size:30px;margin:8px 0 6px;letter-spacing:-.02em}
+  header.hd .url{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  dl.meta{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 16px;margin:18px 0 0;font-size:13.5px}
+  dl.meta dt{color:var(--ink-soft);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  dl.meta dd{margin:0}
+  h2.sec{font-size:12.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--blu);margin:38px 0 14px;
+    padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .blk{border:1px solid var(--line);border-radius:10px;margin:0 0 16px;overflow:hidden}
+  .blk > .bh{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--blu-tenue);
+    padding:9px 16px;border-bottom:1px solid var(--line)}
+  .blk > .bh b{font-size:13.5px}
+  .blk > .bh .n{font-family:var(--mono);font-size:11px;color:var(--blu);font-weight:700}
+  .blk > .bh .src{margin-left:auto;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    padding:2px 9px;border-radius:20px;white-space:nowrap}
+  .s-riuso{background:#e7f4ec;color:var(--ok)}
+  .s-nuovo{background:#e8f0fe;color:#0b5ed7}
+  .s-cli{background:#fff4e0;color:var(--warn)}
+  .blk > .bd{padding:18px 20px}
+  .blk p{margin:0 0 11px}
+  .c-h1{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0 0 10px!important;color:var(--blu-scuro)}
+  .c-sub{font-size:16.5px;color:var(--ink-soft);max-width:64ch}
+  .c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--blu);margin:0 0 8px!important}
+  .c-btn{margin-top:14px!important;font-family:var(--mono);font-size:12.2px;color:var(--blu-scuro);background:var(--blu-tenue);
+    border:1px dashed var(--blu-chiaro);border-radius:7px;padding:9px 12px}
+  .c-note{margin:14px 0 0!important;font-size:12.4px;color:var(--ink-soft);border-top:1px dotted var(--line);padding-top:10px}
+  .c-note code{font-family:var(--mono);font-size:11.8px}
+  .c-link{font-size:13px;font-weight:700;color:var(--blu);margin:0!important}
+  ul,ol{margin:0 0 12px;padding-left:20px}
+  li{margin-bottom:5px}
+  ul.c-two{columns:2;column-gap:34px}
+  @media (max-width:620px){ul.c-two{columns:1}}
+  ol.c-steps{padding-left:20px}
+  ol.c-steps li{margin-bottom:9px}
+  ol.c-steps i{color:var(--ink-soft);font-style:italic}
+  ul.c-faq{list-style:none;padding:0}
+  ul.c-faq li{padding:9px 0;border-bottom:1px solid var(--line)}
+  .c-nums{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 14px}
+  .c-nums div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .c-nums b{display:block;font-size:24px;color:var(--blu);letter-spacing:-.02em;line-height:1.1}
+  .c-nums span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .c-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0 0 14px}
+  .c-cards > div{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .c-cards b{display:block;margin-bottom:6px;color:var(--blu-scuro)}
+  .c-cards p{font-size:13.6px}
+  .todo,.cli{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:5px}
+  .todo{background:#fdecea;color:var(--crit)}
+  .cli{background:#fff4e0;color:var(--warn)}
+  code{font-family:var(--mono);font-size:12.2px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro)}
+  .pager{display:flex;flex-wrap:wrap;gap:6px;margin:34px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+  .pager a{font-size:12.4px;text-decoration:none;color:var(--blu);border:1px solid var(--line);border-radius:16px;padding:4px 10px}
+  .pager a:hover{background:var(--blu-tenue)}
+  .pager a.on{background:var(--blu);color:#fff;border-color:var(--blu);font-weight:700}
+  footer.ft{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:11.8px;color:var(--ink-soft)}
+  .tbl-wrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:560px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+  .cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:0 0 20px}
+  a.pg{display:block;border:1px solid var(--line);border-radius:9px;padding:14px 16px;text-decoration:none;color:inherit;transition:.15s}
+  a.pg:hover{border-color:var(--blu);background:var(--blu-tenue)}
+  a.pg b{display:block;font-size:15px}
+  a.pg code{background:none;padding:0;font-size:11.5px;color:var(--ink-soft)}
+  a.pg .st{display:block;margin-top:7px;font-size:11.5px;color:var(--ink-soft)}
+  .bar{display:flex;height:8px;border-radius:5px;overflow:hidden;margin:4px 0 0;border:1px solid var(--line)}
+  .bar i{display:block}
+  @media (max-width:640px){.shell{padding:0 16px 60px}.upbar{margin:0 -16px 18px;padding:10px 16px}
+    header.hd h1{font-size:23px}dl.meta{grid-template-columns:1fr}}
+  @media print{.upbar,.pager{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <a href="/docs/contenuti/">← Panoramica contenuti</a>
+  <a href="/docs/architettura-informazioni#albero">Alberatura · nodo</a>
+  <span>Contenuti · Telecomunicazioni</span>
+</div>
+
+<header class="hd">
+  <p class="kick">Sonit · contenuti del nuovo sito · fase F3</p>
+  <h1>Telecomunicazioni</h1>
+  <p class="url">/soluzioni/telecomunicazioni</p>
+  <dl class="meta">
+    <dt>Obiettivo</dt><dd>Presidiare il core business con la filiera completa, da pianificazione a collaudo.</dd>
+    <dt>Pubblico</dt><dd>Operatori e general contractor delle telecomunicazioni, enti pubblici.</dd>
+    <dt>Azione attesa</dt><dd>Contatto qualificato con indicazione del tipo di lavorazione</dd>
+    <dt>Title tag</dt><dd><code>Reti in fibra ottica e cablaggi strutturati | Sonit Srl</code> <span style="color:var(--ink-soft)">· 55 caratteri</span></dd>
+    <dt>Meta description</dt><dd><code>Pianificazione, opere civili, posa, giunzione e collaudo di reti in fibra ottica e cablaggi strutturati su tutto il territorio nazionale, con squadre interne.</code> <span style="color:var(--ink-soft)">· 158 caratteri</span></dd>
+    <dt>H1</dt><dd>Reti in fibra ottica, dalla pianificazione al collaudo</dd>
+    <dt>Parole di copy</dt><dd>~364 · 6 blocchi</dd>
+  </dl>
+</header>
+
+<h2 class="sec">Contenuti, blocco per blocco</h2>
+<div class="blk">
+  <div class="bh"><span class="n">01</span><b>Apertura</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p>La nostra mission è contribuire agli obiettivi previsti dall'Agenda Digitale Europea e dalla Strategia italiana per la banda ultra-larga della Gigabit Society: un piano che permetterà di stabilire livelli minimi di connettività in tutti i Paesi europei.</p>
+<p>Lavoriamo su tutta la filiera con squadre nostre: dalla pianificazione del cantiere al collaudo strumentale della tratta. È il ramo in cui siamo nati e in cui oggi operiamo come partner strutturato dei principali operatori infrastrutturali.</p>
+<p class="c-note">Riuso della mission attuale, con l'aggiunta della riga sul presidio dell'intera filiera. I committenti citati in kick-off non sono nominati: serve autorizzazione.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">02</span><b>La filiera completa</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p class="c-lbl">Cosa facciamo, fase per fase</p>
+<ol class="c-steps">
+  <li><b>Pianificazione e controllo</b> — implementazione e gestione di tutti i servizi logistici e di coordinamento del cantiere.<br>
+      <i>Per il committente: un cantiere che non si ferma e un referente unico sull'avanzamento.</i></li>
+  <li><b>Analisi progettuali</b> — gestione dei progetti, degli as-built e dei software per la rendicontazione delle lavorazioni.<br>
+      <i>Per il committente: documentazione allineata alla realtà del posato, rendicontazione senza rilavorazioni.</i></li>
+  <li><b>Opere civili</b> — scavi in minitrincea e microtrincea, scavi tradizionali, scavi su superfici pregiate e relativi ripristini.<br>
+      <i>Per il committente: la tecnica di scavo scelta in base al contesto, con ripristini che tengono nel tempo.</i></li>
+  <li><b>Infrastrutture</b> — sotto-tubazione, posa di cavi in fibra ottica interrati con tecnica blowing, posa su palificazione e su facciata.<br>
+      <i>Per il committente: la stessa squadra sulle tratte interrate e su quelle aeree.</i></li>
+  <li><b>Giunzione</b> — giunzione a caldo delle fibre ottiche con giuntatrici specifiche, che saldano le estremità dei cavi e permettono il passaggio del segnale con una perdita di efficienza impercettibile.<br>
+      <i>Per il committente: attenuazioni entro specifica, verificate una per una.</i></li>
+  <li><b>Collaudi</b> — strumentazione elettronica all'avanguardia per verificare la qualità degli impianti.<br>
+      <i>Per il committente: certificati di collaudo consegnati insieme alla tratta.</i></li>
+</ol>
+<p class="c-note">Riuso quasi integrale del contenuto tecnico attuale, la parte migliore del sito. L'aggiunta è la riga in corsivo su cosa ne ottiene il committente, che oggi manca su tutte le pagine.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">03</span><b>Consulenza e pratiche</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p class="c-lbl">Anche la parte che non si vede</p>
+<p>Gestiamo la documentazione tecnica, gli as-built e i rapporti con gli enti per permessi e occupazioni di suolo pubblico. Il committente riceve la tratta e il fascicolo che la accompagna.</p>
+<p class="c-note">Richiamo del blocco trasversale consulenza, con taglio telecomunicazioni.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">04</span><b>Certificazioni pertinenti</b><span class="src s-cli">Serve materiale dal cliente</span></div>
+  <div class="bd"><p class="c-lbl">Le nostre qualifiche</p>
+<p>Le certificazioni e le qualifiche che riguardano lavori su reti in fibra e opere civili.</p>
+<p class="c-btn">[Tutte le certificazioni → /certificazioni]</p>
+<p class="c-note"><span class="cli">DA MATERIALI CLIENTE · quali certificazioni sono pertinenti a questo ramo</span></p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">05</span><b>Progetti collegati</b><span class="src s-cli">Serve materiale dal cliente</span></div>
+  <div class="bd"><p class="c-btn">[Vedi i progetti di telecomunicazioni → /progetti]</p>
+<p class="c-note"><span class="cli">DA MATERIALI CLIENTE · almeno un case study su una tratta in fibra</span></p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">06</span><b>Chiusura</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p>Se avete una tratta da realizzare, un lotto da subappaltare o una rete da mantenere, diteci il tipo di lavorazione e i tempi: vi rispondiamo con chi seguirebbe il lavoro.</p>
+<p class="c-btn">[Contattaci → /contatti]</p></div>
+</div>
+
+<div class="pager"><a href="/docs/contenuti/">Panoramica</a><a class="" href="/docs/contenuti/home">Home</a><a class="" href="/docs/contenuti/chi-siamo">Chi siamo</a><a class="" href="/docs/contenuti/soluzioni">Soluzioni integrate</a><a class="on" href="/docs/contenuti/telecomunicazioni">Telecomunicazioni</a><a class="" href="/docs/contenuti/impianti">Impianti civili e industriali</a><a class="" href="/docs/contenuti/fotovoltaico">Fotovoltaico ed efficientamento</a><a class="" href="/docs/contenuti/fotovoltaico-casa">Fotovoltaico per la casa</a><a class="" href="/docs/contenuti/certificazioni">Certificazioni</a><a class="" href="/docs/contenuti/partner">Partner e fornitori</a><a class="" href="/docs/contenuti/progetti">Progetti</a><a class="" href="/docs/contenuti/contatti">Contatti</a></div>
+
+<footer class="ft">
+  <p>SONIT · Progetto DXP — contenuti riscritti per <code>/soluzioni/telecomunicazioni</code>, fase F3. Le etichette <span class="todo">DA CONFERMARE</span> e <span class="cli">DA MATERIALI CLIENTE</span> segnalano ciò che non è ancora scrivibile in via definitiva.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/contenuti/">Panoramica contenuti</a> · <a href="/docs/architettura-informazioni">Doc 03 · Architettura</a> · <a href="/docs/alberatura-attuale#schede">Testi del sito attuale</a></p>
+</footer>
+
+</div>
+</body>
+</html>

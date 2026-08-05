@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contenuti · Fotovoltaico per la casa · /fotovoltaico-casa</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{--blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;--crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:#fff;line-height:1.6;font-size:15px}
+  .shell{max-width:980px;margin:0 auto;padding:0 26px 80px}
+  .upbar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--line);margin:0 -26px 24px;padding:11px 26px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px}
+  .upbar a{display:inline-flex;text-decoration:none;color:var(--blu);font-weight:600;padding:4px 10px;
+    border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
+  header.hd{padding:22px 0 20px;border-bottom:3px solid var(--blu);margin-bottom:26px}
+  header.hd .kick{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--blu);font-weight:700}
+  header.hd h1{font-size:30px;margin:8px 0 6px;letter-spacing:-.02em}
+  header.hd .url{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  dl.meta{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 16px;margin:18px 0 0;font-size:13.5px}
+  dl.meta dt{color:var(--ink-soft);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  dl.meta dd{margin:0}
+  h2.sec{font-size:12.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--blu);margin:38px 0 14px;
+    padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .blk{border:1px solid var(--line);border-radius:10px;margin:0 0 16px;overflow:hidden}
+  .blk > .bh{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--blu-tenue);
+    padding:9px 16px;border-bottom:1px solid var(--line)}
+  .blk > .bh b{font-size:13.5px}
+  .blk > .bh .n{font-family:var(--mono);font-size:11px;color:var(--blu);font-weight:700}
+  .blk > .bh .src{margin-left:auto;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    padding:2px 9px;border-radius:20px;white-space:nowrap}
+  .s-riuso{background:#e7f4ec;color:var(--ok)}
+  .s-nuovo{background:#e8f0fe;color:#0b5ed7}
+  .s-cli{background:#fff4e0;color:var(--warn)}
+  .blk > .bd{padding:18px 20px}
+  .blk p{margin:0 0 11px}
+  .c-h1{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0 0 10px!important;color:var(--blu-scuro)}
+  .c-sub{font-size:16.5px;color:var(--ink-soft);max-width:64ch}
+  .c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--blu);margin:0 0 8px!important}
+  .c-btn{margin-top:14px!important;font-family:var(--mono);font-size:12.2px;color:var(--blu-scuro);background:var(--blu-tenue);
+    border:1px dashed var(--blu-chiaro);border-radius:7px;padding:9px 12px}
+  .c-note{margin:14px 0 0!important;font-size:12.4px;color:var(--ink-soft);border-top:1px dotted var(--line);padding-top:10px}
+  .c-note code{font-family:var(--mono);font-size:11.8px}
+  .c-link{font-size:13px;font-weight:700;color:var(--blu);margin:0!important}
+  ul,ol{margin:0 0 12px;padding-left:20px}
+  li{margin-bottom:5px}
+  ul.c-two{columns:2;column-gap:34px}
+  @media (max-width:620px){ul.c-two{columns:1}}
+  ol.c-steps{padding-left:20px}
+  ol.c-steps li{margin-bottom:9px}
+  ol.c-steps i{color:var(--ink-soft);font-style:italic}
+  ul.c-faq{list-style:none;padding:0}
+  ul.c-faq li{padding:9px 0;border-bottom:1px solid var(--line)}
+  .c-nums{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 14px}
+  .c-nums div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .c-nums b{display:block;font-size:24px;color:var(--blu);letter-spacing:-.02em;line-height:1.1}
+  .c-nums span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .c-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0 0 14px}
+  .c-cards > div{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .c-cards b{display:block;margin-bottom:6px;color:var(--blu-scuro)}
+  .c-cards p{font-size:13.6px}
+  .todo,.cli{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:5px}
+  .todo{background:#fdecea;color:var(--crit)}
+  .cli{background:#fff4e0;color:var(--warn)}
+  code{font-family:var(--mono);font-size:12.2px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro)}
+  .pager{display:flex;flex-wrap:wrap;gap:6px;margin:34px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+  .pager a{font-size:12.4px;text-decoration:none;color:var(--blu);border:1px solid var(--line);border-radius:16px;padding:4px 10px}
+  .pager a:hover{background:var(--blu-tenue)}
+  .pager a.on{background:var(--blu);color:#fff;border-color:var(--blu);font-weight:700}
+  footer.ft{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:11.8px;color:var(--ink-soft)}
+  .tbl-wrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:560px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+  .cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:0 0 20px}
+  a.pg{display:block;border:1px solid var(--line);border-radius:9px;padding:14px 16px;text-decoration:none;color:inherit;transition:.15s}
+  a.pg:hover{border-color:var(--blu);background:var(--blu-tenue)}
+  a.pg b{display:block;font-size:15px}
+  a.pg code{background:none;padding:0;font-size:11.5px;color:var(--ink-soft)}
+  a.pg .st{display:block;margin-top:7px;font-size:11.5px;color:var(--ink-soft)}
+  .bar{display:flex;height:8px;border-radius:5px;overflow:hidden;margin:4px 0 0;border:1px solid var(--line)}
+  .bar i{display:block}
+  @media (max-width:640px){.shell{padding:0 16px 60px}.upbar{margin:0 -16px 18px;padding:10px 16px}
+    header.hd h1{font-size:23px}dl.meta{grid-template-columns:1fr}}
+  @media print{.upbar,.pager{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <a href="/docs/contenuti/">← Panoramica contenuti</a>
+  <a href="/docs/architettura-informazioni#albero">Alberatura · nodo</a>
+  <span>Contenuti · Fotovoltaico per la casa</span>
+</div>
+
+<header class="hd">
+  <p class="kick">Sonit · contenuti del nuovo sito · fase F3</p>
+  <h1>Fotovoltaico per la casa</h1>
+  <p class="url">/fotovoltaico-casa</p>
+  <dl class="meta">
+    <dt>Obiettivo</dt><dd>Raccogliere richieste di preventivo e sopralluogo dai privati, senza mescolarsi agli impianti industriali.</dd>
+    <dt>Pubblico</dt><dd>Proprietari di casa, in prevalenza nel Lazio.</dd>
+    <dt>Azione attesa</dt><dd>Compila il form preventivo o telefona</dd>
+    <dt>Title tag</dt><dd><code>Fotovoltaico per la casa a Frosinone e Roma | Sonit Srl</code> <span style="color:var(--ink-soft)">· 55 caratteri</span></dd>
+    <dt>Meta description</dt><dd><code>Fotovoltaico per la casa: sopralluogo gratuito, progetto su misura, installazione con squadre nostre e detrazioni gestite da noi. Preventivo senza impegno.</code> <span style="color:var(--ink-soft)">· 155 caratteri</span></dd>
+    <dt>H1</dt><dd>Il fotovoltaico per la tua casa, dal sopralluogo all&#x27;accensione</dd>
+    <dt>Parole di copy</dt><dd>~315 · 7 blocchi</dd>
+  </dl>
+</header>
+
+<h2 class="sec">Contenuti, blocco per blocco</h2>
+<div class="blk">
+  <div class="bh"><span class="n">01</span><b>Apertura e form in evidenza</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p class="c-h1">Il fotovoltaico per la tua casa, dal sopralluogo all'accensione.</p>
+<p class="c-sub">Veniamo a vedere il tetto, ti diciamo quanto puoi produrre e quanto risparmi, installiamo con squadre nostre e ci occupiamo noi delle detrazioni. Un solo interlocutore, dall'inizio alla fine.</p>
+<p class="c-btn">[Chiedi un preventivo gratuito] &nbsp; [Chiama +39 0776 868072]</p>
+<p class="c-note">Il form sta in alto, non in fondo: è l'unico scopo della pagina. Nessun contenuto industriale, nessuna taglia in MW.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">02</span><b>Come funziona</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p class="c-lbl">Quattro passi, nessuna sorpresa</p>
+<ol class="c-steps">
+  <li><b>Sopralluogo gratuito</b> — veniamo a casa tua, guardiamo tetto, esposizione e quadro elettrico, e leggiamo insieme una bolletta.</li>
+  <li><b>Progetto e preventivo</b> — ti proponiamo la dimensione giusta per i tuoi consumi, con costi, produzione stimata e tempi. Scritti.</li>
+  <li><b>Installazione</b> — installiamo con squadre nostre, non con subappaltatori. Cantiere in casa: sappiamo che va lasciata pulita.</li>
+  <li><b>Attivazione e pratiche</b> — ci occupiamo di allacciamento, pratiche e detrazioni. Tu firmi, il resto lo seguiamo noi.</li>
+</ol></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">03</span><b>Quanto serve per una casa</b><span class="src s-cli">Serve materiale dal cliente</span></div>
+  <div class="bd"><p class="c-lbl">Che impianto ti serve</p>
+<p>Un'abitazione tipo si risolve con un impianto di qualche kilowatt: la dimensione giusta dipende da quanto consumi, da quando consumi e da se vuoi accumulare energia per la sera.</p>
+<p>Nel sopralluogo partiamo dalla tua bolletta, non da un listino.</p>
+<p class="c-note"><span class="cli">DA MATERIALI CLIENTE · taglie residenziali tipiche, con eventuale range di prezzo e produzione stimata. Senza questi dati il blocco resta generico</span> · <span class="todo">DA CONFERMARE · si parla di accumulo? di colonnina per l'auto elettrica?</span></p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">04</span><b>Detrazioni e pratiche</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p class="c-lbl">Le detrazioni le gestiamo noi</p>
+<p>Verifichiamo a quali detrazioni e incentivi hai diritto, prepariamo la documentazione e seguiamo le pratiche fino in fondo. È la parte che scoraggia più spesso chi ci pensa da mesi: per noi è ordinaria amministrazione.</p>
+<p class="c-note">Riuso del blocco incentivi e detrazioni, riscritto per il privato. <span class="todo">DA CONFERMARE · quali incentivi sono attivi al momento della pubblicazione: il testo va verificato prima del go-live</span></p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">05</span><b>Perché noi</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p class="c-lbl">Chi viene a installare</p>
+<p>Sonit installa impianti fotovoltaici per imprese e siti industriali. Sulle case portiamo la stessa organizzazione: tecnici nostri, un responsabile per il tuo impianto e la certezza di trovarci anche dopo, se serve manutenzione.</p>
+<p>Siamo in provincia di Frosinone, con una sede anche a Roma.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">06</span><b>Domande frequenti</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><ul class="c-faq">
+  <li><b>Il sopralluogo è impegnativo?</b> No, è gratuito e senza impegno. Serve a capire se conviene, anche a noi.</li>
+  <li><b>Quanto tempo passa dal preventivo all'accensione?</b> Dipende dalle pratiche di allacciamento. <span class="todo">DA CONFERMARE · tempi medi reali</span></li>
+  <li><b>Chi installa l'impianto?</b> Squadre Sonit, personale nostro.</li>
+  <li><b>E se dopo serve assistenza?</b> Facciamo manutenzione e pronto intervento sugli impianti che installiamo.</li>
+  <li><b>Fate anche pompe di calore o solare termico?</b> Sì, e in molti casi conviene valutarli insieme al fotovoltaico.</li>
+  <li><b>Lavorate solo in provincia di Frosinone?</b> <span class="todo">DA CONFERMARE · raggio di intervento per il residenziale: solo Lazio o oltre?</span></li>
+</ul></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">07</span><b>Form preventivo</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p class="c-lbl">Chiedi un preventivo</p>
+<p>Campi: nome e cognome · comune · telefono · email · tipo di abitazione · consumo o bolletta indicativa · messaggio · consenso privacy.</p>
+<p class="c-btn">[Richiedi il sopralluogo gratuito]</p>
+<p class="c-note">Form dedicato con destinazione email separata da quella commerciale B2B, per non mescolare i flussi. Conferma su /grazie.</p></div>
+</div>
+
+<div class="pager"><a href="/docs/contenuti/">Panoramica</a><a class="" href="/docs/contenuti/home">Home</a><a class="" href="/docs/contenuti/chi-siamo">Chi siamo</a><a class="" href="/docs/contenuti/soluzioni">Soluzioni integrate</a><a class="" href="/docs/contenuti/telecomunicazioni">Telecomunicazioni</a><a class="" href="/docs/contenuti/impianti">Impianti civili e industriali</a><a class="" href="/docs/contenuti/fotovoltaico">Fotovoltaico ed efficientamento</a><a class="on" href="/docs/contenuti/fotovoltaico-casa">Fotovoltaico per la casa</a><a class="" href="/docs/contenuti/certificazioni">Certificazioni</a><a class="" href="/docs/contenuti/partner">Partner e fornitori</a><a class="" href="/docs/contenuti/progetti">Progetti</a><a class="" href="/docs/contenuti/contatti">Contatti</a></div>
+
+<footer class="ft">
+  <p>SONIT · Progetto DXP — contenuti riscritti per <code>/fotovoltaico-casa</code>, fase F3. Le etichette <span class="todo">DA CONFERMARE</span> e <span class="cli">DA MATERIALI CLIENTE</span> segnalano ciò che non è ancora scrivibile in via definitiva.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/contenuti/">Panoramica contenuti</a> · <a href="/docs/architettura-informazioni">Doc 03 · Architettura</a> · <a href="/docs/alberatura-attuale#schede">Testi del sito attuale</a></p>
+</footer>
+
+</div>
+</body>
+</html>

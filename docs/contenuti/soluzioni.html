@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contenuti · Soluzioni integrate · /soluzioni</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{--blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;--crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:#fff;line-height:1.6;font-size:15px}
+  .shell{max-width:980px;margin:0 auto;padding:0 26px 80px}
+  .upbar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--line);margin:0 -26px 24px;padding:11px 26px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px}
+  .upbar a{display:inline-flex;text-decoration:none;color:var(--blu);font-weight:600;padding:4px 10px;
+    border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
+  header.hd{padding:22px 0 20px;border-bottom:3px solid var(--blu);margin-bottom:26px}
+  header.hd .kick{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--blu);font-weight:700}
+  header.hd h1{font-size:30px;margin:8px 0 6px;letter-spacing:-.02em}
+  header.hd .url{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  dl.meta{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 16px;margin:18px 0 0;font-size:13.5px}
+  dl.meta dt{color:var(--ink-soft);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  dl.meta dd{margin:0}
+  h2.sec{font-size:12.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--blu);margin:38px 0 14px;
+    padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .blk{border:1px solid var(--line);border-radius:10px;margin:0 0 16px;overflow:hidden}
+  .blk > .bh{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--blu-tenue);
+    padding:9px 16px;border-bottom:1px solid var(--line)}
+  .blk > .bh b{font-size:13.5px}
+  .blk > .bh .n{font-family:var(--mono);font-size:11px;color:var(--blu);font-weight:700}
+  .blk > .bh .src{margin-left:auto;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    padding:2px 9px;border-radius:20px;white-space:nowrap}
+  .s-riuso{background:#e7f4ec;color:var(--ok)}
+  .s-nuovo{background:#e8f0fe;color:#0b5ed7}
+  .s-cli{background:#fff4e0;color:var(--warn)}
+  .blk > .bd{padding:18px 20px}
+  .blk p{margin:0 0 11px}
+  .c-h1{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0 0 10px!important;color:var(--blu-scuro)}
+  .c-sub{font-size:16.5px;color:var(--ink-soft);max-width:64ch}
+  .c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--blu);margin:0 0 8px!important}
+  .c-btn{margin-top:14px!important;font-family:var(--mono);font-size:12.2px;color:var(--blu-scuro);background:var(--blu-tenue);
+    border:1px dashed var(--blu-chiaro);border-radius:7px;padding:9px 12px}
+  .c-note{margin:14px 0 0!important;font-size:12.4px;color:var(--ink-soft);border-top:1px dotted var(--line);padding-top:10px}
+  .c-note code{font-family:var(--mono);font-size:11.8px}
+  .c-link{font-size:13px;font-weight:700;color:var(--blu);margin:0!important}
+  ul,ol{margin:0 0 12px;padding-left:20px}
+  li{margin-bottom:5px}
+  ul.c-two{columns:2;column-gap:34px}
+  @media (max-width:620px){ul.c-two{columns:1}}
+  ol.c-steps{padding-left:20px}
+  ol.c-steps li{margin-bottom:9px}
+  ol.c-steps i{color:var(--ink-soft);font-style:italic}
+  ul.c-faq{list-style:none;padding:0}
+  ul.c-faq li{padding:9px 0;border-bottom:1px solid var(--line)}
+  .c-nums{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 14px}
+  .c-nums div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .c-nums b{display:block;font-size:24px;color:var(--blu);letter-spacing:-.02em;line-height:1.1}
+  .c-nums span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .c-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0 0 14px}
+  .c-cards > div{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .c-cards b{display:block;margin-bottom:6px;color:var(--blu-scuro)}
+  .c-cards p{font-size:13.6px}
+  .todo,.cli{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:5px}
+  .todo{background:#fdecea;color:var(--crit)}
+  .cli{background:#fff4e0;color:var(--warn)}
+  code{font-family:var(--mono);font-size:12.2px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro)}
+  .pager{display:flex;flex-wrap:wrap;gap:6px;margin:34px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+  .pager a{font-size:12.4px;text-decoration:none;color:var(--blu);border:1px solid var(--line);border-radius:16px;padding:4px 10px}
+  .pager a:hover{background:var(--blu-tenue)}
+  .pager a.on{background:var(--blu);color:#fff;border-color:var(--blu);font-weight:700}
+  footer.ft{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:11.8px;color:var(--ink-soft)}
+  .tbl-wrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:560px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+  .cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:0 0 20px}
+  a.pg{display:block;border:1px solid var(--line);border-radius:9px;padding:14px 16px;text-decoration:none;color:inherit;transition:.15s}
+  a.pg:hover{border-color:var(--blu);background:var(--blu-tenue)}
+  a.pg b{display:block;font-size:15px}
+  a.pg code{background:none;padding:0;font-size:11.5px;color:var(--ink-soft)}
+  a.pg .st{display:block;margin-top:7px;font-size:11.5px;color:var(--ink-soft)}
+  .bar{display:flex;height:8px;border-radius:5px;overflow:hidden;margin:4px 0 0;border:1px solid var(--line)}
+  .bar i{display:block}
+  @media (max-width:640px){.shell{padding:0 16px 60px}.upbar{margin:0 -16px 18px;padding:10px 16px}
+    header.hd h1{font-size:23px}dl.meta{grid-template-columns:1fr}}
+  @media print{.upbar,.pager{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <a href="/docs/contenuti/">← Panoramica contenuti</a>
+  <a href="/docs/architettura-informazioni#albero">Alberatura · nodo</a>
+  <span>Contenuti · Soluzioni integrate</span>
+</div>
+
+<header class="hd">
+  <p class="kick">Sonit · contenuti del nuovo sito · fase F3</p>
+  <h1>Soluzioni integrate</h1>
+  <p class="url">/soluzioni</p>
+  <dl class="meta">
+    <dt>Obiettivo</dt><dd>Spiegare l&#x27;ecosistema: una sola regia su reti, impianti ed energia, con squadre interne e un unico responsabile di commessa.</dd>
+    <dt>Pubblico</dt><dd>B2B con un problema su più fronti, che non vuole coordinare tre fornitori.</dd>
+    <dt>Azione attesa</dt><dd>Entra nella business unit pertinente · Contattaci</dd>
+    <dt>Title tag</dt><dd><code>Soluzioni integrate: reti, impianti ed energia | Sonit Srl</code> <span style="color:var(--ink-soft)">· 58 caratteri</span></dd>
+    <dt>Meta description</dt><dd><code>Tre competenze, un solo interlocutore: telecomunicazioni, impianti civili e industriali, fotovoltaico ed efficientamento, dalla progettazione alla manutenzione.</code> <span style="color:var(--ink-soft)">· 160 caratteri</span></dd>
+    <dt>H1</dt><dd>Tre competenze, un solo interlocutore</dd>
+    <dt>Parole di copy</dt><dd>~381 · 7 blocchi</dd>
+  </dl>
+</header>
+
+<h2 class="sec">Contenuti, blocco per blocco</h2>
+<div class="blk">
+  <div class="bh"><span class="n">01</span><b>L&#x27;ecosistema integrato</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p>La maggior parte dei lavori che ci vengono affidati non sta dentro una sola specializzazione. Una rete in fibra ha bisogno di scavi e di opere civili. Un impianto fotovoltaico è anche un impianto elettrico. Un edificio industriale mette insieme energia, sicurezza e automazione.</p>
+<p>Le nostre tre business unit lavorano sullo stesso cantiere, con una sola direzione. Per il committente significa tre cose concrete: un solo responsabile a cui chiedere, nessun tempo perso a far parlare fornitori diversi tra loro, nessuna zona grigia di responsabilità quando qualcosa va rifatto.</p>
+<p class="c-note">È il contenuto che oggi manca del tutto: la pagina "Servizi e Soluzioni" attuale ha 127 parole e solo quattro card. Questo blocco è il messaggio dell'ecosistema integrato chiesto in kick-off.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">02</span><b>Cosa realizziamo</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p class="c-lbl">Le nostre competenze</p>
+<ul class="c-two">
+  <li>Impianti per le telecomunicazioni</li>
+  <li>Impianti tecnologici</li>
+  <li>Impianti di pubblica illuminazione e reti elettriche</li>
+  <li>Impianti di videosorveglianza</li>
+  <li>Impianti idraulici</li>
+  <li>Impianti per l'efficientamento energetico</li>
+</ul>
+<p class="c-note">Riuso dell'elenco delle sei categorie oggi in Chi Siamo, spostato qui dove serve a orientare.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">03</span><b>Le tre business unit</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><div class="c-cards">
+  <div><b>Telecomunicazioni</b>
+   <p>Cablaggi strutturati e reti in fibra ottica su tutto il territorio nazionale: pianificazione, opere civili, posa, giunzione, collaudo. Il nostro core business.</p>
+   <p class="c-link">Telecomunicazioni →</p></div>
+  <div><b>Impianti civili e industriali</b>
+   <p>Impianti elettrici, videosorveglianza e allarme, domotica e automazione, idraulico, climatizzazione e purificazione dell'aria, per edifici residenziali e industriali.</p>
+   <p class="c-link">Impianti civili e industriali →</p></div>
+  <div><b>Fotovoltaico ed efficientamento</b>
+   <p>Impianti fotovoltaici, solare termico e pompe di calore, riqualificazione energetica degli edifici e gestione degli incentivi.</p>
+   <p class="c-link">Fotovoltaico ed efficientamento →</p></div>
+</div></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">04</span><b>Come lavoriamo, in cinque passi</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><ol class="c-steps">
+  <li><b>Analisi e progettazione</b> — pianificazione dell'impianto più idoneo alle esigenze del cliente e realizzazione dei progetti esecutivi.</li>
+  <li><b>Opere civili</b> — realizzazione di tutte le opere edili e strutturali necessarie.</li>
+  <li><b>Infrastrutture</b> — installazione e configurazione degli apparati e dei dispositivi.</li>
+  <li><b>Incentivi e detrazioni</b> — gestione completa degli incentivi fiscali e delle detrazioni per miglioramenti energetici e ristrutturazioni.</li>
+  <li><b>Manutenzioni</b> — pronto intervento su danni e malfunzionamenti.</li>
+</ol>
+<p class="c-note">Riuso letterale dei cinque blocchi attuali. Vivono qui, e le pagine business unit li richiamano invece di ripeterli.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">05</span><b>Consulenza e pratiche autorizzative</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p class="c-lbl" id="consulenza">Consulenza e pratiche</p>
+<p>Il nostro servizio di consulenza accompagna il cliente quando progetta, costruisce o riqualifica un immobile civile o industriale: dalla scelta dei componenti per gli impianti al supporto nella gestione delle pratiche autorizzative.</p>
+<p>Non è un servizio a sé: è il modo in cui seguiamo ogni commessa. Ci occupiamo della documentazione tecnica, dei rapporti con gli enti e della gestione delle autorizzazioni, così il committente non deve inseguire due interlocutori diversi.</p>
+<p class="c-note">Esito della decisione D-02: la pagina Consulenza diventa questo blocco, con ancora <code>#consulenza</code>. Il vecchio URL viene reindirizzato qui. I due titoli senza corpo del sito attuale — "Gestione documentale" e "Sviluppo di soluzione innovative" — sono stati riscritti dentro il testo.</p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">06</span><b>Manutenzione e pronto intervento</b><span class="src s-riuso">Riuso dal sito attuale</span></div>
+  <div class="bd"><p class="c-lbl">Dopo la consegna</p>
+<p>La manutenzione degli impianti e il pronto intervento su danni e malfunzionamenti fanno parte del servizio. Restiamo il riferimento anche quando il cantiere è chiuso.</p>
+<p class="c-note"><span class="todo">DA CONFERMARE · esistono contratti di manutenzione programmata da comunicare? tempi di intervento garantiti?</span></p></div>
+</div>
+<div class="blk">
+  <div class="bh"><span class="n">07</span><b>Chiusura</b><span class="src s-nuovo">Testo nuovo</span></div>
+  <div class="bd"><p>Se il lavoro che avete in mente tocca più di una di queste aree, è esattamente il caso in cui conviene parlare con noi.</p>
+<p class="c-btn">[Contattaci → /contatti]</p></div>
+</div>
+
+<div class="pager"><a href="/docs/contenuti/">Panoramica</a><a class="" href="/docs/contenuti/home">Home</a><a class="" href="/docs/contenuti/chi-siamo">Chi siamo</a><a class="on" href="/docs/contenuti/soluzioni">Soluzioni integrate</a><a class="" href="/docs/contenuti/telecomunicazioni">Telecomunicazioni</a><a class="" href="/docs/contenuti/impianti">Impianti civili e industriali</a><a class="" href="/docs/contenuti/fotovoltaico">Fotovoltaico ed efficientamento</a><a class="" href="/docs/contenuti/fotovoltaico-casa">Fotovoltaico per la casa</a><a class="" href="/docs/contenuti/certificazioni">Certificazioni</a><a class="" href="/docs/contenuti/partner">Partner e fornitori</a><a class="" href="/docs/contenuti/progetti">Progetti</a><a class="" href="/docs/contenuti/contatti">Contatti</a></div>
+
+<footer class="ft">
+  <p>SONIT · Progetto DXP — contenuti riscritti per <code>/soluzioni</code>, fase F3. Le etichette <span class="todo">DA CONFERMARE</span> e <span class="cli">DA MATERIALI CLIENTE</span> segnalano ciò che non è ancora scrivibile in via definitiva.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/contenuti/">Panoramica contenuti</a> · <a href="/docs/architettura-informazioni">Doc 03 · Architettura</a> · <a href="/docs/alberatura-attuale#schede">Testi del sito attuale</a></p>
+</footer>
+
+</div>
+</body>
+</html>

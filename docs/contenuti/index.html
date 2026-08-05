@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SONIT — Contenuti del nuovo sito, pagina per pagina</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{--blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;--crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:#fff;line-height:1.6;font-size:15px}
+  .shell{max-width:980px;margin:0 auto;padding:0 26px 80px}
+  .upbar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--line);margin:0 -26px 24px;padding:11px 26px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px}
+  .upbar a{display:inline-flex;text-decoration:none;color:var(--blu);font-weight:600;padding:4px 10px;
+    border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
+  header.hd{padding:22px 0 20px;border-bottom:3px solid var(--blu);margin-bottom:26px}
+  header.hd .kick{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--blu);font-weight:700}
+  header.hd h1{font-size:30px;margin:8px 0 6px;letter-spacing:-.02em}
+  header.hd .url{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  dl.meta{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 16px;margin:18px 0 0;font-size:13.5px}
+  dl.meta dt{color:var(--ink-soft);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  dl.meta dd{margin:0}
+  h2.sec{font-size:12.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--blu);margin:38px 0 14px;
+    padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .blk{border:1px solid var(--line);border-radius:10px;margin:0 0 16px;overflow:hidden}
+  .blk > .bh{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--blu-tenue);
+    padding:9px 16px;border-bottom:1px solid var(--line)}
+  .blk > .bh b{font-size:13.5px}
+  .blk > .bh .n{font-family:var(--mono);font-size:11px;color:var(--blu);font-weight:700}
+  .blk > .bh .src{margin-left:auto;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    padding:2px 9px;border-radius:20px;white-space:nowrap}
+  .s-riuso{background:#e7f4ec;color:var(--ok)}
+  .s-nuovo{background:#e8f0fe;color:#0b5ed7}
+  .s-cli{background:#fff4e0;color:var(--warn)}
+  .blk > .bd{padding:18px 20px}
+  .blk p{margin:0 0 11px}
+  .c-h1{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0 0 10px!important;color:var(--blu-scuro)}
+  .c-sub{font-size:16.5px;color:var(--ink-soft);max-width:64ch}
+  .c-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--blu);margin:0 0 8px!important}
+  .c-btn{margin-top:14px!important;font-family:var(--mono);font-size:12.2px;color:var(--blu-scuro);background:var(--blu-tenue);
+    border:1px dashed var(--blu-chiaro);border-radius:7px;padding:9px 12px}
+  .c-note{margin:14px 0 0!important;font-size:12.4px;color:var(--ink-soft);border-top:1px dotted var(--line);padding-top:10px}
+  .c-note code{font-family:var(--mono);font-size:11.8px}
+  .c-link{font-size:13px;font-weight:700;color:var(--blu);margin:0!important}
+  ul,ol{margin:0 0 12px;padding-left:20px}
+  li{margin-bottom:5px}
+  ul.c-two{columns:2;column-gap:34px}
+  @media (max-width:620px){ul.c-two{columns:1}}
+  ol.c-steps{padding-left:20px}
+  ol.c-steps li{margin-bottom:9px}
+  ol.c-steps i{color:var(--ink-soft);font-style:italic}
+  ul.c-faq{list-style:none;padding:0}
+  ul.c-faq li{padding:9px 0;border-bottom:1px solid var(--line)}
+  .c-nums{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 14px}
+  .c-nums div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .c-nums b{display:block;font-size:24px;color:var(--blu);letter-spacing:-.02em;line-height:1.1}
+  .c-nums span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .c-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0 0 14px}
+  .c-cards > div{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .c-cards b{display:block;margin-bottom:6px;color:var(--blu-scuro)}
+  .c-cards p{font-size:13.6px}
+  .todo,.cli{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:5px}
+  .todo{background:#fdecea;color:var(--crit)}
+  .cli{background:#fff4e0;color:var(--warn)}
+  code{font-family:var(--mono);font-size:12.2px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro)}
+  .pager{display:flex;flex-wrap:wrap;gap:6px;margin:34px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+  .pager a{font-size:12.4px;text-decoration:none;color:var(--blu);border:1px solid var(--line);border-radius:16px;padding:4px 10px}
+  .pager a:hover{background:var(--blu-tenue)}
+  .pager a.on{background:var(--blu);color:#fff;border-color:var(--blu);font-weight:700}
+  footer.ft{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:11.8px;color:var(--ink-soft)}
+  .tbl-wrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:560px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+  .cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:0 0 20px}
+  a.pg{display:block;border:1px solid var(--line);border-radius:9px;padding:14px 16px;text-decoration:none;color:inherit;transition:.15s}
+  a.pg:hover{border-color:var(--blu);background:var(--blu-tenue)}
+  a.pg b{display:block;font-size:15px}
+  a.pg code{background:none;padding:0;font-size:11.5px;color:var(--ink-soft)}
+  a.pg .st{display:block;margin-top:7px;font-size:11.5px;color:var(--ink-soft)}
+  .bar{display:flex;height:8px;border-radius:5px;overflow:hidden;margin:4px 0 0;border:1px solid var(--line)}
+  .bar i{display:block}
+  @media (max-width:640px){.shell{padding:0 16px 60px}.upbar{margin:0 -16px 18px;padding:10px 16px}
+    header.hd h1{font-size:23px}dl.meta{grid-template-columns:1fr}}
+  @media print{.upbar,.pager{display:none}}
+
+  .num{text-align:right;font-family:var(--mono);font-size:12.2px;white-space:nowrap}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 20px;font-size:12.4px;color:var(--ink-soft)}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .box{border:1px solid var(--line);border-left:4px solid var(--blu);background:var(--blu-tenue);
+    padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 18px;font-size:14px}
+  .box.warn{border-left-color:var(--warn);background:#fffaf0}
+  .box p:last-child{margin-bottom:0}
+  .kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin:0 0 22px}
+  .kpi{border:1px solid var(--line);border-radius:9px;padding:14px 16px}
+  .kpi b{display:block;font-size:25px;color:var(--blu);line-height:1.05;letter-spacing:-.02em}
+  .kpi span{display:block;font-size:12px;color:var(--ink-soft);margin-top:4px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <a href="/docs/architettura-informazioni">← Doc 03 · Architettura</a>
+  <span>Stai leggendo: Doc 04 · Contenuti del nuovo sito</span>
+</div>
+
+<header class="hd">
+  <p class="kick">Progetto DXP · Documento 04 · Fase F3</p>
+  <h1>Contenuti del nuovo sito, pagina per pagina</h1>
+  <p class="url">Un file per ogni nodo dell'alberatura validata · 67 blocchi di copy · ~2903 parole</p>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><b>11</b><span>pagine con contenuti scritti</span></div>
+  <div class="kpi"><b>67</b><span>blocchi di copy</span></div>
+  <div class="kpi"><b>~2903</b><span>parole, contro ~1.100 del sito attuale</span></div>
+  <div class="kpi"><b>20</b><span>blocchi da riuso del sito attuale</span></div>
+  <div class="kpi"><b>28</b><span>blocchi di testo nuovo, pronti</span></div>
+  <div class="kpi"><b>19</b><span>blocchi in attesa di materiali</span></div>
+</div>
+
+<h2 class="sec">Come leggere questi file</h2>
+<p>Ogni pagina della nuova alberatura ha un file con i suoi contenuti pronti, divisi nei blocchi in cui compaiono scorrendo la pagina. Per ogni blocco è indicata la provenienza: <b>riuso</b> dal sito attuale, <b>testo nuovo</b> già scritto, oppure <b>in attesa di materiali</b> dal cliente. Ogni file riporta anche il <code>title</code>, la <code>meta description</code> e l'H1 proposti, con il conteggio dei caratteri.</p>
+<p>Due etichette segnalano ciò che non è ancora definitivo: <span class="todo">DA CONFERMARE</span> per i dati da validare con il cliente e <span class="cli">DA MATERIALI CLIENTE</span> per i blocchi che non si possono scrivere senza documenti.</p>
+
+<div class="legend">
+  <span><i style="background:#1b6b3a"></i>riuso dal sito attuale</span>
+  <span><i style="background:#0b5ed7"></i>testo nuovo, pronto</span>
+  <span><i style="background:#e0b46a"></i>in attesa di materiali dal cliente</span>
+</div>
+
+<h2 class="sec">Le pagine</h2>
+<div class="cards"><a class="pg" href="/docs/contenuti/home">
+  <b>Home</b><code>/</code>
+  <div class="bar"><i style="width:22%;background:#1b6b3a"></i><i style="width:33%;background:#0b5ed7"></i><i style="width:45%;background:#e0b46a"></i></div>
+  <span class="st">~474 parole · 9 blocchi · <span style="color:var(--warn);font-weight:700">4 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/chi-siamo">
+  <b>Chi siamo</b><code>/chi-siamo</code>
+  <div class="bar"><i style="width:33%;background:#1b6b3a"></i><i style="width:33%;background:#0b5ed7"></i><i style="width:34%;background:#e0b46a"></i></div>
+  <span class="st">~327 parole · 6 blocchi · <span style="color:var(--warn);font-weight:700">2 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/soluzioni">
+  <b>Soluzioni integrate</b><code>/soluzioni</code>
+  <div class="bar"><i style="width:57%;background:#1b6b3a"></i><i style="width:43%;background:#0b5ed7"></i><i style="width:0%;background:#e0b46a"></i></div>
+  <span class="st">~381 parole · 7 blocchi</span>
+</a><a class="pg" href="/docs/contenuti/telecomunicazioni">
+  <b>Telecomunicazioni</b><code>/soluzioni/telecomunicazioni</code>
+  <div class="bar"><i style="width:50%;background:#1b6b3a"></i><i style="width:17%;background:#0b5ed7"></i><i style="width:33%;background:#e0b46a"></i></div>
+  <span class="st">~364 parole · 6 blocchi · <span style="color:var(--warn);font-weight:700">2 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/impianti">
+  <b>Impianti civili e industriali</b><code>/soluzioni/impianti</code>
+  <div class="bar"><i style="width:43%;background:#1b6b3a"></i><i style="width:29%;background:#0b5ed7"></i><i style="width:28%;background:#e0b46a"></i></div>
+  <span class="st">~200 parole · 7 blocchi · <span style="color:var(--warn);font-weight:700">2 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/fotovoltaico">
+  <b>Fotovoltaico ed efficientamento</b><code>/soluzioni/fotovoltaico</code>
+  <div class="bar"><i style="width:43%;background:#1b6b3a"></i><i style="width:29%;background:#0b5ed7"></i><i style="width:28%;background:#e0b46a"></i></div>
+  <span class="st">~243 parole · 7 blocchi · <span style="color:var(--warn);font-weight:700">2 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/fotovoltaico-casa">
+  <b>Fotovoltaico per la casa</b><code>/fotovoltaico-casa</code>
+  <div class="bar"><i style="width:14%;background:#1b6b3a"></i><i style="width:71%;background:#0b5ed7"></i><i style="width:15%;background:#e0b46a"></i></div>
+  <span class="st">~315 parole · 7 blocchi · <span style="color:var(--warn);font-weight:700">1 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/certificazioni">
+  <b>Certificazioni</b><code>/certificazioni</code>
+  <div class="bar"><i style="width:20%;background:#1b6b3a"></i><i style="width:20%;background:#0b5ed7"></i><i style="width:60%;background:#e0b46a"></i></div>
+  <span class="st">~145 parole · 5 blocchi · <span style="color:var(--warn);font-weight:700">3 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/partner">
+  <b>Partner e fornitori</b><code>/partner</code>
+  <div class="bar"><i style="width:0%;background:#1b6b3a"></i><i style="width:50%;background:#0b5ed7"></i><i style="width:50%;background:#e0b46a"></i></div>
+  <span class="st">~129 parole · 4 blocchi · <span style="color:var(--warn);font-weight:700">2 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/progetti">
+  <b>Progetti</b><code>/progetti</code>
+  <div class="bar"><i style="width:0%;background:#1b6b3a"></i><i style="width:75%;background:#0b5ed7"></i><i style="width:25%;background:#e0b46a"></i></div>
+  <span class="st">~190 parole · 4 blocchi · <span style="color:var(--warn);font-weight:700">1 blocchi in attesa</span></span>
+</a><a class="pg" href="/docs/contenuti/contatti">
+  <b>Contatti</b><code>/contatti</code>
+  <div class="bar"><i style="width:20%;background:#1b6b3a"></i><i style="width:80%;background:#0b5ed7"></i><i style="width:0%;background:#e0b46a"></i></div>
+  <span class="st">~135 parole · 5 blocchi</span>
+</a></div>
+
+<h2 class="sec">Riepilogo</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Pagina</th><th>URL</th><th class="num">Parole</th><th class="num">Riuso</th><th class="num">Nuovi</th><th class="num">In attesa</th></tr></thead>
+  <tbody><tr><td><a href="/docs/contenuti/home">Home</a></td><td><code>/</code></td><td class="num">~474</td><td class="num">2</td><td class="num">3</td><td class="num">4</td></tr><tr><td><a href="/docs/contenuti/chi-siamo">Chi siamo</a></td><td><code>/chi-siamo</code></td><td class="num">~327</td><td class="num">2</td><td class="num">2</td><td class="num">2</td></tr><tr><td><a href="/docs/contenuti/soluzioni">Soluzioni integrate</a></td><td><code>/soluzioni</code></td><td class="num">~381</td><td class="num">4</td><td class="num">3</td><td class="num">0</td></tr><tr><td><a href="/docs/contenuti/telecomunicazioni">Telecomunicazioni</a></td><td><code>/soluzioni/telecomunicazioni</code></td><td class="num">~364</td><td class="num">3</td><td class="num">1</td><td class="num">2</td></tr><tr><td><a href="/docs/contenuti/impianti">Impianti civili e industriali</a></td><td><code>/soluzioni/impianti</code></td><td class="num">~200</td><td class="num">3</td><td class="num">2</td><td class="num">2</td></tr><tr><td><a href="/docs/contenuti/fotovoltaico">Fotovoltaico ed efficientamento</a></td><td><code>/soluzioni/fotovoltaico</code></td><td class="num">~243</td><td class="num">3</td><td class="num">2</td><td class="num">2</td></tr><tr><td><a href="/docs/contenuti/fotovoltaico-casa">Fotovoltaico per la casa</a></td><td><code>/fotovoltaico-casa</code></td><td class="num">~315</td><td class="num">1</td><td class="num">5</td><td class="num">1</td></tr><tr><td><a href="/docs/contenuti/certificazioni">Certificazioni</a></td><td><code>/certificazioni</code></td><td class="num">~145</td><td class="num">1</td><td class="num">1</td><td class="num">3</td></tr><tr><td><a href="/docs/contenuti/partner">Partner e fornitori</a></td><td><code>/partner</code></td><td class="num">~129</td><td class="num">0</td><td class="num">2</td><td class="num">2</td></tr><tr><td><a href="/docs/contenuti/progetti">Progetti</a></td><td><code>/progetti</code></td><td class="num">~190</td><td class="num">0</td><td class="num">3</td><td class="num">1</td></tr><tr><td><a href="/docs/contenuti/contatti">Contatti</a></td><td><code>/contatti</code></td><td class="num">~135</td><td class="num">1</td><td class="num">4</td><td class="num">0</td></tr></tbody>
+</table>
+</div>
+
+<div class="box warn">
+  <p><strong>Cosa blocca la chiusura della fase F3.</strong> 19 blocchi su 67 non si possono chiudere senza materiali del cliente, e sono concentrati esattamente dove serve la prova: certificazioni, partner, progetti, numeri aziendali, taglie degli impianti e caselle email di destinazione. Le pagine a riuso alto — telecomunicazioni, impianti, fotovoltaico B2B, hub soluzioni — sono invece complete e possono andare direttamente in wireframe.</p>
+</div>
+
+<h2 class="sec">Regole redazionali usate</h2>
+<ul>
+  <li><b>Frasi corte, verbi concreti.</b> Si dice cosa si fa e cosa ne ottiene il committente, senza aggettivi di rinforzo.</li>
+  <li><b>Nessuna promessa non verificabile.</b> Ogni affermazione di solidità è accompagnata da un dato o da una certificazione.</li>
+  <li><b>Termini tecnici mantenuti</b> dove sono il linguaggio del committente: minitrincea, microtrincea, blowing, as-built, giunzione a caldo, collaudo strumentale.</li>
+  <li><b>Refusi del sito attuale corretti</b>: "efficientamento" con la i, "intraprendenti", "soluzioni innovative".</li>
+  <li><b>Niente "azienda giovane"</b> né "di recente costituzione": contraddicono il posizionamento.</li>
+  <li><b>L'etichetta "general contractor" non compare</b> nei testi pubblici, per la decisione D-04: si descrive la capacità di regia.</li>
+  <li><b>Committenti non nominati</b> finché non arriva l'autorizzazione.</li>
+  <li><b>Title tag</b> entro 60–70 caratteri, con il riferimento territoriale dove è utile; <b>meta description</b> entro 150–160.</li>
+</ul>
+
+<div class="box">
+  <p><strong>Passo successivo.</strong> Con questi contenuti si costruiscono i wireframe strutturali a bassa fedeltà (W-013): ogni blocco elencato qui diventa una sezione del wireframe, nello stesso ordine. In parallelo si sollecitano i materiali mancanti, che sono l'unica dipendenza rimasta.</p>
+</div>
+
+<footer class="ft">
+  <p><strong>SONIT · Progetto DXP — Documento 04: contenuti del nuovo sito.</strong> Versione 1.0 del 05/08/2026. Costruito sull'alberatura validata del <a href="/docs/architettura-informazioni">Documento 03</a> e sui testi estratti dal sito attuale raccolti nel <a href="/docs/alberatura-attuale#schede">Documento 02</a>.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/architettura-informazioni">Architettura</a> · <a href="/docs/alberatura-attuale">Alberatura attuale</a> · <a href="/docs/stato-arte-sonit">Stato dell'arte</a></p>
+</footer>
+
+</div>
+</body>
+</html>
