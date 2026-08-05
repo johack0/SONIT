@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SONIT — Nuova alberatura e organizzazione dei contenuti</title>
+<meta name="description" content="Proposta di architettura delle informazioni per il nuovo sito Sonit: alberatura, percorsi B2B e B2C, riorganizzazione dei contenuti estratti dal sito attuale.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;
+    --crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;--info:#0b5ed7;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55;font-size:15px}
+  .wrap{display:grid;grid-template-columns:264px minmax(0,1fr);max-width:1400px;margin:0 auto}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;background:var(--blu);color:#fff;padding:28px 20px 40px}
+  aside .brand{font-weight:800;letter-spacing:.14em;font-size:20px;margin:0 0 2px}
+  aside .brand span{font-weight:400;opacity:.75}
+  aside .sub{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:22px}
+  aside nav a{display:block;color:#dbe6f5;text-decoration:none;font-size:13.2px;padding:5px 8px;border-radius:5px}
+  aside nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+  aside nav .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;opacity:.55;margin:18px 0 6px 8px}
+  aside .back{display:block;margin-top:24px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;color:#bcd3fb;text-decoration:none}
+  aside .back+.back{border-top:0;margin-top:4px;padding-top:0}
+  aside .back:hover{color:#fff}
+  aside .meta{margin-top:18px;font-size:11.5px;opacity:.65}
+  main{padding:44px 52px 90px;min-width:0}
+  main [id]{scroll-margin-top:66px}
+  .upbar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:-44px -52px 26px;padding:11px 52px;
+    background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line);font-size:12.5px}
+  .upbar a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--blu);font-weight:600;padding:4px 10px;border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+  .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+  .upbar span{color:var(--ink-soft)}
+  header.top{border-bottom:3px solid var(--blu);padding-bottom:22px;margin-bottom:34px}
+  header.top .kicker{color:var(--blu);font-size:11.5px;text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+  h1{font-size:32px;line-height:1.15;margin:8px 0 10px;letter-spacing:-.02em}
+  h2{font-size:21px;margin:52px 0 14px;padding-top:14px;border-top:1px solid var(--line);letter-spacing:-.01em}
+  h2:first-of-type{border-top:0}
+  h3{font-size:16px;margin:26px 0 8px;color:var(--blu-scuro)}
+  h4{font-size:13.5px;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+  p{margin:0 0 12px}
+  ul,ol{margin:0 0 14px;padding-left:20px}
+  li{margin-bottom:5px}
+  code{font-family:var(--mono);font-size:12.5px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro);word-break:break-word}
+  .lead{font-size:16.5px;color:var(--ink-soft);max-width:70ch}
+  .tbl-wrap{overflow-x:auto;margin:0 0 18px}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:600px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--blu-chiaro);white-space:nowrap}
+  tbody tr:hover{background:#fafcff}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .t-riusa{background:#e7f4ec;color:var(--ok)}
+  .t-riscrivi{background:#e8f0fe;color:var(--info)}
+  .t-sposta{background:#fff4e0;color:var(--warn)}
+  .t-elimina{background:#fdecea;color:var(--crit)}
+  .t-nuovo{background:var(--blu);color:#fff}
+  .t-neutro{background:#eef1f5;color:var(--ink-soft)}
+  .box{border:1px solid var(--line);border-left:4px solid var(--blu);background:var(--blu-tenue);padding:14px 16px;border-radius:0 6px 6px 0;margin:0 0 18px}
+  .box.warn{border-left-color:var(--warn);background:#fffaf0}
+  .box.ok{border-left-color:var(--ok);background:#f3faf5}
+  .box p:last-child{margin-bottom:0}
+  .box strong{color:var(--blu-scuro)}
+  pre.tree{font-family:var(--mono);font-size:12.5px;line-height:1.72;background:#0e1a2b;color:#d7e3f4;padding:22px;border-radius:8px;overflow-x:auto;margin:0 0 18px}
+  pre.tree b{color:#7fb2ff;font-weight:600}
+  pre.tree i{color:#8e9db4;font-style:normal}
+  pre.tree em{color:#7ee0b0;font-style:normal}
+  pre.tree u{color:#ffcf8f;text-decoration:none}
+  .diagram{border:1px solid var(--line);border-radius:10px;padding:18px 18px 10px;margin:0 0 16px;background:#fff}
+  .diagram > .cap{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .diagram > .cap b{font-size:14.5px}
+  .diagram > .cap i{font-style:normal;font-size:12.3px;color:var(--ink-soft)}
+  .diagram .canvas{overflow-x:auto;padding-bottom:6px}
+  .diagram .canvas svg{display:block;min-width:780px}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 22px;font-size:12.4px;color:var(--ink-soft)}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:0 0 18px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .card .n{font-size:25px;font-weight:800;color:var(--blu);line-height:1.1;letter-spacing:-.02em}
+  .card .l{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .sheet{border:1px solid var(--line);border-radius:9px;margin:0 0 14px;overflow:hidden}
+  .sheet .hd{background:var(--blu-tenue);padding:11px 16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+  .sheet .hd b{font-size:15px}
+  .sheet .hd code{background:#fff}
+  .sheet .hd .tag{margin-left:auto}
+  .sheet .bd{padding:14px 16px}
+  .sheet dl{display:grid;grid-template-columns:126px minmax(0,1fr);gap:5px 14px;margin:0;font-size:13.4px}
+  .sheet dt{color:var(--ink-soft);font-size:12.2px;text-transform:uppercase;letter-spacing:.05em}
+  .sheet dd{margin:0}
+  .blocks{counter-reset:b;list-style:none;padding:0;margin:0}
+  .blocks li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.6px}
+  .blocks li:last-child{border-bottom:0}
+  .blocks li::before{counter-increment:b;content:counter(b);font-family:var(--mono);font-size:11.5px;color:var(--blu);font-weight:700;
+    background:var(--blu-tenue);border-radius:5px;text-align:center;padding:2px 0;height:20px}
+  .blocks b{display:block}
+  .blocks span{color:var(--ink-soft);font-size:13px}
+  footer.doc{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr}
+    aside{position:static;height:auto}
+    main{padding:28px 20px 60px}
+    .upbar{margin:-28px -20px 20px;padding:10px 20px}
+    h1{font-size:25px}
+    .sheet dl{grid-template-columns:1fr}
+  }
+  @media print{aside,.upbar{display:none}.wrap{display:block}main{padding:0}h2{page-break-after:avoid}.sheet,.diagram{page-break-inside:avoid}table{font-size:10.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<aside>
+  <p class="brand">SONIT<span>&nbsp;/ DXP</span></p>
+  <p class="sub">Architettura · Doc 03</p>
+  <nav>
+    <div class="grp">Impostazione</div>
+    <a href="#premessa">Premessa e criteri</a>
+    <a href="#principi">Principi guida</a>
+    <div class="grp">Nuova alberatura</div>
+    <a href="#viste">Viste verticale e orizzontale</a>
+    <a href="#albero">Albero con le sezioni</a>
+    <a href="#confronto">Confronto prima / dopo</a>
+    <a href="#pagine">Le pagine una per una</a>
+    <div class="grp">Contenuti</div>
+    <a href="#riuso">Riorganizzazione dei testi estratti</a>
+    <a href="#messaggi">Sistema di messaggi</a>
+    <a href="#home">Struttura della home</a>
+    <a href="#template-bu">Template business unit</a>
+    <a href="#b2c">Percorso B2C fotovoltaico</a>
+    <div class="grp">Operativo</div>
+    <a href="#form">Form e conversioni</a>
+    <a href="#slug">Slug e redirect</a>
+    <a href="#serve">Cosa serve dal cliente</a>
+    <a href="#decisioni">Decisioni da validare</a>
+  </nav>
+  <a class="back" href="/">← Indice dei documenti</a>
+  <a class="back" href="/docs/alberatura-attuale">← Doc 02 · Alberatura attuale</a>
+  <p class="meta">Versione 1.0<br>05/08/2026</p>
+</aside>
+
+<main>
+
+<div class="upbar">
+  <a href="/">← Indice dei documenti</a>
+  <span>·</span>
+  <a href="/docs/alberatura-attuale">Doc 02 · Alberatura attuale</a>
+  <span>Stai leggendo: Doc 03 · Nuova architettura</span>
+</div>
+
+<header class="top">
+  <p class="kicker">Progetto DXP · Documento 03 · Fase F2</p>
+  <h1>Nuova alberatura e organizzazione dei contenuti</h1>
+  <p class="lead">Proposta di architettura delle informazioni per il nuovo sito: struttura delle pagine, percorsi per pubblico, e destinazione di ogni blocco di testo estratto dal sito attuale.</p>
+</header>
+
+<!-- ===== PREMESSA ===== -->
+<h2 id="premessa">Premessa e criteri</h2>
+<p>Questa proposta nasce da tre fonti: gli obiettivi condivisi in kick-off, l'analisi del sito online del <a href="/docs/stato-arte-sonit">Documento 01</a> e i testi estratti pagina per pagina raccolti nel <a href="/docs/alberatura-attuale#schede">Documento 02</a>. Ogni scelta strutturale qui sotto risponde a un vincolo o a un problema documentato, non a una preferenza.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Vincolo o obiettivo</th><th>Conseguenza sull'architettura</th></tr></thead>
+  <tbody>
+    <tr><td>Posizionamento come general contractor</td><td>La home smette di essere un elenco di servizi e diventa una dichiarazione di capacità, con le prove immediatamente sotto</td></tr>
+    <tr><td>Tre business unit come ecosistema integrato</td><td>Un hub <code>/soluzioni</code> con contenuto proprio che racconta l'integrazione, e sotto tre pagine pari-livello, una per business unit</td></tr>
+    <tr><td>B2B istituzionale, B2C solo sul fotovoltaico, netta separazione</td><td>Il residenziale esce dal percorso industriale e vive su una pagina propria fuori dal menu, con CTA e form dedicati</td></tr>
+    <tr><td>Certificazioni prioritarie</td><td>Voce di primo livello nel menu, non una sezione in fondo a Chi siamo</td></tr>
+    <tr><td>Partnership e fornitori a fini di fiducia</td><td>Voce di primo livello, che risolve anche il <code>/partner.php</code> oggi in sitemap e in 404</td></tr>
+    <tr><td>Brochure e company profile in PDF</td><td>Blocco download in evidenza in Chi siamo, ripetuto in coda alle pagine business unit</td></tr>
+    <tr><td>Nessuna foto reale di cantieri o mezzi</td><td>La struttura non dipende da fotografie: le prove sono numeri, certificazioni, loghi partner e racconto dei progetti</td></tr>
+    <tr><td>Poche pagine ben organizzate</td><td>9 pagine pubblicate contro le 10 attuali, ma tutte popolate: nessuna pagina ponte, nessuna pagina vuota</td></tr>
+    <tr><td>Ingresso nel comparto IT nel 2027</td><td>Il livello delle business unit accoglie una quarta voce senza ridisegnare il menu</td></tr>
+    <tr><td>Nessuna integrazione con i gestionali</td><td>I form restano invii email, con destinazioni distinte per B2B e B2C</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===== PRINCIPI ===== -->
+<h2 id="principi">Sei principi guida</h2>
+<ol>
+  <li><strong>Ogni pagina ha un lavoro solo.</strong> Il difetto strutturale peggiore del sito attuale è la pagina che non fa niente: "Servizi e Soluzioni" con 127 parole e "Lavori" vuota. Nella nuova alberatura una pagina esiste se ha un compito, un pubblico e una azione attesa.</li>
+  <li><strong>La struttura dichiara l'offerta.</strong> Oggi il menu elenca quattro servizi che non corrispondono alle tre business unit e il fotovoltaico è la seconda voce di una lista di dodici. Nella nuova struttura la gerarchia delle pagine coincide con la struttura dell'azienda.</li>
+  <li><strong>Le prove stanno prima delle descrizioni.</strong> Un buyer B2B che valuta un general contractor cerca dimensione, certificazioni, referenze e continuità. Numeri, certificazioni e partner salgono in home e in primo livello; le descrizioni tecniche restano ma seguono.</li>
+  <li><strong>Due pubblici, due percorsi, nessuna ambiguità.</strong> Impianti industriali e impianti residenziali non condividono pagine, esempi, taglie né form. Il passaggio da un percorso all'altro è esplicito e volontario.</li>
+  <li><strong>Il contenuto ripetuto si scrive una volta.</strong> I cinque blocchi di processo oggi duplicati su due pagine diventano un "metodo di lavoro" trasversale, richiamato dove serve.</li>
+  <li><strong>Ogni pagina ha un'uscita.</strong> Nessun vicolo cieco: da ogni pagina si arriva alla conversione pertinente al proprio pubblico, non a un form generico identico su tutto il sito.</li>
+</ol>
+
+<!-- ===== VISTE ===== -->
+<h2 id="viste">Alberatura proposta · viste verticale e orizzontale</h2>
+<p>Le stesse due letture usate per il sito attuale, così le due strutture si confrontano a vista.</p>
+
+<div class="legend">
+  <span><i style="background:#003A83"></i>home, ingresso del posizionamento</span>
+  <span><i style="background:#fff;box-shadow:inset 0 0 0 1px #9db6d6;border-left:3px solid #003A83"></i>pagina istituzionale B2B</span>
+  <span><i style="background:#eef4fc;box-shadow:inset 0 0 0 1px #7fa6d6;border-left:3px solid #003A83"></i>nodo nuovo, oggi inesistente</span>
+  <span><i style="background:#fff7ec;box-shadow:inset 0 0 0 1px #e0b46a;border-left:3px solid #b26a00"></i>percorso B2C</span>
+  <span><i style="background:#f7f9fc;box-shadow:inset 0 0 0 1px #c3d2e6;border-left:3px solid #8496ad"></i>predisposto o di servizio</span>
+</div>
+
+<div class="diagram">
+  <div class="cap"><b>Vista verticale</b><i>2 livelli di menu · 6 voci principali · 3 business unit · 1 percorso B2C separato</i></div>
+  <div class="canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 550" width="100%" role="img" aria-label="Alberatura proposta, vista verticale"><rect width="1300" height="550" fill="#ffffff"/><g><rect x="525" y="18" width="250" height="52" rx="8" fill="#003A83"/><text x="650.0" y="42" font-size="14.5" font-weight="700" fill="#fff" text-anchor="middle">Home</text><text x="650.0" y="59" font-size="10.5" fill="#bcd3fb" text-anchor="middle">posizionamento · doppio ingresso B2B / B2C</text></g><path d="M650.0 70 L650.0 100" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M110.0 100 L1190.0 100" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M110.0 100 L110.0 132" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="12" y="132" width="196" height="52" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="12" y="132" width="4" height="52" rx="2" fill="#003A83"/><text x="25" y="153" font-size="13" font-weight="600" fill="#16202e">Chi siamo</text><text x="25" y="170" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/chi-siamo</text><text x="197" y="153" font-size="9.5" text-anchor="end" fill="#4a5768">+ download PDF</text></g><path d="M326.0 100 L326.0 132" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="228" y="132" width="196" height="52" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="228" y="132" width="4" height="52" rx="2" fill="#003A83"/><text x="241" y="153" font-size="13" font-weight="600" fill="#16202e">Soluzioni integrate</text><text x="241" y="170" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni</text><text x="413" y="153" font-size="9.5" text-anchor="end" fill="#4a5768">hub</text></g><path d="M542.0 100 L542.0 132" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="444" y="132" width="196" height="52" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="444" y="132" width="4" height="52" rx="2" fill="#003A83"/><text x="457" y="153" font-size="13" font-weight="600" fill="#16202e">Certificazioni</text><text x="457" y="170" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/certificazioni</text><text x="629" y="153" font-size="9.5" text-anchor="end" fill="#4a5768">priorità</text></g><path d="M758.0 100 L758.0 132" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="660" y="132" width="196" height="52" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="660" y="132" width="4" height="52" rx="2" fill="#003A83"/><text x="673" y="153" font-size="13" font-weight="600" fill="#16202e">Partner e fornitori</text><text x="673" y="170" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/partner</text><text x="845" y="153" font-size="9.5" text-anchor="end" fill="#4a5768">trust</text></g><path d="M974.0 100 L974.0 132" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="876" y="132" width="196" height="52" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="876" y="132" width="4" height="52" rx="2" fill="#003A83"/><text x="889" y="153" font-size="13" font-weight="600" fill="#16202e">Progetti</text><text x="889" y="170" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/progetti</text><text x="1061" y="153" font-size="9.5" text-anchor="end" fill="#4a5768">case study</text></g><path d="M1190.0 100 L1190.0 132" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="1092" y="132" width="196" height="52" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="1092" y="132" width="4" height="52" rx="2" fill="#003A83"/><text x="1105" y="153" font-size="13" font-weight="600" fill="#16202e">Contatti</text><text x="1105" y="170" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/contatti</text><text x="1277" y="153" font-size="9.5" text-anchor="end" fill="#4a5768">form B2B</text></g><text x="650.0" y="91" font-size="10.5" fill="#4a5768" text-anchor="middle" font-weight="400">menu principale · 6 voci</text><path d="M326.0 184 L326.0 210" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M143.0 210 L707.0 210" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M143.0 210 L143.0 240" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="12" y="240" width="262" height="52" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="12" y="240" width="4" height="52" rx="2" fill="#003A83"/><text x="25" y="261" font-size="13" font-weight="600" fill="#16202e">Telecomunicazioni</text><text x="25" y="278" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni/telecomunicazioni</text><text x="263" y="261" font-size="9.5" text-anchor="end" fill="#4a5768">riuso alto</text></g><path d="M425.0 210 L425.0 240" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="294" y="240" width="262" height="52" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="294" y="240" width="4" height="52" rx="2" fill="#003A83"/><text x="307" y="261" font-size="13" font-weight="600" fill="#16202e">Impianti civili e industriali</text><text x="307" y="278" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni/impianti</text><text x="545" y="261" font-size="9.5" text-anchor="end" fill="#4a5768">da scorporo</text></g><path d="M707.0 210 L707.0 240" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="576" y="240" width="262" height="52" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="576" y="240" width="4" height="52" rx="2" fill="#003A83"/><text x="589" y="261" font-size="13" font-weight="600" fill="#16202e">Fotovoltaico ed efficientamento</text><text x="589" y="278" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni/fotovoltaico</text><text x="827" y="261" font-size="9.5" text-anchor="end" fill="#4a5768">B2B</text></g><text x="326.0" y="201" font-size="10.5" fill="#4a5768" text-anchor="middle" font-weight="400">3 business unit</text><path d="M707.0 292 L707.0 330" stroke="#e0b46a" stroke-width="1.4" fill="none" stroke-dasharray="4 4"/><g><rect x="576" y="330" width="262" height="52" rx="7" fill="#fff7ec" stroke="#e0b46a" stroke-dasharray="5 4"/><rect x="576" y="330" width="4" height="52" rx="2" fill="#b26a00"/><text x="589" y="351" font-size="13" font-weight="600" fill="#16202e">Fotovoltaico per la casa</text><text x="589" y="368" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/fotovoltaico-casa</text><text x="827" y="351" font-size="9.5" text-anchor="end" fill="#4a5768">percorso B2C</text></g><text x="852" y="352" font-size="10.5" fill="#4a5768" text-anchor="start" font-weight="400">separata dal percorso industriale:</text><text x="852" y="367" font-size="10.5" fill="#4a5768" text-anchor="start" font-weight="400">preventivo e sopralluogo per privati</text><line x1="40" y1="414" x2="1260" y2="414" stroke="#c3d2e6" stroke-dasharray="3 5"/><text x="40" y="430" font-size="10" fill="#4a5768" text-anchor="start" font-weight="700">FUORI DAL MENU PRINCIPALE</text><g><rect x="40" y="442" width="250" height="52" rx="7" fill="#fbfcfe" stroke="#dde4ee"/><rect x="40" y="442" width="4" height="52" rx="2" fill="#8496ad"/><text x="53" y="463" font-size="13" font-weight="600" fill="#16202e">Privacy e cookie policy</text><text x="53" y="480" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/privacy-policy</text><text x="279" y="463" font-size="9.5" text-anchor="end" fill="#4a5768">footer</text></g><g><rect x="310" y="442" width="250" height="52" rx="7" fill="#fbfcfe" stroke="#dde4ee"/><rect x="310" y="442" width="4" height="52" rx="2" fill="#8496ad"/><text x="323" y="463" font-size="13" font-weight="600" fill="#16202e">Area riservata</text><text x="323" y="480" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">app.sonit.it</text><text x="549" y="463" font-size="9.5" text-anchor="end" fill="#4a5768">utility</text></g><g><rect x="700" y="442" width="250" height="52" rx="7" fill="#f7f9fc" stroke="#c3d2e6" stroke-dasharray="5 4"/><rect x="700" y="442" width="4" height="52" rx="2" fill="#8496ad"/><text x="713" y="463" font-size="13" font-weight="600" fill="#16202e">IT e cybersecurity</text><text x="713" y="480" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/it-cybersecurity</text><text x="939" y="463" font-size="9.5" text-anchor="end" fill="#4a5768">roadmap 2027</text></g><g><rect x="970" y="442" width="250" height="52" rx="7" fill="#f7f9fc" stroke="#c3d2e6" stroke-dasharray="5 4"/><rect x="970" y="442" width="4" height="52" rx="2" fill="#8496ad"/><text x="983" y="463" font-size="13" font-weight="600" fill="#16202e">Lavora con noi</text><text x="983" y="480" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/lavora-con-noi</text><text x="1209" y="463" font-size="9.5" text-anchor="end" fill="#4a5768">se serve</text></g></svg></div>
+</div>
+
+<div class="diagram">
+  <div class="cap"><b>Vista orizzontale</b><i>percorso di navigazione da sinistra a destra</i></div>
+  <div class="canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 615" width="100%" role="img" aria-label="Alberatura proposta, vista orizzontale"><rect width="1180" height="615" fill="#ffffff"/><g><rect x="20" y="206.5" width="180" height="54" rx="8" fill="#003A83"/><text x="110.0" y="230.5" font-size="14.5" font-weight="700" fill="#fff" text-anchor="middle">Home</text><text x="110.0" y="247.5" font-size="10.5" fill="#bcd3fb" text-anchor="middle">posizionamento</text></g><path d="M200 233.5 L230 233.5" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M230 61.0 L230 406.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M230 61.0 L260 61.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="260" y="34" width="244" height="54" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="260" y="34" width="4" height="54" rx="2" fill="#003A83"/><text x="273" y="55" font-size="13" font-weight="600" fill="#16202e">Chi siamo</text><text x="273" y="72" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/chi-siamo</text><text x="493" y="55" font-size="9.5" text-anchor="end" fill="#4a5768">+ download PDF</text></g><path d="M230 130.0 L260 130.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="260" y="103" width="244" height="54" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="260" y="103" width="4" height="54" rx="2" fill="#003A83"/><text x="273" y="124" font-size="13" font-weight="600" fill="#16202e">Soluzioni integrate</text><text x="273" y="141" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni</text><text x="493" y="124" font-size="9.5" text-anchor="end" fill="#4a5768">hub</text></g><path d="M230 199.0 L260 199.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="260" y="172" width="244" height="54" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="260" y="172" width="4" height="54" rx="2" fill="#003A83"/><text x="273" y="193" font-size="13" font-weight="600" fill="#16202e">Certificazioni</text><text x="273" y="210" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/certificazioni</text><text x="493" y="193" font-size="9.5" text-anchor="end" fill="#4a5768">priorità</text></g><path d="M230 268.0 L260 268.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="260" y="241" width="244" height="54" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="260" y="241" width="4" height="54" rx="2" fill="#003A83"/><text x="273" y="262" font-size="13" font-weight="600" fill="#16202e">Partner e fornitori</text><text x="273" y="279" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/partner</text><text x="493" y="262" font-size="9.5" text-anchor="end" fill="#4a5768">trust</text></g><path d="M230 337.0 L260 337.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="260" y="310" width="244" height="54" rx="7" fill="#eef4fc" stroke="#7fa6d6"/><rect x="260" y="310" width="4" height="54" rx="2" fill="#003A83"/><text x="273" y="331" font-size="13" font-weight="600" fill="#16202e">Progetti</text><text x="273" y="348" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/progetti</text><text x="493" y="331" font-size="9.5" text-anchor="end" fill="#4a5768">case study</text></g><path d="M230 406.0 L260 406.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="260" y="379" width="244" height="54" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="260" y="379" width="4" height="54" rx="2" fill="#003A83"/><text x="273" y="400" font-size="13" font-weight="600" fill="#16202e">Contatti</text><text x="273" y="417" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/contatti</text><text x="493" y="400" font-size="9.5" text-anchor="end" fill="#4a5768">form B2B</text></g><path d="M504 130.0 L528 130.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M528 61.0 L528 199.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><path d="M528 61.0 L556 61.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="556" y="34" width="302" height="54" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="556" y="34" width="4" height="54" rx="2" fill="#003A83"/><text x="569" y="55" font-size="13" font-weight="600" fill="#16202e">Telecomunicazioni</text><text x="569" y="72" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni/telecomunicazioni</text><text x="847" y="55" font-size="9.5" text-anchor="end" fill="#4a5768">riuso alto</text></g><path d="M528 130.0 L556 130.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="556" y="103" width="302" height="54" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="556" y="103" width="4" height="54" rx="2" fill="#003A83"/><text x="569" y="124" font-size="13" font-weight="600" fill="#16202e">Impianti civili e industriali</text><text x="569" y="141" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni/impianti</text><text x="847" y="124" font-size="9.5" text-anchor="end" fill="#4a5768">da scorporo</text></g><path d="M528 199.0 L556 199.0" stroke="#c3d2e6" stroke-width="1.4" fill="none"/><g><rect x="556" y="172" width="302" height="54" rx="7" fill="#ffffff" stroke="#9db6d6"/><rect x="556" y="172" width="4" height="54" rx="2" fill="#003A83"/><text x="569" y="193" font-size="13" font-weight="600" fill="#16202e">Fotovoltaico ed efficientamento</text><text x="569" y="210" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/soluzioni/fotovoltaico</text><text x="847" y="193" font-size="9.5" text-anchor="end" fill="#4a5768">B2B</text></g><text x="260" y="22" font-size="10" fill="#4a5768" text-anchor="start" font-weight="700">LIVELLO 1 · MENU</text><text x="556" y="22" font-size="10" fill="#4a5768" text-anchor="start" font-weight="700">LIVELLO 2 · BUSINESS UNIT</text><path d="M586 226.0 L586 275.0" stroke="#e0b46a" stroke-width="1.4" fill="none" stroke-dasharray="4 4"/><path d="M586 275.0 L608 275.0" stroke="#e0b46a" stroke-width="1.4" fill="none" stroke-dasharray="4 4"/><g><rect x="608" y="248" width="250" height="54" rx="7" fill="#fff7ec" stroke="#e0b46a" stroke-dasharray="5 4"/><rect x="608" y="248" width="4" height="54" rx="2" fill="#b26a00"/><text x="621" y="269" font-size="13" font-weight="600" fill="#16202e">Fotovoltaico per la casa</text><text x="621" y="286" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/fotovoltaico-casa</text><text x="847" y="269" font-size="9.5" text-anchor="end" fill="#4a5768">percorso B2C</text></g><line x1="20" y1="463" x2="1160" y2="463" stroke="#c3d2e6" stroke-dasharray="3 5"/><text x="20" y="479" font-size="10" fill="#4a5768" text-anchor="start" font-weight="700">FUORI DAL MENU PRINCIPALE</text><g><rect x="20" y="491" width="244" height="54" rx="7" fill="#fbfcfe" stroke="#dde4ee"/><rect x="20" y="491" width="4" height="54" rx="2" fill="#8496ad"/><text x="33" y="512" font-size="13" font-weight="600" fill="#16202e">Privacy e cookie policy</text><text x="33" y="529" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/privacy-policy</text><text x="253" y="512" font-size="9.5" text-anchor="end" fill="#4a5768">footer</text></g><g><rect x="304" y="491" width="244" height="54" rx="7" fill="#fbfcfe" stroke="#dde4ee"/><rect x="304" y="491" width="4" height="54" rx="2" fill="#8496ad"/><text x="317" y="512" font-size="13" font-weight="600" fill="#16202e">Area riservata</text><text x="317" y="529" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">app.sonit.it</text><text x="537" y="512" font-size="9.5" text-anchor="end" fill="#4a5768">utility</text></g><g><rect x="20" y="559" width="244" height="54" rx="7" fill="#f7f9fc" stroke="#c3d2e6" stroke-dasharray="5 4"/><rect x="20" y="559" width="4" height="54" rx="2" fill="#8496ad"/><text x="33" y="580" font-size="13" font-weight="600" fill="#16202e">IT e cybersecurity</text><text x="33" y="597" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/it-cybersecurity</text><text x="253" y="580" font-size="9.5" text-anchor="end" fill="#4a5768">2027</text></g><g><rect x="304" y="559" width="244" height="54" rx="7" fill="#f7f9fc" stroke="#c3d2e6" stroke-dasharray="5 4"/><rect x="304" y="559" width="4" height="54" rx="2" fill="#8496ad"/><text x="317" y="580" font-size="13" font-weight="600" fill="#16202e">Lavora con noi</text><text x="317" y="597" font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#4a5768">/lavora-con-noi</text><text x="537" y="580" font-size="9.5" text-anchor="end" fill="#4a5768">se serve</text></g></svg></div>
+</div>
+
+<!-- ===== ALBERO ===== -->
+<h2 id="albero">Albero con le sezioni di ogni pagina</h2>
+<p>Per ogni pagina, i blocchi previsti nell'ordine in cui si incontrano scorrendo. <em>In verde</em> il contenuto che riusa testo già esistente, <u>in ambra</u> ciò che va prodotto da zero o richiede materiale dal cliente.</p>
+
+<pre class="tree">
+<b>/</b>  Home
+│   ├─ hero: dichiarazione di posizionamento + doppia CTA <i>(impresa / privato)</i>
+│   ├─ <em>una riga di offerta</em> <i>(riscrittura del paragrafo istituzionale attuale)</i>
+│   ├─ <u>Sonit in numeri</u> <i>(anni, dipendenti diretti, cantieri, sedi)</i>
+│   ├─ le tre business unit come sistema integrato, 3 card
+│   ├─ <u>metodo di lavoro</u> in 5 passi <i>(dal riuso dei blocchi di processo)</i>
+│   ├─ <u>certificazioni</u> in sintesi → rimando alla pagina
+│   ├─ <u>partner e fornitori</u>, striscia loghi → rimando alla pagina
+│   ├─ <u>un progetto in evidenza</u> → rimando ai progetti
+│   ├─ blocco fotovoltaico per privati <i>(unico punto di passaggio al B2C)</i>
+│   └─ contatti rapidi: sedi, telefono, email, CTA
+│
+├─ <b>/chi-siamo</b>
+│   ├─ chi siamo oggi <i>(riscrittura: dall'azienda "di recente costituzione" all'azienda strutturata)</i>
+│   ├─ <u>crescita e struttura</u>: organico, ruoli interni, capicantiere e maestranze
+│   ├─ <em>valori e responsabilità</em> <i>(riuso: ambiente, salute e sicurezza dei lavoratori)</i>
+│   ├─ <em>le due sedi operative</em> + sede legale
+│   ├─ <u>download brochure e company profile PDF</u>
+│   └─ CTA contatti
+│
+├─ <b>/soluzioni</b>  <i>hub, oggi pagina ponte vuota</i>
+│   ├─ <u>l'ecosistema integrato: perché le tre unit lavorano insieme</u>
+│   ├─ <em>indice delle competenze</em> <i>(riuso dell'elenco delle 6 categorie di impianto)</i>
+│   ├─ le tre business unit, 3 card con perimetro chiaro
+│   ├─ <em>metodo di lavoro in 5 passi</em> <i>(riuso dei blocchi processo, scritti una volta sola)</i>
+│   ├─ <em>consulenza e pratiche autorizzative</em> <i>(riuso della pagina Consulenza, come blocco trasversale)</i>
+│   ├─ <em>manutenzione e pronto intervento</em> <i>(riuso)</i>
+│   └─ CTA contatti
+│   │
+│   ├─ <b>/soluzioni/telecomunicazioni</b>  <i>riuso alto: è la pagina migliore del sito</i>
+│   │   ├─ <em>mission: Agenda Digitale, banda ultra-larga, Gigabit Society</em>
+│   │   ├─ <em>la filiera completa in 6 fasi</em> <i>(pianificazione → collaudi)</i>
+│   │   ├─ <u>cosa ne ottiene il committente</u> <i>(da aggiungere alle 6 fasi)</i>
+│   │   ├─ <u>certificazioni e qualifiche pertinenti</u>
+│   │   └─ CTA contatti B2B
+│   │
+│   ├─ <b>/soluzioni/impianti</b>  Impianti civili e industriali
+│   │   ├─ <em>obiettivo: realizzazione e protezione di impianti, sistemi e reti</em>
+│   │   ├─ <em>ambiti</em>: elettrico, videosorveglianza, allarme, domotica, automazione,
+│   │   │   idraulico, climatizzazione, purificazione dell'aria <i>(dallo scorporo dell'elenco attuale)</i>
+│   │   ├─ <u>civile e industriale: due contesti, due modi di lavorare</u>
+│   │   └─ CTA contatti B2B
+│   │
+│   └─ <b>/soluzioni/fotovoltaico</b>  Fotovoltaico ed efficientamento <i>B2B</i>
+│       ├─ <em>riqualificazione energetica degli edifici</em> <i>(riuso)</i>
+│       ├─ <em>ambiti</em>: fotovoltaico, solare termico, pompe di calore <i>(dallo scorporo)</i>
+│       ├─ <u>taglie e contesti industriali e commerciali</u>
+│       ├─ <em>incentivi e detrazioni</em> <i>(riuso, qui è pertinente)</i>
+│       ├─ <u>accordi con società di vendita di energia</u> <i>(se comunicabile)</i>
+│       └─ CTA contatti B2B + rimando esplicito ai privati
+│           │
+│           └─ <b>/fotovoltaico-casa</b>  <i>percorso B2C, fuori dal menu principale</i>
+│               ├─ <u>promessa per il privato</u> + form preventivo in evidenza
+│               ├─ <u>come funziona in 4 passi</u>: sopralluogo, progetto, installazione, attivazione
+│               ├─ <u>taglie residenziali e cosa cambia in bolletta</u>
+│               ├─ <em>detrazioni e pratiche gestite da noi</em> <i>(riuso, riscritto per il privato)</i>
+│               ├─ <u>domande frequenti</u>
+│               └─ form preventivo o sopralluogo + telefono
+│
+├─ <b>/certificazioni</b>  <u>tutto nuovo, materiale dal cliente</u>
+│   ├─ cosa certifichiamo e perché conta per il committente
+│   ├─ elenco certificazioni con enti ed estremi
+│   ├─ <em>compliance legislativa e miglioramento continuo</em> <i>(riuso da Chi Siamo)</i>
+│   └─ CTA contatti
+│
+├─ <b>/partner</b>  <u>tutto nuovo, materiale dal cliente</u>
+│   ├─ come lavoriamo con partner e fornitori
+│   ├─ loghi e categorie di fornitura
+│   ├─ committenti nominabili <i>(solo previa autorizzazione)</i>
+│   └─ CTA contatti
+│
+├─ <b>/progetti</b>  <u>sostituisce la gallery vuota</u>
+│   ├─ come raccontiamo i progetti: ostacoli e progettazione flessibile in corso d'opera
+│   ├─ 3–5 schede progetto <i>(contesto, problema, soluzione, esito)</i>
+│   └─ CTA contatti
+│
+├─ <b>/contatti</b>
+│   ├─ <em>le due sedi operative con indirizzi</em> <i>(riuso)</i> + sede legale
+│   ├─ telefono, email, orari
+│   ├─ form B2B qualificato <i>(azienda, ruolo, tipo di richiesta)</i>
+│   └─ rimando al percorso privati
+│
+└─ <i>fuori dal menu principale</i>
+    ├─ <b>/privacy-policy</b> e <b>/cookie-policy</b> <u>testi legali su dominio proprio</u>
+    ├─ <b>/grazie</b> pagina di conferma invio <i>(oggi inesistente: serve per misurare)</i>
+    ├─ Area riservata → <code>app.sonit.it</code> <i>(link di servizio, non blocco commerciale)</i>
+    ├─ <b>/it-cybersecurity</b> <i>predisposta, pubblicazione 2027</i>
+    └─ <b>/lavora-con-noi</b> <i>predisposta, se utile alla crescita dell'organico</i>
+</pre>
+
+<!-- ===== CONFRONTO ===== -->
+<h2 id="confronto">Confronto prima / dopo</h2>
+<div class="grid">
+  <div class="card"><div class="n">10 → 9</div><div class="l">pagine pubblicate, tutte popolate</div></div>
+  <div class="card"><div class="n">0 → 3</div><div class="l">sezioni di prova: certificazioni, partner, progetti</div></div>
+  <div class="card"><div class="n">0 → 1</div><div class="l">pagine dedicate al fotovoltaico</div></div>
+  <div class="card"><div class="n">1 → 2</div><div class="l">form distinti per pubblico</div></div>
+  <div class="card"><div class="n">2 → 0</div><div class="l">pagine vuote o ponte</div></div>
+  <div class="card"><div class="n">0 → 1</div><div class="l">pagina di conferma invio, misurabile</div></div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Nodo attuale</th><th>Cosa diventa</th><th>Perché</th></tr></thead>
+  <tbody>
+    <tr><td><code>/index.php</code></td><td><code>/</code> con struttura completamente nuova</td><td>Da elenco di servizi a dichiarazione di posizionamento con le prove sotto</td></tr>
+    <tr><td><code>/sonit-srl.php</code></td><td><code>/chi-siamo</code></td><td>Il racconto passa dai titolari all'azienda strutturata, con numeri e download PDF</td></tr>
+    <tr><td><code>/servizi-sonit.php</code></td><td><code>/soluzioni</code> con contenuto proprio</td><td>Il livello che deve raccontare l'ecosistema integrato oggi è vuoto</td></tr>
+    <tr><td><code>/telecomunicazioni.php</code></td><td><code>/soluzioni/telecomunicazioni</code></td><td>Riuso quasi integrale, con l'aggiunta del beneficio per il committente</td></tr>
+    <tr><td><code>/impianti-sistemi.php</code></td><td><code>/soluzioni/impianti</code> <i>+ scorporo verso fotovoltaico</i></td><td>Conteneva due business unit e un catalogo residenziale nello stesso elenco</td></tr>
+    <tr><td><code>/efficentamento-energetico.php</code></td><td><code>/soluzioni/fotovoltaico</code></td><td>Slug corretto, contenuto unito al fotovoltaico che è la stessa business unit</td></tr>
+    <tr><td><code>/consulenza.php</code></td><td>blocco trasversale in <code>/soluzioni</code> e nelle pagine BU</td><td>167 parole e due titoli senza corpo non regge come pagina; come servizio trasversale sì</td></tr>
+    <tr><td><code>/foto.php</code></td><td><code>/progetti</code></td><td>Da gallery vuota a case study senza foto reali di cantiere</td></tr>
+    <tr><td><code>/contatti.php</code></td><td><code>/contatti</code> + <code>/grazie</code></td><td>Form qualificato e conferma misurabile</td></tr>
+    <tr><td><code>/privacy.php</code></td><td><code>/privacy-policy</code> + <code>/cookie-policy</code></td><td>Oggi la pagina non contiene informativa e i testi legali stanno su un dominio terzo</td></tr>
+    <tr><td><code>/partner.php</code> <i>(404)</i></td><td><code>/partner</code> pubblicata</td><td>Chiude l'errore in sitemap e realizza la sezione trust chiesta in kick-off</td></tr>
+    <tr><td>box Area Riservata in home</td><td>link di servizio in header o footer</td><td>Un blocco tecnico non deve occupare lo spazio del posizionamento</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===== PAGINE ===== -->
+<h2 id="pagine">Le pagine una per una</h2>
+
+<div class="sheet">
+  <div class="hd"><b>Home</b><code>/</code><span class="tag t-riscrivi">Riscrittura totale</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>In quindici secondi far capire chi è Sonit, che dimensione ha, cosa sa fare come sistema integrato e a chi si rivolge</dd>
+    <dt>Pubblico</dt><dd>Buyer e tecnici B2B in primo luogo; il privato trova un ingresso dedicato e riconoscibile</dd>
+    <dt>Azione attesa</dt><dd>Andare alle soluzioni o contattare; per il privato, entrare nel percorso fotovoltaico casa</dd>
+    <dt>Contenuti</dt><dd>Nuovi per la parte di posizionamento e prova; riuso solo del paragrafo di offerta</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Chi siamo</b><code>/chi-siamo</code><span class="tag t-riscrivi">Riscrittura + materiale cliente</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Dimostrare solidità e struttura organizzativa: è la pagina che sostiene il posizionamento da general contractor</dd>
+    <dt>Pubblico</dt><dd>B2B in valutazione fornitore, potenziali partner, candidati</dd>
+    <dt>Azione attesa</dt><dd>Scaricare brochure e company profile, poi contattare</dd>
+    <dt>Contenuti</dt><dd>Riuso di valori e responsabilità; nuovo tutto ciò che riguarda crescita, organico e sedi; PDF dal cliente</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Soluzioni integrate</b><code>/soluzioni</code><span class="tag t-nuovo">Nodo nuovo di fatto</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Spiegare l'ecosistema: una sola regia su reti, impianti ed energia, con squadre interne e un unico responsabile di commessa</dd>
+    <dt>Pubblico</dt><dd>B2B che ha un problema su più fronti e non vuole coordinare tre fornitori</dd>
+    <dt>Azione attesa</dt><dd>Entrare nella business unit pertinente o chiedere un contatto</dd>
+    <dt>Contenuti</dt><dd>Nuovo il racconto dell'integrazione; riuso dell'indice competenze, del metodo di lavoro, della consulenza e della manutenzione</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Telecomunicazioni</b><code>/soluzioni/telecomunicazioni</code><span class="tag t-riusa">Riuso alto</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Presidiare il core business con la filiera completa, da pianificazione a collaudo</dd>
+    <dt>Pubblico</dt><dd>Operatori e general contractor delle telecomunicazioni, enti</dd>
+    <dt>Azione attesa</dt><dd>Contatto qualificato con indicazione del tipo di lavorazione</dd>
+    <dt>Contenuti</dt><dd>Riuso quasi integrale dei testi attuali; da aggiungere l'esito per il committente e le qualifiche</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Impianti civili e industriali</b><code>/soluzioni/impianti</code><span class="tag t-sposta">Da scorporo</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Coprire l'impiantistica generale distinguendo il contesto civile da quello industriale</dd>
+    <dt>Pubblico</dt><dd>Imprese, direzioni lavori, amministrazioni</dd>
+    <dt>Azione attesa</dt><dd>Contatto qualificato</dd>
+    <dt>Contenuti</dt><dd>Riuso degli ambiti dall'elenco attuale, al netto delle voci che passano al fotovoltaico</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Fotovoltaico ed efficientamento</b><code>/soluzioni/fotovoltaico</code><span class="tag t-riscrivi">Riscrittura + scorporo</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Dare alla business unit che guida la transizione a general contractor una pagina propria, chiaramente industriale e commerciale</dd>
+    <dt>Pubblico</dt><dd>Imprese, proprietà immobiliari, società di vendita di energia</dd>
+    <dt>Azione attesa</dt><dd>Contatto B2B; il privato viene dirottato in modo esplicito</dd>
+    <dt>Contenuti</dt><dd>Riuso della riqualificazione energetica e degli incentivi; nuove le taglie, i contesti e gli accordi commerciali</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Fotovoltaico per la casa</b><code>/fotovoltaico-casa</code><span class="tag t-nuovo">Nuovo · percorso B2C</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Raccogliere richieste di preventivo e sopralluogo dai privati, senza mescolarsi agli impianti industriali</dd>
+    <dt>Pubblico</dt><dd>Proprietari di casa, in prevalenza locali</dd>
+    <dt>Azione attesa</dt><dd>Compilare il form preventivo o telefonare</dd>
+    <dt>Contenuti</dt><dd>Nuovi, con riuso della sola parte incentivi e pratiche, riscritta per il privato</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Certificazioni</b><code>/certificazioni</code><span class="tag t-nuovo">Nuovo · priorità cliente</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Rispondere in anticipo alla domanda di qualifica che ogni committente strutturato pone</dd>
+    <dt>Pubblico</dt><dd>Uffici acquisti, direzioni lavori, enti</dd>
+    <dt>Azione attesa</dt><dd>Fiducia e passaggio al contatto; download della documentazione se prevista</dd>
+    <dt>Contenuti</dt><dd>Interamente da materiale del cliente; riuso della sola frase su compliance e miglioramento continuo</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Partner e fornitori</b><code>/partner</code><span class="tag t-nuovo">Nuovo</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Mostrare con chi Sonit lavora: catena di fornitura e relazioni come indicatore di affidabilità</dd>
+    <dt>Pubblico</dt><dd>B2B in valutazione, potenziali partner commerciali</dd>
+    <dt>Azione attesa</dt><dd>Fiducia; contatto per proposte di partnership</dd>
+    <dt>Contenuti</dt><dd>Loghi ed elenco da autorizzare con il cliente</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Progetti</b><code>/progetti</code><span class="tag t-nuovo">Nuovo · sostituisce Lavori</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Dimostrare capacità di esecuzione raccontando ostacoli e riprogettazione in corso d'opera, come indicato in kick-off</dd>
+    <dt>Pubblico</dt><dd>B2B che valuta il rischio di affidare una commessa</dd>
+    <dt>Azione attesa</dt><dd>Contatto con riferimento a un caso simile</dd>
+    <dt>Contenuti</dt><dd>Nuovi, da 3–5 progetti indicati dal cliente. Nessuna foto reale: schemi, dati e racconto</dd>
+  </dl></div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Contatti</b><code>/contatti</code><span class="tag t-riscrivi">Riorganizzazione</span></div>
+  <div class="bd"><dl>
+    <dt>Compito</dt><dd>Convertire, qualificando la richiesta e indirizzandola alla persona giusta</dd>
+    <dt>Pubblico</dt><dd>B2B; il privato ha il suo form sul percorso dedicato</dd>
+    <dt>Azione attesa</dt><dd>Invio del form, con conferma su <code>/grazie</code></dd>
+    <dt>Contenuti</dt><dd>Riuso delle sedi; nuovi i campi di qualificazione e la pagina di conferma</dd>
+  </dl></div>
+</div>
+
+<!-- ===== RIUSO ===== -->
+<h2 id="riuso">Riorganizzazione dei testi estratti</h2>
+<p>Destinazione di ogni blocco di testo raccolto nei <a href="/docs/alberatura-attuale#schede">file dei testi estratti</a>. Cinque verdetti: <span class="tag t-riusa">riusa</span> il testo regge così com'è o con minimi interventi, <span class="tag t-riscrivi">riscrivi</span> il contenuto serve ma il testo va rifatto, <span class="tag t-sposta">sposta</span> il testo è buono ma è nel posto sbagliato, <span class="tag t-elimina">elimina</span> non serve al nuovo posizionamento, <span class="tag t-nuovo">nuovo</span> da produrre.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Origine</th><th>Blocco di testo</th><th>Verdetto</th><th>Destinazione e nota</th></tr></thead>
+  <tbody>
+    <tr><td rowspan="6"><a href="/docs/testi/index">Home</a></td><td>Citazione di Henry Ford come hero</td><td><span class="tag t-elimina">Elimina</span></td><td>Occupa lo spazio del posizionamento senza dire nulla di Sonit</td></tr>
+    <tr><td>"Progettazione, Realizzazione e Manutenzione di Impianti di Telecomunicazioni, Elettrici ed Industriali…"</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>Diventa la riga di offerta sotto il titolo della home: buona la sostanza, da asciugare</td></tr>
+    <tr><td>4 card servizi</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>Diventano 3 card business unit, allineate alla struttura aziendale</td></tr>
+    <tr><td>Box "Area Riservata - WebApp" + form di login</td><td><span class="tag t-sposta">Sposta</span></td><td>Link di servizio in header o footer, fuori dal percorso commerciale</td></tr>
+    <tr><td>"Previous" / "Next" dello slider</td><td><span class="tag t-elimina">Elimina</span></td><td>Controlli senza etichetta accessibile; il nuovo hero non usa uno slider</td></tr>
+    <tr><td>Slider: 3 immagini del 2022 da 1,58 MB</td><td><span class="tag t-elimina">Elimina</span></td><td>Sostituite da immagini coerenti alle linee guida, ottimizzate</td></tr>
+
+    <tr><td rowspan="5"><a href="/docs/testi/sonit-srl">Chi Siamo</a></td><td>"azienda di recente costituzione", focus sui titolari e sulle esperienze pregresse</td><td><span class="tag t-elimina">Elimina</span></td><td>Contraddice il messaggio di solidità: 45 dipendenti diretti non sono una start-up</td></tr>
+    <tr><td>"Siamo una squadra di professionisti con esperienza, competenza e mentalità innovativa…"</td><td><span class="tag t-riusa">Riusa</span></td><td>Blocco valori in <code>/chi-siamo</code></td></tr>
+    <tr><td>Rispetto di ambiente, salute e sicurezza dei lavoratori</td><td><span class="tag t-riusa">Riusa</span></td><td>Blocco responsabilità in <code>/chi-siamo</code>, richiamato in <code>/certificazioni</code></td></tr>
+    <tr><td>Elenco delle 6 categorie di impianto</td><td><span class="tag t-sposta">Sposta</span></td><td>Diventa l'indice delle competenze nell'hub <code>/soluzioni</code></td></tr>
+    <tr><td>"attenta all'attuazione della compliance legislativa e al costante miglioramento delle performance"</td><td><span class="tag t-sposta">Sposta</span></td><td>Apertura della pagina <code>/certificazioni</code>, dove è pertinente</td></tr>
+
+    <tr><td><a href="/docs/testi/servizi-sonit">Servizi e Soluzioni</a></td><td>Solo 4 etichette di card, nessun testo proprio</td><td><span class="tag t-nuovo">Nuovo</span></td><td>L'intero contenuto dell'hub va scritto: è il messaggio dell'ecosistema integrato</td></tr>
+
+    <tr><td rowspan="4"><a href="/docs/testi/impianti-sistemi">Impianti e Sistemi</a></td><td>Elenco 12 tipologie</td><td><span class="tag t-sposta">Sposta</span></td><td>Scorporo: 8 voci restano su <code>/soluzioni/impianti</code>, 3 passano a <code>/soluzioni/fotovoltaico</code>, la manutenzione diventa blocco trasversale</td></tr>
+    <tr><td>"L'obiettivo di Sonit è la realizzazione e la protezione degli impianti, sistemi, reti e programmi presso edifici residenziali ed industriali."</td><td><span class="tag t-riusa">Riusa</span></td><td>Apertura di <code>/soluzioni/impianti</code></td></tr>
+    <tr><td>5 blocchi processo: analisi e progettazione, infrastrutture, incentivi e detrazioni, opere civili, manutenzioni</td><td><span class="tag t-sposta">Sposta</span></td><td>Diventano il "metodo di lavoro" trasversale in <code>/soluzioni</code>, scritti una volta sola</td></tr>
+    <tr><td>Copia degli stessi 5 blocchi presente anche su Efficentamento</td><td><span class="tag t-elimina">Elimina</span></td><td>Duplicazione interna: le due pagine competono tra loro</td></tr>
+
+    <tr><td rowspan="3"><a href="/docs/testi/telecomunicazioni">Telecomunicazioni</a></td><td>Mission su Agenda Digitale Europea, banda ultra-larga, Gigabit Society</td><td><span class="tag t-riusa">Riusa</span></td><td>Apertura di <code>/soluzioni/telecomunicazioni</code>, leggermente asciugata</td></tr>
+    <tr><td>6 fasi: pianificazione e controllo, analisi progettuali, opere civili, infrastrutture, giunzione, collaudi</td><td><span class="tag t-riusa">Riusa</span></td><td>Cuore della pagina: è il contenuto tecnico migliore del sito</td></tr>
+    <tr><td>Termini tecnici specifici: MINItrincea, MICROtrincea, blowing, as-built, giuntatrici</td><td><span class="tag t-riusa">Riusa</span></td><td>Da conservare: sono i termini che un committente TLC cerca</td></tr>
+
+    <tr><td rowspan="3"><a href="/docs/testi/efficentamento-energetico">Efficentamento Energetico</a></td><td>"Riqualificazione energetica degli edifici": soluzioni per edifici esistenti e di nuova costruzione</td><td><span class="tag t-riusa">Riusa</span></td><td>Blocco di apertura di <code>/soluzioni/fotovoltaico</code></td></tr>
+    <tr><td>"Incentivi e detrazioni": gestione completa degli incentivi fiscali</td><td><span class="tag t-riusa">Riusa</span></td><td>Sezione dedicata su <code>/soluzioni/fotovoltaico</code> e, riscritta, su <code>/fotovoltaico-casa</code></td></tr>
+    <tr><td>Refuso "Efficentamento" in title, H1, menu, slug e keywords</td><td><span class="tag t-elimina">Elimina</span></td><td>Nuovo slug corretto e revisione redazionale su tutto il sito</td></tr>
+
+    <tr><td rowspan="2"><a href="/docs/testi/consulenza">Consulenza</a></td><td>Paragrafo su supporto in progettazione, scelta componenti e pratiche autorizzative</td><td><span class="tag t-sposta">Sposta</span></td><td>Blocco "consulenza e pratiche autorizzative" in <code>/soluzioni</code> e nelle pagine BU</td></tr>
+    <tr><td>"GESTIONE DOCUMENTALE" e "SVILUPPO DI SOLUZIONE INNOVATIVE": titoli senza corpo, con refuso</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>O si scrivono davvero, o si eliminano: oggi sono due righe vuote</td></tr>
+
+    <tr><td><a href="/docs/testi/foto">Lavori</a></td><td>"Album non presenti…"</td><td><span class="tag t-elimina">Elimina</span></td><td>Sostituita da <code>/progetti</code> con schede case study</td></tr>
+
+    <tr><td rowspan="3"><a href="/docs/testi/contatti">Contatti</a></td><td>Sede operativa principale Arpino (FR) e sede operativa Roma</td><td><span class="tag t-riusa">Riusa</span></td><td>In <code>/contatti</code>, con l'aggiunta della sede legale oggi presente solo nei dati strutturati</td></tr>
+    <tr><td>"Per saperne di piu' sui nostri servizi, non esitate a contattarci"</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>Invito generico: va sostituito da CTA specifiche per pubblico</td></tr>
+    <tr><td>Form a 4 campi + somma antispam + consenso</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>Due form distinti, campi di qualificazione, pagina di conferma. Antispam attuale da conservare come approccio</td></tr>
+
+    <tr><td><a href="/docs/testi/privacy">Privacy</a></td><td>Nessun contenuto: solo header, menu e footer</td><td><span class="tag t-nuovo">Nuovo</span></td><td>Privacy policy e cookie policy da scrivere e ospitare su dominio proprio</td></tr>
+
+    <tr><td rowspan="3">Template ripetuto</td><td>Payoff "Reti | Sistemi | Impianti"</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>Non dice la capacità di regia: va portato sul territorio del general contractor</td></tr>
+    <tr><td>Blocco contatti replicato su 9 pagine con form identico</td><td><span class="tag t-riscrivi">Riscrivi</span></td><td>Sostituito da CTA di chiusura contestuale alla pagina</td></tr>
+    <tr><td>Footer: dati societari, "Non Facciamo Spam…", link legali, social</td><td><span class="tag t-riusa">Riusa</span></td><td>Da riorganizzare, sostituendo il profilo Facebook personale con la pagina aziendale</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box ok">
+  <p><strong>Bilancio del riuso.</strong> Su circa 1.100 parole di contenuto effettivo estratte dal sito attuale, circa il 45% è riusabile con interventi minimi — quasi tutto concentrato su Telecomunicazioni, sull'elenco delle competenze impiantistiche, sui blocchi di processo e sulle sedi. Il resto va riscritto o prodotto: la nuova architettura richiede molto più contenuto di quanto il sito attuale ne abbia, soprattutto su certificazioni, partner, progetti e numeri aziendali.</p>
+</div>
+
+<!-- ===== MESSAGGI ===== -->
+<h2 id="messaggi">Sistema di messaggi</h2>
+<p>Prima dei testi serve decidere cosa il sito afferma. Proposta di gerarchia, da validare con Giorgio e Beatrice.</p>
+
+<h3>Messaggio principale</h3>
+<div class="box">
+  <p><strong>Una sola regia su reti, impianti ed energia.</strong> Sonit progetta, realizza e mantiene infrastrutture di telecomunicazione, impianti civili e industriali e impianti fotovoltaici, con squadre interne e un unico responsabile per commessa. È la formulazione operativa di "general contractor" senza usare l'etichetta prima che il mercato la riconosca.</p>
+</div>
+
+<h3>Tre pilastri e le loro prove</h3>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Pilastro</th><th>Cosa afferma</th><th>Prove che lo sostengono</th><th>Dove vive</th></tr></thead>
+  <tbody>
+    <tr><td>Struttura</td><td>Non un subappaltatore, un'organizzazione con direzione, capicantiere e maestranze interne</td><td>Numeri di organico e crescita, due sedi operative, organizzazione dei ruoli</td><td>Home, Chi siamo</td></tr>
+    <tr><td>Qualifica</td><td>Lavoriamo secondo norma e ce lo facciamo verificare</td><td>Certificazioni con enti ed estremi, compliance, sicurezza</td><td>Certificazioni, pagine BU</td></tr>
+    <tr><td>Esecuzione</td><td>Portiamo a termine anche quando il cantiere cambia in corsa</td><td>Case study su ostacoli e riprogettazione, filiera completa TLC, partner e fornitori</td><td>Progetti, Soluzioni, Partner</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Cosa il sito non dirà</h3>
+<ul>
+  <li>Non userà fotografie di cantieri e mezzi, per indicazione del cliente.</li>
+  <li>Non nominerà committenti senza autorizzazione esplicita, anche se citati in kick-off.</li>
+  <li>Non anticiperà il comparto IT: la pagina è predisposta ma resta non pubblicata fino al 2027.</li>
+  <li>Non parlerà di "azienda giovane" o "di recente costituzione": è il contrario di ciò che serve comunicare.</li>
+</ul>
+
+<!-- ===== HOME ===== -->
+<h2 id="home">Struttura della home, sezione per sezione</h2>
+<ol class="blocks">
+  <li><b>Hero</b><span>Dichiarazione di posizionamento in una riga, riga di offerta sotto, due CTA affiancate: "Sono un'impresa" e "Sono un privato e voglio il fotovoltaico". È il punto in cui i due pubblici si separano, una volta sola e in modo esplicito.</span></li>
+  <li><b>Sonit in numeri</b><span>Quattro o cinque dati: anni di attività, dipendenti diretti, cantieri o commesse, sedi, regioni servite. Prima prova di solidità, subito dopo la promessa.</span></li>
+  <li><b>Le tre business unit come sistema</b><span>Tre card con perimetro chiaro e una riga che spiega perché stanno insieme. Non un elenco di servizi: un sistema con una regia.</span></li>
+  <li><b>Metodo di lavoro in 5 passi</b><span>Dal riuso dei blocchi di processo: analisi e progettazione, opere civili, infrastrutture, incentivi e pratiche, manutenzione. Risponde alla domanda "come lavorate".</span></li>
+  <li><b>Certificazioni in sintesi</b><span>Loghi o sigle con rimando alla pagina dedicata. Priorità dichiarata dal cliente, quindi presente già in home.</span></li>
+  <li><b>Partner e fornitori</b><span>Striscia di loghi autorizzati con rimando alla pagina. Fiducia per associazione.</span></li>
+  <li><b>Un progetto in evidenza</b><span>Una scheda progetto sola, scelta per rappresentatività, con rimando a <code>/progetti</code>.</span></li>
+  <li><b>Fotovoltaico per i privati</b><span>Blocco visivamente distinto: è l'unico passaggio dal percorso B2B a quello B2C dentro il corpo della home.</span></li>
+  <li><b>Contatti rapidi</b><span>Sedi, telefono, email e CTA. Non il form completo: il form vive dove la richiesta è qualificata.</span></li>
+</ol>
+
+<!-- ===== TEMPLATE BU ===== -->
+<h2 id="template-bu">Template delle pagine business unit</h2>
+<p>Le tre pagine di business unit condividono la stessa impalcatura, così il confronto tra unit resta leggibile e la manutenzione dei contenuti è semplice.</p>
+<ol class="blocks">
+  <li><b>Apertura</b><span>Cosa fa questa unit e per chi, in due frasi. Riuso dei testi attuali dove esistono.</span></li>
+  <li><b>Ambiti di intervento</b><span>Elenco concreto delle lavorazioni, con i termini tecnici che i committenti cercano.</span></li>
+  <li><b>Come lavoriamo</b><span>Le fasi specifiche della unit; per le telecomunicazioni sono le 6 fasi già scritte, da pianificazione a collaudo.</span></li>
+  <li><b>Cosa ne ottiene il committente</b><span>Blocco nuovo: per ogni fase, il beneficio. È l'anello che manca in tutte le pagine attuali.</span></li>
+  <li><b>Consulenza e pratiche</b><span>Richiamo del blocco trasversale, con il taglio pertinente alla unit.</span></li>
+  <li><b>Certificazioni pertinenti</b><span>Le qualifiche che contano per quel tipo di lavorazione, con rimando alla pagina.</span></li>
+  <li><b>Progetti collegati</b><span>Uno o due case study della stessa unit.</span></li>
+  <li><b>Chiusura</b><span>CTA contestuale, non il form generico replicato. Sulla pagina fotovoltaico, anche il rimando esplicito ai privati.</span></li>
+</ol>
+
+<!-- ===== B2C ===== -->
+<h2 id="b2c">Percorso B2C fotovoltaico</h2>
+<p>In kick-off l'indicazione era netta: il privato non deve sentirsi fuori posto davanti a impianti industriali da decine di MW, e il B2C serve solo sul fotovoltaico. La proposta è una <strong>pagina autonoma fuori dal menu principale</strong>, non una sezione dentro la pagina della business unit.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th></th><th>Landing autonoma <span class="tag t-nuovo">proposta</span></th><th>Sezione dentro la pagina BU</th></tr></thead>
+  <tbody>
+    <tr><td>Separazione dei pubblici</td><td>Netta: contenuti, esempi, taglie e form solo per privati</td><td>Parziale: il privato attraversa comunque contenuti industriali</td></tr>
+    <tr><td>Peso sulla navigazione</td><td>Nessuno: resta fuori dal menu, si raggiunge da home e dalla pagina BU</td><td>Nessuno, ma la pagina BU diventa lunga e ibrida</td></tr>
+    <tr><td>Misurabilità e campagne</td><td>Pagina propria con URL proprio: usabile in campagna e misurabile</td><td>Difficile isolare il comportamento del privato</td></tr>
+    <tr><td>Costo di realizzazione</td><td>Una pagina in più da scrivere e disegnare</td><td>Minore</td></tr>
+    <tr><td>Rischio</td><td>Va tenuta viva con contenuti propri</td><td>Confondere i due pubblici, che è esattamente il rischio che si voleva evitare</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box warn">
+  <p><strong>Raccomandazione.</strong> Landing autonoma su <code>/fotovoltaico-casa</code>, fuori dal menu principale, raggiungibile dalla CTA in hero, dal blocco dedicato in home e dal rimando in coda alla pagina business unit. Se in futuro il B2C cresce, quella pagina diventa la radice di una sezione senza toccare il resto dell'architettura. È il punto che chiede una conferma esplicita prima di procedere ai wireframe.</p>
+</div>
+
+<!-- ===== FORM ===== -->
+<h2 id="form">Form e conversioni</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Form</th><th>Dove</th><th>Campi</th><th>Destinazione</th></tr></thead>
+  <tbody>
+    <tr><td>Richiesta B2B</td><td><code>/contatti</code>, CTA da tutte le pagine istituzionali</td><td>Nome e cognome, azienda, ruolo, email, telefono, tipo di richiesta <i>(informazioni, gara o preventivo, partnership, altro)</i>, business unit di interesse, messaggio</td><td>Casella commerciale, da confermare con il cliente</td></tr>
+    <tr><td>Preventivo o sopralluogo privati</td><td><code>/fotovoltaico-casa</code></td><td>Nome e cognome, comune, telefono, email, tipo di abitazione, consumo o bolletta indicativa, messaggio</td><td>Casella dedicata al B2C, per non mescolare i flussi</td></tr>
+    <tr><td>Candidature <i>(se si pubblica Lavora con noi)</i></td><td><code>/lavora-con-noi</code></td><td>Nome, ruolo di interesse, allegato CV, messaggio</td><td>Amministrazione o risorse umane</td></tr>
+  </tbody>
+</table>
+</div>
+<ul>
+  <li><strong>Pagina di conferma dedicata</strong> <code>/grazie</code> per ogni invio: oggi il POST resta su <code>/contatti.php</code> e nessuna conversione è misurabile.</li>
+  <li><strong>Antispam</strong>: si mantiene l'approccio attuale senza captcha di terze parti — domanda aritmetica e honeypot — aggiungendo un limite di invii per indirizzo IP.</li>
+  <li><strong>Consenso privacy</strong> con informativa sul dominio Sonit, non su dominio terzo.</li>
+  <li><strong>Telefono sempre raggiungibile</strong>: in header su desktop, come pulsante di chiamata su mobile.</li>
+</ul>
+
+<!-- ===== SLUG ===== -->
+<h2 id="slug">Slug definitivi e redirect</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>URL attuale</th><th>Nuovo URL</th><th>Tipo</th></tr></thead>
+  <tbody>
+    <tr><td><code>/index.php</code></td><td><code>/</code></td><td>301</td></tr>
+    <tr><td><code>/sonit-srl.php</code></td><td><code>/chi-siamo</code></td><td>301</td></tr>
+    <tr><td><code>/servizi-sonit.php</code></td><td><code>/soluzioni</code></td><td>301</td></tr>
+    <tr><td><code>/telecomunicazioni.php</code></td><td><code>/soluzioni/telecomunicazioni</code></td><td>301</td></tr>
+    <tr><td><code>/impianti-sistemi.php</code></td><td><code>/soluzioni/impianti</code></td><td>301</td></tr>
+    <tr><td><code>/efficentamento-energetico.php</code></td><td><code>/soluzioni/fotovoltaico</code></td><td>301 · corregge il refuso</td></tr>
+    <tr><td><code>/consulenza.php</code></td><td><code>/soluzioni#consulenza</code></td><td>301 verso l'ancora del blocco</td></tr>
+    <tr><td><code>/foto.php</code></td><td><code>/progetti</code></td><td>301</td></tr>
+    <tr><td><code>/contatti.php</code></td><td><code>/contatti</code></td><td>301</td></tr>
+    <tr><td><code>/privacy.php</code></td><td><code>/privacy-policy</code></td><td>301</td></tr>
+    <tr><td><code>/partner.php</code></td><td><code>/partner</code></td><td>nuova pagina, chiude il 404</td></tr>
+    <tr><td>—</td><td><code>/certificazioni</code> · <code>/fotovoltaico-casa</code> · <code>/cookie-policy</code> · <code>/grazie</code></td><td>nuove</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Da fare in fase di sviluppo insieme ai redirect: canonical corretti su tutte le pagine — oggi 7 su 10 contengono codice PHP non interpretato — sitemap generata dalle pagine reali, dati strutturati JSON-LD migrati e aggiornati con le nuove URL.</p>
+
+<!-- ===== SERVE ===== -->
+<h2 id="serve">Cosa serve dal cliente per riempire questa architettura</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Materiale</th><th>Serve per</th><th>Senza questo</th></tr></thead>
+  <tbody>
+    <tr><td>Elenco certificazioni con enti ed estremi</td><td><code>/certificazioni</code></td><td>La pagina dichiarata prioritaria non si può scrivere</td></tr>
+    <tr><td>Numeri aggiornati: anni, dipendenti diretti, ruoli interni, cantieri o commesse</td><td>Home, <code>/chi-siamo</code></td><td>Il posizionamento resta un'affermazione senza prova</td></tr>
+    <tr><td>Brochure e company profile PDF definitivi</td><td><code>/chi-siamo</code></td><td>Manca il download chiesto in kick-off</td></tr>
+    <tr><td>Partner e fornitori pubblicabili, con loghi e autorizzazione</td><td><code>/partner</code></td><td>La pagina resta vuota o generica</td></tr>
+    <tr><td>Committenti nominabili</td><td><code>/partner</code>, <code>/progetti</code></td><td>Si lavora per categorie anonime, con meno forza</td></tr>
+    <tr><td>3–5 progetti candidabili a case study</td><td><code>/progetti</code></td><td>Nessuna prova di esecuzione</td></tr>
+    <tr><td>Taglie tipiche degli impianti fotovoltaici B2B e residenziali</td><td>pagine fotovoltaico</td><td>Non si può separare industriale da residenziale in modo credibile</td></tr>
+    <tr><td>Caselle email di destinazione, distinte B2B e B2C</td><td>form</td><td>I due flussi si mescolano dal primo giorno</td></tr>
+    <tr><td>Decisione sull'area riservata e sul suo pubblico</td><td>header o footer</td><td>Resta un blocco tecnico in mezzo al percorso commerciale</td></tr>
+    <tr><td>Testi legali: titolare del trattamento, finalità, conservazione</td><td>pagine legali</td><td>Il problema di conformità attuale non si chiude</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===== DECISIONI ===== -->
+<h2 id="decisioni">Decisioni da validare prima dei wireframe</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>#</th><th>Decisione</th><th>Proposta</th><th>Impatto se cambia</th></tr></thead>
+  <tbody>
+    <tr><td>D-01</td><td>Il B2C fotovoltaico è una pagina autonoma o una sezione della pagina BU?</td><td>Pagina autonoma <code>/fotovoltaico-casa</code> fuori dal menu</td><td>Cambia menu, home, struttura dei form</td></tr>
+    <tr><td>D-02</td><td>La consulenza resta una pagina o diventa un blocco trasversale?</td><td>Blocco trasversale in <code>/soluzioni</code> e nelle pagine BU</td><td>Una voce di menu in più o in meno</td></tr>
+    <tr><td>D-03</td><td>Il menu principale ha 6 voci: Chi siamo, Soluzioni, Certificazioni, Partner, Progetti, Contatti. Va bene questo peso?</td><td>Sei voci, con Soluzioni come unica voce con sottomenu</td><td>Accorpare Certificazioni e Partner ridurrebbe l'evidenza chiesta in kick-off</td></tr>
+    <tr><td>D-04</td><td>Si nomina "general contractor" sul sito o si descrive la capacità senza l'etichetta?</td><td>Descrivere la capacità ora, adottare l'etichetta quando il riposizionamento è compiuto</td><td>Cambia il messaggio principale in hero</td></tr>
+    <tr><td>D-05</td><td>I numeri aziendali sono pubblicabili?</td><td>Sì, sono la prova più efficace di solidità</td><td>Senza numeri servono altre prove, prove meno efficaci</td></tr>
+    <tr><td>D-06</td><td>Si pubblica "Lavora con noi"?</td><td>Predisposta, da attivare se la crescita dell'organico lo richiede</td><td>Nessuno sull'architettura</td></tr>
+    <tr><td>D-07</td><td>Area riservata: in header, in footer o rimossa dal sito pubblico?</td><td>Link discreto in header, accanto al telefono</td><td>Nessuno sull'architettura</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <p><strong>Passo successivo.</strong> Validata questa architettura, la fase F3 produce i contenuti sezione per sezione e i wireframe strutturali a bassa fedeltà, partendo dai blocchi già mappati qui: circa il 45% del testo arriva dal riuso, il resto si scrive sui materiali che il cliente carica sul Drive condiviso.</p>
+</div>
+
+<footer class="doc">
+  <p><strong>SONIT · Progetto DXP — Documento 03: nuova alberatura e organizzazione dei contenuti.</strong> Versione 1.0 del 05/08/2026. Basato sugli obiettivi di kick-off del 28/07/2026, sull'analisi del <a href="/docs/stato-arte-sonit">Documento 01</a> e sui testi estratti raccolti nel <a href="/docs/alberatura-attuale#schede">Documento 02</a>.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/alberatura-attuale">Alberatura attuale</a> · <a href="/docs/stato-arte-sonit">Stato dell'arte</a></p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

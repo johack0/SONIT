@@ -152,10 +152,11 @@
   </nav>
   <p class="meta" style="border-top:1px solid rgba(255,255,255,.2);padding-top:14px">
     <a href="/" style="color:#bcd3fb;text-decoration:none">← Indice dei documenti</a><br>
-    <a href="/docs/alberatura-attuale" style="color:#bcd3fb;text-decoration:none">→ Doc 02 · Alberatura attuale</a>
+    <a href="/docs/alberatura-attuale" style="color:#bcd3fb;text-decoration:none">→ Doc 02 · Alberatura attuale</a><br>
+    <a href="/docs/architettura-informazioni" style="color:#bcd3fb;text-decoration:none">→ Doc 03 · Nuova architettura</a>
   </p>
   <p class="meta" style="margin-top:14px">
-    Versione 0.4<br>
+    Versione 0.5<br>
     Aggiornato: 05/08/2026<br>
     Rilevamento sito: 05/08/2026
   </p>
@@ -167,7 +168,8 @@
   <a href="/">← Indice dei documenti</a>
   <span>·</span>
   <a href="/docs/alberatura-attuale">Doc 02 · Alberatura attuale</a>
-  <span>Stai leggendo: Doc 01 · Stato dell'arte</span>
+  <a href="/docs/architettura-informazioni">Doc 03 · Nuova architettura</a>
+  <span>Stai leggendo: Doc 01</span>
 </div>
 
 <header class="top">
@@ -208,6 +210,12 @@
 <table>
   <thead><tr><th>Ambito</th><th>Obiettivo</th><th>Impatto sul progetto</th></tr></thead>
   <tbody>
+    <tr>
+      <td>05/08/2026</td>
+      <td>0.5</td>
+      <td>Team dev</td>
+      <td>Pubblicato il <a href="/docs/architettura-informazioni">Documento 03 — nuova alberatura e organizzazione dei contenuti</a>: proposta di architettura con viste verticale e orizzontale, albero delle sezioni, confronto prima/dopo, schede delle pagine previste, mappatura del riuso di tutti i testi estratti (circa il 45% riusabile con interventi minimi), sistema di messaggi, struttura della home, template delle business unit, percorso B2C, specifica dei form, slug e redirect, 7 decisioni da validare. Aggiunti al repo <code>README.md</code> e <code>WORKLOG.md</code> come registro operativo affiancato a questo diario. W-008 chiusa, W-010 in avvio.</td>
+    </tr>
     <tr>
       <td>05/08/2026</td>
       <td>0.4</td>
@@ -612,8 +620,8 @@ sonit.it  <i>(www, HTTPS, nginx, pagine .php — builder SitoFelice)</i>
   <thead><tr><th>Fase</th><th>Deliverable</th><th>Output atteso</th><th>Stato</th></tr></thead>
   <tbody>
     <tr><td>F0 — Kick-off</td><td>Raccolta obiettivi aziendali, vincoli e governance</td><td>Verbale + obiettivi condivisi</td><td><span class="tag t-ok">Completata 28/07/2026</span></td></tr>
-    <tr><td>F1 — Stato dell'arte</td><td>Analisi sito online, alberatura attuale, gap analysis (questo documento)</td><td>Documento 01</td><td><span class="tag t-info">In corso</span></td></tr>
-    <tr><td>F2 — Architettura informazioni</td><td>Nuova sitemap con razionale per ogni pagina e sezione</td><td>Documento 02 + presentazione al cliente</td><td><span class="tag t-neutro">Da avviare</span></td></tr>
+    <tr><td>F1 — Stato dell'arte</td><td>Analisi sito online, alberatura attuale, testi estratti, gap analysis</td><td>Documenti 01 e 02 + <code>/docs/testi/</code></td><td><span class="tag t-ok">Completata 05/08/2026</span></td></tr>
+    <tr><td>F2 — Architettura informazioni</td><td>Nuova alberatura con razionale per ogni pagina e sezione, riorganizzazione dei contenuti</td><td><a href="/docs/architettura-informazioni">Documento 03</a> + presentazione al cliente</td><td><span class="tag t-info">Proposta pronta, da validare</span></td></tr>
     <tr><td>F3 — Contenuti e wireframe</td><td>Contenuti per sezione + wireframe strutturali low fidelity</td><td>Documento 03 + wireframe</td><td><span class="tag t-neutro">Da avviare</span></td></tr>
     <tr><td>F4 — Direzione visiva</td><td><strong>Due</strong> proposte di design con direzioni e interfacce differenti</td><td>2 concept sulla home + 1 pagina interna</td><td><span class="tag t-neutro">Da avviare</span></td></tr>
     <tr><td>F5 — Design completo</td><td>Disegno di tutte le pagine con i contenuti definitivi</td><td>UI kit + tutte le schermate desktop/mobile</td><td><span class="tag t-neutro">Da avviare</span></td></tr>
@@ -641,9 +649,9 @@ sonit.it  <i>(www, HTTPS, nginx, pagine .php — builder SitoFelice)</i>
     <tr><td>W-005</td><td>Estrazione palette e tipografia attuali</td><td>F1</td><td>W-001</td><td>Team dev</td><td><span class="tag t-ok">Fatto</span></td></tr>
     <tr><td>W-006</td><td>Invio documento 01 a Giorgio e Beatrice</td><td>F1</td><td>W-004</td><td>Referente progetto</td><td><span class="tag t-info">Prossimo</span></td></tr>
     <tr><td>W-007</td><td>Raccolta materiali dal cliente su Drive condiviso (brochure, company profile, certificazioni, elenco partner, dati organico)</td><td>F1</td><td>—</td><td>Giorgio / Beatrice</td><td><span class="tag t-warn">Atteso</span></td></tr>
-    <tr><td>W-008</td><td>Definizione nuova architettura informazioni e sitemap con razionale</td><td>F2</td><td>W-004</td><td>Team dev</td><td><span class="tag t-neutro">Da fare</span></td></tr>
-    <tr><td>W-009</td><td>Definizione strategia B2B / B2C fotovoltaico e punti di separazione</td><td>F2</td><td>W-008</td><td>Team dev + cliente</td><td><span class="tag t-neutro">Da fare</span></td></tr>
-    <tr><td>W-010</td><td>Presentazione IA al cliente e raccolta feedback</td><td>F2</td><td>W-008</td><td>Referente progetto</td><td><span class="tag t-neutro">Da fare</span></td></tr>
+    <tr><td>W-008</td><td>Definizione nuova architettura informazioni e sitemap con razionale</td><td>F2</td><td>W-004</td><td>Team dev</td><td><span class="tag t-ok">Fatto</span></td></tr>
+    <tr><td>W-009</td><td>Definizione strategia B2B / B2C fotovoltaico e punti di separazione</td><td>F2</td><td>W-008</td><td>Team dev + cliente</td><td><span class="tag t-info">Proposta pronta</span></td></tr>
+    <tr><td>W-010</td><td>Presentazione architettura al cliente e raccolta feedback</td><td>F2</td><td>W-008</td><td>Referente progetto</td><td><span class="tag t-info">Prossimo</span></td></tr>
     <tr><td>W-011</td><td>Sistema di messaggi: posizionamento general contractor e prove di solidità</td><td>F3</td><td>W-010, W-007</td><td>Team contenuti</td><td><span class="tag t-neutro">Da fare</span></td></tr>
     <tr><td>W-012</td><td>Stesura contenuti per pagina, con riuso e correzione dei testi esistenti</td><td>F3</td><td>W-011</td><td>Team contenuti</td><td><span class="tag t-neutro">Da fare</span></td></tr>
     <tr><td>W-013</td><td>Wireframe low fidelity di tutte le pagine</td><td>F3</td><td>W-012</td><td>Team design</td><td><span class="tag t-neutro">Da fare</span></td></tr>
@@ -771,7 +779,7 @@ sonit.it  <i>(www, HTTPS, nginx, pagine .php — builder SitoFelice)</i>
 </div>
 
 <footer class="doc">
-  <p><strong>SONIT · Progetto DXP — Documento 01: stato dell'arte.</strong> Versione 0.4 del 05/08/2026. Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>. Fonti: sito online, <code>robots.txt</code>, <code>sitemap.xml</code>, fogli di stile e dati strutturati del sito attuale, verbale del kick-off del 28/07/2026, obiettivi condivisi.</p>
+  <p><strong>SONIT · Progetto DXP — Documento 01: stato dell'arte.</strong> Versione 0.5 del 05/08/2026. Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>. Fonti: sito online, <code>robots.txt</code>, <code>sitemap.xml</code>, fogli di stile e dati strutturati del sito attuale, verbale del kick-off del 28/07/2026, obiettivi condivisi.</p>
   <p>Approvazione documenti ufficiali: Giorgio. Riferimenti operativi: Giorgio e Beatrice. Ogni comunicazione va inviata a entrambi gli indirizzi.</p>
 </footer>
 
