@@ -140,8 +140,12 @@
     <div class="grp">Tracciamento</div>
     <a href="#diario">Diario delle modifiche</a>
   </nav>
-  <p class="meta">
-    Versione 0.1<br>
+  <p class="meta" style="border-top:1px solid rgba(255,255,255,.2);padding-top:14px">
+    <a href="/" style="color:#bcd3fb;text-decoration:none">← Indice dei documenti</a><br>
+    <a href="/docs/alberatura-attuale" style="color:#bcd3fb;text-decoration:none">→ Doc 02 · Alberatura attuale</a>
+  </p>
+  <p class="meta" style="margin-top:14px">
+    Versione 0.2<br>
     Aggiornato: 05/08/2026<br>
     Rilevamento sito: 05/08/2026
   </p>
@@ -360,7 +364,7 @@
     <tr><td>C-09</td><td>SEO tecnico</td><td><code>/partner.php</code> in sitemap ma 404</td><td><span class="tag t-warn">Alta</span></td><td>Sitemap generata dinamicamente dalle pagine reali</td></tr>
     <tr><td>C-10</td><td>Copy</td><td>Refuso "Effic<strong>e</strong>ntamento" in URL, title, H1, menu e keywords; "intrapendenti" in meta description; "soluzione innovative"</td><td><span class="tag t-warn">Alta</span></td><td>Revisione redazionale completa; nuovo slug <code>/efficientamento-energetico</code></td></tr>
     <tr><td>C-11</td><td>Accessibilità</td><td><code>user-scalable=no</code> nel viewport (blocca lo zoom); 11 immagini su 20 senza <code>alt</code> in home; gerarchia titoli piatta (un H1, gli H2 usati solo per "Contatti")</td><td><span class="tag t-warn">Alta</span></td><td>Impostazione accessibile di base come requisito di sviluppo</td></tr>
-    <tr><td>C-12</td><td>Performance</td><td>Immagini JPEG non ottimizzate (fino a 346 KB per singolo file), nessun WebP/AVIF, nessun <code>loading="lazy"</code>, nessun <code>srcset</code></td><td><span class="tag t-warn">Alta</span></td><td>Pipeline immagini responsive con formati moderni</td></tr>
+    <tr><td>C-12</td><td>Performance</td><td>2,57 MB di immagini caricate dalla home, di cui 1,58 MB nel solo slider (file del 2022, fino a 740 KB l'uno); nessun WebP/AVIF, nessun <code>loading="lazy"</code>, nessun <code>srcset</code></td><td><span class="tag t-warn">Alta</span></td><td>Pipeline immagini responsive con formati moderni</td></tr>
     <tr><td>C-13</td><td>Contenuti</td><td>Contenuto sottile: 117–284 parole per pagina; blocchi di processo duplicati tra due pagine</td><td><span class="tag t-warn">Alta</span></td><td>Riscrittura con profondità utile, senza duplicazioni</td></tr>
     <tr><td>C-14</td><td>Target</td><td>Nessuna separazione B2B/B2C; il residenziale è mescolato all'industriale nello stesso elenco</td><td><span class="tag t-warn">Alta</span></td><td>Percorsi distinti come da obiettivo condiviso</td></tr>
     <tr><td>C-15</td><td>Prova sociale</td><td>Nessun numero, nessuna referenza, nessun logo cliente/fornitore, nessuna certificazione</td><td><span class="tag t-warn">Alta</span></td><td>Blocco "Sonit in numeri" + wall partner + certificazioni</td></tr>
@@ -413,11 +417,12 @@
 <div class="grid">
   <div class="card"><div class="n">160 ms</div><div class="l">TTFB homepage (misurato)</div></div>
   <div class="card"><div class="n">32,7 KB</div><div class="l">HTML homepage</div></div>
-  <div class="card"><div class="n">346 KB</div><div class="l">immagine singola più pesante</div></div>
+  <div class="card"><div class="n">2,57 MB</div><div class="l">immagini caricate dalla home</div></div>
+  <div class="card"><div class="n">740 KB</div><div class="l">immagine singola più pesante</div></div>
   <div class="card"><div class="n">0</div><div class="l">immagini con lazy loading</div></div>
 </div>
 
-<p>Peso delle immagini principali rilevato: <code>efficentamento-energetico.jpg</code> 346 KB · <code>impianti-sistemi.jpg</code> 253 KB · <code>fibra.jpg</code> 231 KB · <code>s-consulenza.jpg</code> 168 KB · <code>s-telecomunicazioni.jpg</code> 124 KB · <code>map-small.jpg</code> 65 KB · <code>sonit.png</code> 29 KB. Tutte JPEG/PNG, nessun formato moderno, servite a dimensione unica.</p>
+<p>La homepage carica <strong>2,57 MB di immagini</strong> su 18 file, tutte in caricamento immediato. Il peso è concentrato nello slider: le tre slide <code>/public/2022-08-26-1-001a.jpg</code> (740 KB), <code>-002a.jpg</code> (504 KB) e <code>-003a.jpg</code> (377 KB) valgono da sole 1,58 MB e risalgono ad agosto 2022. Seguono le immagini di servizio: <code>efficentamento-energetico.jpg</code> 346 KB · <code>impianti-sistemi.jpg</code> 253 KB · <code>fibra.jpg</code> 231 KB · <code>s-consulenza.jpg</code> 168 KB · <code>s-telecomunicazioni.jpg</code> 124 KB · <code>map-small.jpg</code> 65 KB · <code>sonit.png</code> 29 KB. Tutte JPEG/PNG, nessun formato moderno, servite a dimensione unica per ogni contesto.</p>
 
 <p>Sul fronte accessibilità il problema più serio è <code>user-scalable=no</code> nel meta viewport: impedisce lo zoom su mobile e costituisce una violazione WCAG diretta. Seguono le immagini prive di <code>alt</code> e l'uso quasi assente di attributi ARIA (6 occorrenze in tutta la homepage, riferite al menu Bootstrap).</p>
 
@@ -722,6 +727,12 @@ sonit.it  <i>(www, HTTPS, nginx, pagine .php — builder SitoFelice)</i>
   <tbody>
     <tr>
       <td>05/08/2026</td>
+      <td>0.2</td>
+      <td>Team dev</td>
+      <td>Pubblicato il <a href="/docs/alberatura-attuale">Documento 02 — alberatura del sito online</a>: albero con le sezioni interne di ogni pagina, confronto menu / <code>sitemap.xml</code> / realtà, mappa dei link interni (121 link totali, di cui 9 contestuali), matrice dei blocchi di template, 11 schede pagina, risorse fuori albero e 13 anomalie strutturali. Aggiornata la sezione Performance con il payload reale della homepage: 2,57 MB di immagini, di cui 1,58 MB nello slider con file del 2022. Rilevati due form in homepage con lo stesso <code>name</code>, il primo dei quali invia credenziali a <code>app.sonit.it</code> in tecnologia ASP.</td>
+    </tr>
+    <tr>
+      <td>05/08/2026</td>
       <td>0.1</td>
       <td>Team dev</td>
       <td>Prima stesura. Analisi del sito online del 05/08/2026 (10 pagine + 1 URL 404), estrazione alberatura attuale, inventario contenuti, 20 criticità classificate, estrazione palette e tipografia, gap analysis sugli obiettivi di kick-off, fasi di progetto, worklog (31 attività), bozza di alberatura per F2, elenco materiali da richiedere al cliente, bozza piano redirect.</td>
@@ -731,7 +742,7 @@ sonit.it  <i>(www, HTTPS, nginx, pagine .php — builder SitoFelice)</i>
 </div>
 
 <footer class="doc">
-  <p><strong>SONIT · Progetto DXP — Documento 01: stato dell'arte.</strong> Versione 0.1 del 05/08/2026. Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>. Fonti: sito online, <code>robots.txt</code>, <code>sitemap.xml</code>, fogli di stile e dati strutturati del sito attuale, verbale del kick-off del 28/07/2026, obiettivi condivisi.</p>
+  <p><strong>SONIT · Progetto DXP — Documento 01: stato dell'arte.</strong> Versione 0.2 del 05/08/2026. Rilevamento tecnico del sito eseguito il 05/08/2026 su <code>https://www.sonit.it</code>. Fonti: sito online, <code>robots.txt</code>, <code>sitemap.xml</code>, fogli di stile e dati strutturati del sito attuale, verbale del kick-off del 28/07/2026, obiettivi condivisi.</p>
   <p>Approvazione documenti ufficiali: Giorgio. Riferimenti operativi: Giorgio e Beatrice. Ogni comunicazione va inviata a entrambi gli indirizzi.</p>
 </footer>
 

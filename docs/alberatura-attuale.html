@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SONIT — Alberatura del sito attualmente online</title>
+<meta name="description" content="Estrazione completa dell'alberatura di sonit.it: struttura, pagine, sezioni interne, blocchi di template, mappa dei link interni e anomalie strutturali.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+    --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;
+    --crit:#b3261e;--warn:#b26a00;--ok:#1b6b3a;--info:#0b5ed7;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55;font-size:15px}
+  .wrap{display:grid;grid-template-columns:264px minmax(0,1fr);max-width:1400px;margin:0 auto}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;background:var(--blu);color:#fff;padding:28px 20px 40px}
+  aside .brand{font-weight:800;letter-spacing:.14em;font-size:20px;margin:0 0 2px}
+  aside .brand span{font-weight:400;opacity:.75}
+  aside .sub{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:22px}
+  aside nav a{display:block;color:#dbe6f5;text-decoration:none;font-size:13.2px;padding:5px 8px;border-radius:5px}
+  aside nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+  aside nav .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;opacity:.55;margin:18px 0 6px 8px}
+  aside .back{display:block;margin-top:24px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;color:#bcd3fb;text-decoration:none}
+  aside .back:hover{color:#fff}
+  aside .meta{margin-top:18px;font-size:11.5px;opacity:.65}
+  main{padding:44px 52px 90px;min-width:0}
+  header.top{border-bottom:3px solid var(--blu);padding-bottom:22px;margin-bottom:34px}
+  header.top .kicker{color:var(--blu);font-size:11.5px;text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+  h1{font-size:32px;line-height:1.15;margin:8px 0 10px;letter-spacing:-.02em}
+  h2{font-size:21px;margin:52px 0 14px;padding-top:14px;border-top:1px solid var(--line);letter-spacing:-.01em}
+  h2:first-of-type{border-top:0}
+  h3{font-size:16px;margin:26px 0 8px;color:var(--blu-scuro)}
+  h4{font-size:13.5px;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+  p{margin:0 0 12px}
+  ul,ol{margin:0 0 14px;padding-left:20px}
+  li{margin-bottom:5px}
+  code{font-family:var(--mono);font-size:12.5px;background:var(--blu-tenue);padding:1.5px 5px;border-radius:4px;color:var(--blu-scuro);word-break:break-word}
+  .lead{font-size:16.5px;color:var(--ink-soft);max-width:70ch}
+  .tbl-wrap{overflow-x:auto;margin:0 0 18px}
+  table{border-collapse:collapse;width:100%;font-size:13.2px;min-width:560px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--blu-tenue);color:var(--blu-scuro);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--blu-chiaro);white-space:nowrap}
+  tbody tr:hover{background:#fafcff}
+  td.num{text-align:right;font-family:var(--mono);font-size:12.2px;white-space:nowrap}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .t-crit{background:#fdecea;color:var(--crit)}
+  .t-warn{background:#fff4e0;color:var(--warn)}
+  .t-ok{background:#e7f4ec;color:var(--ok)}
+  .t-info{background:#e8f0fe;color:var(--info)}
+  .t-neutro{background:#eef1f5;color:var(--ink-soft)}
+  .box{border:1px solid var(--line);border-left:4px solid var(--blu);background:var(--blu-tenue);padding:14px 16px;border-radius:0 6px 6px 0;margin:0 0 18px}
+  .box.warn{border-left-color:var(--warn);background:#fffaf0}
+  .box.crit{border-left-color:var(--crit);background:#fef7f6}
+  .box p:last-child{margin-bottom:0}
+  .box strong{color:var(--blu-scuro)}
+  pre.tree{font-family:var(--mono);font-size:12.5px;line-height:1.72;background:#0e1a2b;color:#d7e3f4;padding:22px;border-radius:8px;overflow-x:auto;margin:0 0 18px}
+  pre.tree b{color:#7fb2ff;font-weight:600}
+  pre.tree i{color:#8e9db4;font-style:normal}
+  pre.tree u{color:#ff9a90;text-decoration:none}
+  pre.tree em{color:#7ee0b0;font-style:normal}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:0 0 18px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .card .n{font-size:25px;font-weight:800;color:var(--blu);line-height:1.1;letter-spacing:-.02em}
+  .card .l{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  /* page sheets */
+  .sheet{border:1px solid var(--line);border-radius:9px;padding:0;margin:0 0 16px;overflow:hidden}
+  .sheet > .hd{background:var(--blu-tenue);padding:11px 16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between}
+  .sheet > .hd b{font-size:15px}
+  .sheet > .hd code{background:#fff}
+  .sheet > .bd{padding:14px 16px}
+  .sheet dl{display:grid;grid-template-columns:132px minmax(0,1fr);gap:5px 14px;margin:0 0 12px;font-size:13.4px}
+  .sheet dt{color:var(--ink-soft);font-size:12.3px;text-transform:uppercase;letter-spacing:.05em}
+  .sheet dd{margin:0}
+  .sheet .blocks{margin:0;padding-left:18px;font-size:13.6px}
+  .sheet .blocks li{margin-bottom:3px}
+  footer.doc{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr}
+    aside{position:static;height:auto}
+    main{padding:28px 20px 60px}
+    h1{font-size:25px}
+    .sheet dl{grid-template-columns:1fr}
+  }
+  @media print{aside{display:none}.wrap{display:block}main{padding:0}h2{page-break-after:avoid}.sheet{page-break-inside:avoid}table{font-size:10.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<aside>
+  <p class="brand">SONIT<span>&nbsp;/ DXP</span></p>
+  <p class="sub">Alberatura attuale · Doc 02</p>
+  <nav>
+    <div class="grp">Quadro</div>
+    <a href="#metodo">Metodo e fonti</a>
+    <a href="#colpo">Colpo d'occhio</a>
+    <div class="grp">Struttura</div>
+    <a href="#albero">Alberatura completa</a>
+    <a href="#confronto">Menu vs sitemap vs realtà</a>
+    <a href="#link">Mappa dei link interni</a>
+    <a href="#template">Blocchi di template</a>
+    <div class="grp">Dettaglio</div>
+    <a href="#schede">Schede pagina</a>
+    <a href="#fuori">Risorse fuori albero</a>
+    <div class="grp">Conclusioni</div>
+    <a href="#anomalie">Anomalie strutturali</a>
+    <a href="#implicazioni">Implicazioni per il nuovo sito</a>
+  </nav>
+  <a class="back" href="/">← Torna all'indice dei documenti</a>
+  <a class="back" href="/docs/stato-arte-sonit" style="border-top:0;margin-top:4px;padding-top:0">← Doc 01 · Stato dell'arte</a>
+  <p class="meta">Versione 1.0<br>05/08/2026</p>
+</aside>
+
+<main>
+
+<header class="top">
+  <p class="kicker">Progetto DXP · Documento 02</p>
+  <h1>Alberatura del sito attualmente online</h1>
+  <p class="lead">Estrazione completa della struttura di <code>sonit.it</code>: gerarchia delle pagine, sezioni interne, blocchi di template ripetuti, mappa dei link interni, risorse fuori albero e anomalie strutturali.</p>
+</header>
+
+<!-- ===== METODO ===== -->
+<h2 id="metodo">Metodo e fonti</h2>
+<p>Rilevamento eseguito il <strong>05/08/2026</strong> scaricando e analizzando il codice sorgente di ogni pagina raggiungibile di <code>https://www.sonit.it</code>. L'alberatura è ricostruita incrociando quattro fonti:</p>
+<ol>
+  <li><strong>Menu di navigazione</strong> (<code>&lt;nav id="cssmenu"&gt;</code>), identico su tutte e 10 le pagine.</li>
+  <li><strong><code>sitemap.xml</code></strong> dichiarata in <code>robots.txt</code>.</li>
+  <li><strong>Link interni reali</strong> presenti nel codice di ogni pagina, contati e verificati uno per uno.</li>
+  <li><strong>Verifica del codice di risposta HTTP</strong> di ogni URL, per distinguere pagine esistenti, vuote e inesistenti.</li>
+</ol>
+<p>Le sezioni interne di ciascuna pagina sono elencate nell'ordine in cui compaiono nel documento, così come le vede l'utente.</p>
+
+<!-- ===== COLPO D'OCCHIO ===== -->
+<h2 id="colpo">Colpo d'occhio</h2>
+<div class="grid">
+  <div class="card"><div class="n">10</div><div class="l">pagine esistenti e raggiungibili</div></div>
+  <div class="card"><div class="n">1</div><div class="l">URL orfano che risponde 404</div></div>
+  <div class="card"><div class="n">2</div><div class="l">livelli di menu (3 di gerarchia logica)</div></div>
+  <div class="card"><div class="n">1 click</div><div class="l">profondità massima da qualunque pagina</div></div>
+  <div class="card"><div class="n">9 / 10</div><div class="l">pagine con il form contatti replicato</div></div>
+  <div class="card"><div class="n">2</div><div class="l">pagine di fatto vuote (Lavori, Privacy)</div></div>
+  <div class="card"><div class="n">2,57 MB</div><div class="l">immagini caricate dalla sola home</div></div>
+  <div class="card"><div class="n">2022</div><div class="l">anno delle immagini dello slider in home</div></div>
+</div>
+
+<div class="box">
+  <p><strong>Come è fatta.</strong> È un'alberatura piatta di 10 pagine con un solo ramo di secondo livello (i quattro servizi sotto "Servizi e Soluzioni"). Il menu completo è ripetuto su ogni pagina, quindi ogni pagina è raggiungibile con un click da qualunque altra: non esiste un percorso di navigazione guidato, esiste un elenco. Il contenuto è governato da un template unico in cui la parte variabile è una sola: il corpo centrale.</p>
+</div>
+
+<!-- ===== ALBERO ===== -->
+<h2 id="albero">Alberatura completa con sezioni interne</h2>
+
+<pre class="tree">
+<b>https://www.sonit.it</b>  <i>— nginx · HTTP/2 · pagine .php · builder SitoFelice.it</i>
+│
+├─ <b>/index.php</b>  <em>Home</em>  <i>· title: "Impianti e Telecomunicazioni Roma e Frosinone | Sonit"</i>
+│   ├─ header: logo + payoff "Reti | Sistemi | Impianti" + telefono
+│   ├─ menu principale
+│   ├─ <em>slider</em> 3 immagini <i>(/public/2022-08-26-1-00{1,2,3}a.jpg — 1,58 MB in totale)</i>
+│   ├─ <em>hero testuale</em>: citazione di Henry Ford <i>(nessuna value proposition, nessuna CTA)</i>
+│   ├─ <em>paragrafo istituzionale</em> + link "scopri chi siamo…"
+│   ├─ <em>H1 "Servizi e Soluzioni"</em> → 4 card
+│   │     ├─ Impianti e Sistemi
+│   │     ├─ Telecomunicazioni
+│   │     ├─ Efficentamento Energetico
+│   │     └─ Consulenza
+│   ├─ <em>box "Area Riservata - WebApp"</em> → <u>form di login che invia a app.sonit.it (.asp)</u>
+│   ├─ <em>H2 "Contatti"</em>: indirizzo Arpino + telefono + email + form
+│   └─ footer + cookie bar + pulsante torna-su
+│
+├─ <b>/sonit-srl.php</b>  <em>Chi Siamo</em>  <i>· H1: "Sonit srl"</i>
+│   ├─ intro: azienda che opera sull'intero territorio nazionale
+│   ├─ paragrafo sui titolari e le esperienze pregresse
+│   ├─ paragrafo squadra, ambiente, salute e sicurezza
+│   ├─ elenco 6 categorie di impianto
+│   ├─ chiusura su compliance e performance
+│   └─ blocco Contatti + form
+│       <u>assenti: numeri, sedi, organigramma, certificazioni, download PDF</u>
+│
+├─ <b>/servizi-sonit.php</b>  <em>Servizi e Soluzioni</em>  <i>· pagina ponte, ~127 parole</i>
+│   ├─ H1 + 4 card verso le sottopagine
+│   └─ blocco Contatti + form
+│   │
+│   ├─ <b>/impianti-sistemi.php</b>  <em>Impianti e Sistemi</em>
+│   │   ├─ claim: realizzazione e protezione di impianti, sistemi, reti e programmi
+│   │   ├─ elenco 12 tipologie <u>(include "Impianti fotovoltaici": BU 3 sepolta qui)</u>
+│   │   ├─ 5 blocchi processo: Analisi e progettazione · Infrastrutture ·
+│   │   │  Incentivi e detrazioni · Opere civili · Manutenzioni  <u>(duplicati)</u>
+│   │   └─ blocco Contatti + form
+│   │
+│   ├─ <b>/telecomunicazioni.php</b>  <em>Telecomunicazioni</em>  <i>· pagina più solida del sito</i>
+│   │   ├─ mission: Agenda Digitale Europea, banda ultra-larga, Gigabit Society
+│   │   ├─ 6 blocchi di filiera:
+│   │   │     ├─ Pianificazione e controllo
+│   │   │     ├─ Analisi progettuali <i>(progetti, as-built, software di rendicontazione)</i>
+│   │   │     ├─ Opere civili <i>(MINItrincea, MICROtrincea, scavi pregiati, ripristini)</i>
+│   │   │     ├─ Infrastrutture <i>(sotto-tubazione, posa interrata blowing, palificazione, facciata)</i>
+│   │   │     ├─ Giunzione <i>(a caldo con giuntatrici)</i>
+│   │   │     └─ Collaudi <i>(strumentazione elettronica)</i>
+│   │   └─ blocco Contatti + form
+│   │
+│   ├─ <b>/efficentamento-energetico.php</b>  <em>Efficentamento Energetico</em>  <u>refuso nello slug</u>
+│   │   ├─ Riqualificazione energetica degli edifici
+│   │   ├─ gli stessi 5 blocchi processo di "Impianti e Sistemi"  <u>(contenuto duplicato)</u>
+│   │   └─ blocco Contatti + form
+│   │
+│   └─ <b>/consulenza.php</b>  <em>Consulenza</em>
+│       ├─ paragrafo introduttivo
+│       ├─ "GESTIONE DOCUMENTALE"  <u>(titolo senza corpo)</u>
+│       ├─ "SVILUPPO DI SOLUZIONE INNOVATIVE"  <u>(titolo senza corpo, con refuso)</u>
+│       └─ blocco Contatti + form
+│
+├─ <b>/foto.php</b>  <em>Lavori</em>  <i>· H1: "Foto Gallery"</i>
+│   ├─ <u>"Album non presenti…" + immagine placeholder non-trovata.png</u>
+│   └─ blocco Contatti + form
+│
+├─ <b>/contatti.php</b>  <em>Contatti</em>  <i>· H1: "Contattaci"</i>
+│   ├─ H2 "I Nostri Contatti"
+│   ├─ H2 sede operativa principale — Arpino (FR), Via S. Altissimo snc
+│   ├─ H2 sede operativa — Roma, Via Pescara 2
+│   ├─ mappe come <u>immagini statiche</u> con link esterno a Google Maps
+│   └─ form richiesta <i>(destinazione del POST di tutti i form del sito)</i>
+│
+├─ <b>/privacy.php</b>  <em>Informazioni | Termini | Privacy | Cookies</em>
+│   └─ <u>solo header, menu e footer: nessun H1, nessun testo di informativa (46 parole)</u>
+│
+└─ <b>/partner.php</b>  <u>404 — dichiarata in sitemap.xml, non linkata da nessuna pagina</u>
+</pre>
+
+<h4>Elementi trasversali del template</h4>
+<pre class="tree">
+<b>header</b>   logo Sonit · payoff "Reti | Sistemi | Impianti" · telefono +39.0776.868072
+<b>menu</b>     Home · Chi Siamo · <b>Servizi e Soluzioni</b> ▸ (4 voci) · Lavori · Contatti
+<b>blocco contatti</b>  indirizzo Arpino + telefono + email + mappa piccola + form
+          <i>presente su 9 pagine su 10 (assente solo su privacy.php)</i>
+<b>footer</b>   © 2026 Sonit Srl | P.Iva 02815390600 · Informazioni|Termini|Privacy|Cookies
+          social: Facebook <u>(profilo personale)</u> · Instagram @sonit_srl · "powered by SitoFelice.it"
+<b>overlay</b>  cookie bar (cookiechoices.js) · pulsante torna-su
+</pre>
+
+<!-- ===== CONFRONTO ===== -->
+<h2 id="confronto">Menu vs <code>sitemap.xml</code> vs realtà</h2>
+<p>Le tre viste della struttura non coincidono. La tabella mette a confronto ciò che il menu dichiara, ciò che la sitemap dichiara a Google e ciò che esiste davvero.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>URL</th><th>Nel menu</th><th>In sitemap.xml</th><th>HTTP</th><th>Contenuto reale</th></tr></thead>
+  <tbody>
+    <tr><td><code>/index.php</code></td><td>Sì — "Home"</td><td>Sì (come <code>https://www.sonit.it</code>, priorità 1.0)</td><td>200</td><td><span class="tag t-ok">Popolata</span></td></tr>
+    <tr><td><code>/sonit-srl.php</code></td><td>Sì — "Chi Siamo"</td><td>Sì</td><td>200</td><td><span class="tag t-ok">Popolata</span></td></tr>
+    <tr><td><code>/servizi-sonit.php</code></td><td>Sì — voce padre</td><td>Sì</td><td>200</td><td><span class="tag t-warn">Ponte, ~127 parole</span></td></tr>
+    <tr><td><code>/telecomunicazioni.php</code></td><td>Sì — sottovoce</td><td>Sì</td><td>200</td><td><span class="tag t-ok">Popolata</span></td></tr>
+    <tr><td><code>/impianti-sistemi.php</code></td><td>Sì — sottovoce</td><td>Sì</td><td>200</td><td><span class="tag t-ok">Popolata</span></td></tr>
+    <tr><td><code>/efficentamento-energetico.php</code></td><td>Sì — sottovoce</td><td>Sì</td><td>200</td><td><span class="tag t-warn">Metà duplicata</span></td></tr>
+    <tr><td><code>/consulenza.php</code></td><td>Sì — sottovoce</td><td>Sì</td><td>200</td><td><span class="tag t-warn">Due titoli senza corpo</span></td></tr>
+    <tr><td><code>/foto.php</code></td><td>Sì — "Lavori"</td><td>Sì</td><td>200</td><td><span class="tag t-crit">Vuota</span></td></tr>
+    <tr><td><code>/contatti.php</code></td><td>Sì — "Contatti"</td><td>Sì</td><td>200</td><td><span class="tag t-ok">Popolata</span></td></tr>
+    <tr><td><code>/privacy.php</code></td><td>No — solo footer</td><td><strong>No</strong></td><td>200</td><td><span class="tag t-crit">Priva di contenuto</span></td></tr>
+    <tr><td><code>/partner.php</code></td><td>No</td><td><strong>Sì</strong></td><td><strong>404</strong></td><td><span class="tag t-crit">Inesistente</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box crit">
+  <p><strong>Due disallineamenti da correggere.</strong> La sitemap dichiara a Google una pagina che non esiste (<code>/partner.php</code>) ed esclude una pagina che esiste (<code>/privacy.php</code>). Il fatto che qualcuno avesse previsto una pagina partner e non l'abbia mai pubblicata è coerente con la richiesta di una sezione partnership/fornitori emersa in kick-off.</p>
+</div>
+
+<!-- ===== LINK ===== -->
+<h2 id="link">Mappa dei link interni</h2>
+<p>Conteggio dei link interni presenti nel codice: quanti ne parte da ciascuna pagina e quanti ne arrivano. Include i link di menu, footer e contenuto.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Pagina</th><th class="num">Link in uscita</th><th class="num">Link in entrata</th><th class="num">Pagine che la linkano</th><th class="num">Click dalla home</th><th>Nota</th></tr></thead>
+  <tbody>
+    <tr><td><code>/index.php</code></td><td class="num">15</td><td class="num">10</td><td class="num">9</td><td class="num">—</td><td>i 5 link in più sono i contenuti: 4 card servizi + "scopri chi siamo"</td></tr>
+    <tr><td><code>/sonit-srl.php</code></td><td class="num">11</td><td class="num">11</td><td class="num">9</td><td class="num">1</td><td>+1 link contestuale al blocco servizi</td></tr>
+    <tr><td><code>/servizi-sonit.php</code></td><td class="num">14</td><td class="num">11</td><td class="num">9</td><td class="num">1</td><td>+4 card verso le sottopagine</td></tr>
+    <tr><td><code>/impianti-sistemi.php</code></td><td class="num">10</td><td class="num">12</td><td class="num">9</td><td class="num">1</td><td>solo link di menu e footer</td></tr>
+    <tr><td><code>/telecomunicazioni.php</code></td><td class="num">10</td><td class="num">12</td><td class="num">9</td><td class="num">1</td><td>solo link di menu e footer</td></tr>
+    <tr><td><code>/efficentamento-energetico.php</code></td><td class="num">10</td><td class="num">12</td><td class="num">9</td><td class="num">1</td><td>solo link di menu e footer</td></tr>
+    <tr><td><code>/consulenza.php</code></td><td class="num">10</td><td class="num">12</td><td class="num">9</td><td class="num">1</td><td>solo link di menu e footer</td></tr>
+    <tr><td><code>/foto.php</code></td><td class="num">11</td><td class="num">11</td><td class="num">9</td><td class="num">1</td><td>+1 autolink assoluto</td></tr>
+    <tr><td><code>/contatti.php</code></td><td class="num">10</td><td class="num">10</td><td class="num">9</td><td class="num">1</td><td>solo link di menu e footer</td></tr>
+    <tr><td><code>/privacy.php</code></td><td class="num">10</td><td class="num">10</td><td class="num">9</td><td class="num">1</td><td>raggiungibile solo dal footer</td></tr>
+    <tr><td><code>/partner.php</code></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td><td><span class="tag t-crit">Orfana</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <p><strong>Che forma ha il grafo.</strong> È completo e piatto: il menu ripetuto collega tutte le pagine con tutte, quindi ogni pagina dista un click da ogni altra e i conteggi in entrata sono quasi identici (10–12). L'unico linking contestuale, cioè guidato dal contenuto, sono le 4 card servizi e il "scopri chi siamo" in home e le 4 card in "Servizi e Soluzioni": <strong>9 link su 121 totali</strong>. Le sei pagine di contenuto non si linkano tra loro in nessun punto del testo, quindi non esiste alcun percorso costruito né alcuna gerarchia di importanza leggibile per un motore di ricerca.</p>
+</div>
+
+<!-- ===== TEMPLATE ===== -->
+<h2 id="template">Blocchi di template e loro distribuzione</h2>
+<p>Il sito è un template unico con una sola zona variabile. Questo spiega sia la velocità di realizzazione sia l'impossibilità di differenziare i percorsi per pubblico.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Blocco</th><th>Su quante pagine</th><th>Variabile?</th><th>Nota</th></tr></thead>
+  <tbody>
+    <tr><td>Header con logo, payoff e telefono</td><td>10 / 10</td><td>No</td><td>identico</td></tr>
+    <tr><td>Menu principale</td><td>10 / 10</td><td>Solo la classe <code>active</code></td><td>identico in struttura e ordine</td></tr>
+    <tr><td>Corpo centrale</td><td>10 / 10</td><td><strong>Sì</strong></td><td>unica zona di contenuto proprio della pagina</td></tr>
+    <tr><td>Slider immagini</td><td>1 / 10 <i>(solo home)</i></td><td>—</td><td>3 slide, immagini del 2022, 1,58 MB</td></tr>
+    <tr><td>Box "Area Riservata - WebApp"</td><td>1 / 10 <i>(solo home)</i></td><td>—</td><td>form di login verso dominio esterno</td></tr>
+    <tr><td>Blocco Contatti + form</td><td>9 / 10</td><td>Solo la somma antispam</td><td>assente solo su <code>/privacy.php</code></td></tr>
+    <tr><td>Footer con dati societari e social</td><td>10 / 10</td><td>No</td><td>identico</td></tr>
+    <tr><td>Cookie bar</td><td>10 / 10</td><td>No</td><td><code>cookiechoices.js</code>, libreria deprecata</td></tr>
+    <tr><td>Pulsante torna-su</td><td>10 / 10</td><td>No</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h4>Il form, unico meccanismo di conversione del sito</h4>
+<p>Lo stesso form compare su 9 pagine, sempre con gli stessi 7 campi (<code>Nome</code>, <code>eMail</code>, <code>Telefono</code>, <code>Domanda</code>, <code>S0mma</code> antispam, consenso <code>Dati</code>, honeypot <code>campo1</code>) e sempre con <code>action="contatti.php"</code>: qualunque invio, da qualunque pagina, finisce su <code>/contatti.php</code>. Non esiste una pagina di conferma distinta, quindi non c'è modo di misurare quante richieste arrivano né da quale pagina partono. Non esiste alcun campo che distingua un'impresa da un privato, né l'intento della richiesta.</p>
+
+<div class="box warn">
+  <p><strong>Nota sulla home.</strong> La homepage contiene <strong>due</strong> form, entrambi con lo stesso attributo <code>name="preventivo"</code>. Il primo è il login dell'area riservata e invia le credenziali a <code>https://www.app.sonit.it/include/inc-login.asp</code>, un endpoint su un sottodominio diverso e in tecnologia diversa (ASP). Da chiarire con il cliente a chi serve quell'accesso e se deve restare nella homepage pubblica: come minimo va spostato fuori dal flusso commerciale e reso una voce di servizio, non un blocco accanto ai servizi.</p>
+</div>
+
+<!-- ===== SCHEDE ===== -->
+<h2 id="schede">Schede pagina</h2>
+
+<div class="sheet">
+  <div class="hd"><b>Home</b><code>/index.php</code><span class="tag t-ok">Popolata</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Impianti e Telecomunicazioni Roma e Frosinone | Sonit</dd>
+      <dt>H1</dt><dd>Servizi e Soluzioni <i>(l'unico H1 è quello del blocco servizi)</i></dd>
+      <dt>Peso HTML</dt><dd>32,7 KB · immagini caricate: <strong>2,57 MB</strong></dd>
+      <dt>Parole</dt><dd>~199</dd>
+      <dt>Canonical</dt><dd><span class="tag t-ok">Corretto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>Slider 3 immagini (senza testo)</li>
+      <li>Citazione di Henry Ford come hero</li>
+      <li>Paragrafo istituzionale + "scopri chi siamo…"</li>
+      <li>4 card servizi</li>
+      <li>Box Area Riservata WebApp con form di login esterno</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Chi Siamo</b><code>/sonit-srl.php</code><span class="tag t-ok">Popolata</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Sonit Srl, l'Azienda</dd>
+      <dt>H1</dt><dd>Sonit srl</dd>
+      <dt>Peso HTML</dt><dd>13,4 KB</dd>
+      <dt>Parole</dt><dd>~251</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+      <dt>Da sapere</dt><dd>la meta description dichiara ancora "azienda di recente costituzione" e contiene il refuso "intrapendenti"</dd>
+    </dl>
+    <ol class="blocks">
+      <li>Intro: opera sull'intero territorio nazionale</li>
+      <li>I titolari e le esperienze pregresse</li>
+      <li>Squadra, ambiente, salute e sicurezza</li>
+      <li>Elenco 6 categorie di impianto</li>
+      <li>Compliance legislativa e performance</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Servizi e Soluzioni</b><code>/servizi-sonit.php</code><span class="tag t-warn">Pagina ponte</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Sonit, i nostri servizi Reti e Sistemi</dd>
+      <dt>H1</dt><dd>Servizi e Soluzioni</dd>
+      <dt>Peso HTML</dt><dd>12,1 KB</dd>
+      <dt>Parole</dt><dd>~127 — il minimo del sito dopo le due pagine vuote</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>H1 + 4 card verso le sottopagine, senza testo proprio</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">È il punto in cui dovrebbe vivere il messaggio "ecosistema integrato, soluzione chiavi in mano" chiesto in kick-off. Oggi è un passaggio a vuoto.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Impianti e Sistemi</b><code>/impianti-sistemi.php</code><span class="tag t-warn">Da scomporre</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title / H1</dt><dd>Impianti e Sistemi</dd>
+      <dt>Peso HTML</dt><dd>13,3 KB</dd>
+      <dt>Parole</dt><dd>~245</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>Claim su impianti, sistemi, reti e programmi</li>
+      <li>Elenco 12 tipologie: elettrici, <strong>fotovoltaici</strong>, domotica, automazione, videosorveglianza, allarme, idraulici, climatizzazione, purificazione aria, solare termico, pompe di calore, manutenzione</li>
+      <li>5 blocchi processo (duplicati con Efficentamento Energetico)</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">Contiene due business unit diverse più un catalogo residenziale nello stesso elenco piatto. Il fotovoltaico, leva della transizione a general contractor, è la seconda voce di una lista di dodici.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Telecomunicazioni</b><code>/telecomunicazioni.php</code><span class="tag t-info">Riutilizzabile</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Servizi di Telecomunicazioni</dd>
+      <dt>H1</dt><dd>Telecomunicazioni</dd>
+      <dt>Peso HTML</dt><dd>12,6 KB</dd>
+      <dt>Parole</dt><dd>~284 — la pagina più ricca del sito</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>Mission: Agenda Digitale Europea, banda ultra-larga, Gigabit Society</li>
+      <li>Pianificazione e controllo</li>
+      <li>Analisi progettuali</li>
+      <li>Opere civili</li>
+      <li>Infrastrutture</li>
+      <li>Giunzione</li>
+      <li>Collaudi</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">Unica pagina che dimostra competenza tecnica reale e copre la filiera completa. Contenuto riusabile quasi integralmente nel nuovo sito.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Efficentamento Energetico</b><code>/efficentamento-energetico.php</code><span class="tag t-crit">Refuso nello slug</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title / H1</dt><dd>Efficentamento Energetico <i>(corretto: Effic<strong>i</strong>entamento)</i></dd>
+      <dt>Peso HTML</dt><dd>12,6 KB</dd>
+      <dt>Parole</dt><dd>~237, di cui oltre metà duplicati</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>Riqualificazione energetica degli edifici</li>
+      <li>Gli stessi 5 blocchi processo di Impianti e Sistemi</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">Il refuso è propagato in URL, title, H1, voce di menu e keywords. Nessuna distinzione tra taglie industriali e residenziali.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Consulenza</b><code>/consulenza.php</code><span class="tag t-warn">Contenuto minimo</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title / H1</dt><dd>Consulenza</dd>
+      <dt>Peso HTML</dt><dd>11,6 KB</dd>
+      <dt>Parole</dt><dd>~167</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>Paragrafo introduttivo</li>
+      <li>"GESTIONE DOCUMENTALE" — titolo senza corpo</li>
+      <li>"SVILUPPO DI SOLUZIONE INNOVATIVE" — titolo senza corpo, con refuso</li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">La meta description parla di Pubbliche Amministrazioni e Aziende Private, tema che non compare in nessun'altra pagina del sito.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Lavori</b><code>/foto.php</code><span class="tag t-crit">Vuota</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Foto Gallery Lavori Eseguiti</dd>
+      <dt>H1</dt><dd>Foto Gallery</dd>
+      <dt>Peso HTML</dt><dd>10,8 KB</dd>
+      <dt>Parole</dt><dd>~117</dd>
+      <dt>Canonical</dt><dd><span class="tag t-ok">Corretto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>"Album non presenti…" + immagine placeholder <code>non-trovata.png</code></li>
+      <li>Blocco Contatti + form</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">Voce attiva nel menu principale che porta a una pagina senza contenuto: è il difetto più visibile all'utente su tutto il sito.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Contatti</b><code>/contatti.php</code><span class="tag t-ok">Popolata</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Contatti e Telefono di Sonit srl</dd>
+      <dt>H1</dt><dd>Contattaci</dd>
+      <dt>Peso HTML</dt><dd>12,4 KB</dd>
+      <dt>Parole</dt><dd>~173</dd>
+      <dt>Canonical</dt><dd><span class="tag t-crit">Rotto</span></dd>
+    </dl>
+    <ol class="blocks">
+      <li>H2 "I Nostri Contatti"</li>
+      <li>Sede operativa principale — Arpino (FR), Via S. Altissimo snc</li>
+      <li>Sede operativa — Roma, Via Pescara 2</li>
+      <li>Due mappe come immagini statiche con link esterno</li>
+      <li>Form richiesta</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13.6px;color:var(--ink-soft)">È la pagina di destinazione di tutti i form del sito. La sede legale esiste solo nei dati strutturati, non è mai mostrata all'utente.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Informazioni | Termini | Privacy | Cookies</b><code>/privacy.php</code><span class="tag t-crit">Priva di contenuto</span></div>
+  <div class="bd">
+    <dl>
+      <dt>Title</dt><dd>Informazioni | Termini | Privacy | Cookies</dd>
+      <dt>H1</dt><dd>nessuno</dd>
+      <dt>Peso HTML</dt><dd>4,9 KB</dd>
+      <dt>Parole</dt><dd>~46 — solo header, menu e footer</dd>
+      <dt>Canonical</dt><dd><span class="tag t-ok">Corretto</span></dd>
+    </dl>
+    <p style="margin:0;font-size:13.6px;color:var(--ink-soft)">La cookie bar rimanda qui, ma qui non c'è nessuna informativa. L'unica informativa raggiungibile è un popup su <code>sitofelice.it</code>, dominio di terze parti, aperto dal consenso del form. È l'unica pagina senza blocco contatti e l'unica esclusa dalla sitemap.</p>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="hd"><b>Partner</b><code>/partner.php</code><span class="tag t-crit">404 · orfana</span></div>
+  <div class="bd">
+    <p style="margin:0;font-size:13.6px">Dichiarata in <code>sitemap.xml</code>, non linkata da nessuna pagina, restituisce 404. Traccia di una pagina partner pianificata e mai pubblicata.</p>
+  </div>
+</div>
+
+<!-- ===== FUORI ALBERO ===== -->
+<h2 id="fuori">Risorse fuori dall'albero</h2>
+<p>Elementi che fanno parte dell'esperienza del sito ma non sono pagine dell'alberatura. Vanno decisi in fase di architettura perché tre su quattro finiscono davanti all'utente.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Risorsa</th><th>Dove compare</th><th>Natura</th><th>Da decidere</th></tr></thead>
+  <tbody>
+    <tr><td><code>app.sonit.it</code> — Area Riservata WebApp</td><td>Box in homepage + popup password</td><td>Applicazione esterna su sottodominio, tecnologia ASP</td><td>A chi serve, se resta in homepage, dove va collocata</td></tr>
+    <tr><td><code>sitofelice.it/terms-privacy-policy.asp</code></td><td>Popup dal consenso privacy dei form</td><td>Informativa ospitata su dominio di terze parti</td><td>Riportare i testi legali su dominio proprio</td></tr>
+    <tr><td><code>/public/2022-08-26-1-00{1,2,3}a.jpg</code></td><td>Slider della homepage</td><td>3 immagini caricate nel 2022, 1,58 MB complessivi</td><td>Sostituzione con immagini coerenti alle linee guida visive</td></tr>
+    <tr><td>Google Maps</td><td>Contatti e blocco contatti</td><td>Immagini statiche con link in uscita</td><td>Mappa interattiva o immagine ottimizzata</td></tr>
+    <tr><td>Facebook / Instagram</td><td>Footer</td><td>Il link Facebook punta a un profilo personale, non a una pagina aziendale</td><td>Collegare la pagina business</td></tr>
+    <tr><td><code>robots.txt</code> · <code>sitemap.xml</code></td><td>Radice</td><td>Presenti; la sitemap è disallineata dalla realtà</td><td>Rigenerazione automatica dalle pagine reali</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===== ANOMALIE ===== -->
+<h2 id="anomalie">Anomalie strutturali</h2>
+<p>Solo ciò che riguarda la struttura. L'elenco completo delle criticità, comprese quelle di contenuto, SEO e performance, è nel <a href="/docs/stato-arte-sonit">Documento 01</a>.</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>#</th><th>Anomalia</th><th>Effetto</th><th>Gravità</th></tr></thead>
+  <tbody>
+    <tr><td>S-01</td><td><code>/partner.php</code> dichiarata in sitemap ma inesistente</td><td>Errore di scansione segnalato a Google; pagina pianificata mai pubblicata</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-02</td><td>"Lavori" nel menu principale porta a una pagina vuota</td><td>Vicolo cieco visibile a ogni visitatore</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-03</td><td><code>/privacy.php</code> senza informativa e fuori dalla sitemap; testi legali su dominio terzo</td><td>Requisito di conformità non soddisfatto</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-04</td><td>"Servizi e Soluzioni" è una pagina ponte da ~127 parole</td><td>Il livello che dovrebbe raccontare l'ecosistema integrato è vuoto</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-05</td><td>Le 4 voci di servizio non corrispondono alle 3 business unit; il fotovoltaico non ha pagina</td><td>L'offerta reale non è leggibile dalla struttura</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-06</td><td>Nessuna separazione tra pubblico B2B e B2C</td><td>Industriale e residenziale mescolati nello stesso elenco</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-07</td><td>Contenuto duplicato: gli stessi 5 blocchi processo su due pagine</td><td>Le due pagine competono tra loro e diluiscono il valore</td><td><span class="tag t-warn">Media</span></td></tr>
+    <tr><td>S-08</td><td>Form identico su 9 pagine, tutti verso <code>/contatti.php</code>, senza pagina di conferma</td><td>Nessuna misurazione possibile, nessuna qualificazione della richiesta</td><td><span class="tag t-warn">Media</span></td></tr>
+    <tr><td>S-09</td><td>Due form in homepage con lo stesso <code>name</code>; il login invia credenziali a un dominio e a una tecnologia diversi</td><td>Blocco tecnico dentro un percorso commerciale</td><td><span class="tag t-warn">Media</span></td></tr>
+    <tr><td>S-10</td><td>Linking contestuale quasi assente: 9 link di contenuto su 121 totali</td><td>Nessun percorso guidato, nessuna gerarchia di importanza</td><td><span class="tag t-warn">Media</span></td></tr>
+    <tr><td>S-11</td><td>Sedi operative solo in fondo a Contatti; sede legale solo nei dati strutturati</td><td>La presenza territoriale, che è un argomento di solidità, non è visibile</td><td><span class="tag t-neutro">Bassa</span></td></tr>
+    <tr><td>S-12</td><td>Nessuna sezione per certificazioni, partner, progetti, download documenti</td><td>Manca l'intera parte di prova richiesta in kick-off</td><td><span class="tag t-crit">Alta</span></td></tr>
+    <tr><td>S-13</td><td>Nessuno spazio previsto per il comparto IT della roadmap 2027</td><td>L'architettura attuale non è estensibile</td><td><span class="tag t-neutro">Bassa</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===== IMPLICAZIONI ===== -->
+<h2 id="implicazioni">Cosa comporta per il nuovo sito</h2>
+<p>L'alberatura attuale non è riusabile come base: va rifatta partendo dalle business unit reali. Tre conclusioni operative che entrano direttamente nella fase F2.</p>
+<ol>
+  <li><strong>Il livello intermedio deve avere un contenuto proprio.</strong> "Servizi e Soluzioni" oggi non fa nulla. Nel nuovo sito quel livello è il posto dove si racconta l'ecosistema integrato e la capacità chiavi in mano: è il messaggio principale, non un passaggio.</li>
+  <li><strong>Tre pagine di business unit, non quattro voci di servizio.</strong> Con il fotovoltaico promosso a pagina propria e con il residenziale gestito su un percorso separato, non dentro lo stesso elenco degli impianti industriali.</li>
+  <li><strong>Le sezioni di prova non esistono e vanno create da zero:</strong> certificazioni, partner e fornitori, progetti, download di brochure e company profile. Sono quattro nuovi nodi dell'albero, non restyling di pagine esistenti.</li>
+</ol>
+<p>La mappa dei redirect 301 dai vecchi URL è nel <a href="/docs/stato-arte-sonit#redirect">Documento 01</a> e va consolidata dopo l'approvazione della nuova sitemap.</p>
+
+<footer class="doc">
+  <p><strong>SONIT · Progetto DXP — Documento 02: alberatura del sito attualmente online.</strong> Versione 1.0 del 05/08/2026. Rilevamento eseguito il 05/08/2026 su <code>https://www.sonit.it</code>: codice sorgente di tutte le pagine raggiungibili, <code>robots.txt</code>, <code>sitemap.xml</code>, verifica dei codici di risposta HTTP e conteggio dei link interni.</p>
+  <p><a href="/">Indice dei documenti</a> · <a href="/docs/stato-arte-sonit">Documento 01 · Stato dell'arte e worklog</a></p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>
