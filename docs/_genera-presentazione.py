@@ -17,7 +17,7 @@ PAGES = st.PAGES
 
 from _layout import LAY, SHAPE  # noqa: E402
 
-DATA = "05/08/2026"
+DATA = "17/08/2026"
 OUT = os.path.join(REPO, "presentazione")
 
 # pagine fuori dal menu principale
@@ -335,7 +335,18 @@ code{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
 .upbar a{text-decoration:none;color:var(--blu);font-weight:600;padding:3px 10px;
   border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
 .upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+.upbar a.on{background:var(--blu);color:#fff;border-color:var(--blu)}
 .upbar .sp{margin-left:auto;color:var(--ink-soft);font-weight:400}
+
+/* scelta fra i due documenti */
+.pick{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.pick a{display:block;border:1px solid var(--line);border-radius:11px;padding:22px;text-decoration:none;
+  color:inherit;background:#fff;transition:.16s}
+.pick a:hover{border-color:var(--blu);background:var(--blu-tenue);transform:translateY(-2px)}
+.pick .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--blu);margin:0;text-transform:uppercase}
+.pick h3{margin:5px 0 8px;font-size:21px;letter-spacing:-.02em}
+.pick p{margin:0 0 12px;font-size:13.8px;color:var(--ink-soft)}
+.pick .go{font-size:12.8px;font-weight:700;color:var(--blu);margin:0}
 
 /* copertina */
 header.cover{background:linear-gradient(160deg,var(--blu) 0%,var(--blu-scuro) 100%);color:#fff;
@@ -560,50 +571,184 @@ footer.ft p{margin:0 0 6px}
 @media print{.upbar,.jump{display:none}.screen{box-shadow:none}}
 """
 
-DOC = f"""<!DOCTYPE html>
+# ─────────────────────────────────────────────── guscio comune dei tre documenti
+
+FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E"
+           "%3Crect width='32' height='32' rx='6' fill='%23003A83'/%3E%3Ctext x='16' y='22' "
+           "font-family='Helvetica,Arial' font-size='16' font-weight='bold' fill='%23fff' "
+           "text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E")
+
+NAVLINKS = [("/presentazione", "Copertina"),
+            ("/presentazione/struttura", "1 · Struttura del sito"),
+            ("/presentazione/pagine", "2 · Le pagine e i contenuti")]
+
+
+def upbar(current, extra=""):
+    out = []
+    for href, label in NAVLINKS:
+        on = ' class="on"' if href == current else ""
+        out.append(f'<a href="{href}"{on}>{label}</a>')
+    return (f'<div class="upbar">{"".join(out)}{extra}'
+            f'<span class="sp"><a href="/">Documentazione di progetto →</a></span></div>')
+
+
+def document(fname, title, desc, current, body, extra_nav=""):
+    doc = f"""<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sonit · Il nuovo sito: struttura, pagine e contenuti</title>
-<meta name="description" content="Presentazione per Sonit Srl: struttura del nuovo sito e wireframe di tutte le pagine con i contenuti proposti.">
+<title>{H.escape(title)}</title>
+<meta name="description" content="{H.escape(desc)}">
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003A83'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial' font-size='16' font-weight='bold' fill='%23fff' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="{FAVICON}">
 <style>{CSS}</style>
 </head>
 <body>
 <div class="shell">
 
-<div class="upbar">
-  <a href="#struttura">Struttura del sito</a>
-  <a href="#pagine">Le pagine</a>
-  <a href="#serve">Cosa serve da voi</a>
-  <a href="#approvazione">Cosa vi chiediamo</a>
-  <span class="sp"><a href="/">Documentazione di progetto →</a></span>
-</div>
+{upbar(current, extra_nav)}
+{body}
 
-<header class="cover">
-  <p class="kick">Sonit Srl · nuovo sito · presentazione</p>
+<footer class="ft">
+  <p><strong>Sonit Srl · nuovo sito.</strong> Aggiornato al {DATA}. Documento riservato, non indicizzato.</p>
+  <p><a href="/presentazione">Copertina</a> · <a href="/presentazione/struttura">Struttura del sito</a> · <a href="/presentazione/pagine">Le pagine e i contenuti</a> · <a href="/">Documentazione tecnica di progetto</a></p>
+</footer>
+
+</div>
+</body>
+</html>
+"""
+    open(os.path.join(OUT, fname), "w", encoding="utf-8").write(doc)
+
+
+NO_GRAFICA = """<div class="note">
+  <p><strong>Cosa non c'è, di proposito.</strong> Questi documenti non contengono la grafica. Il carattere, i colori pieni, le fotografie e lo stile dei pulsanti si decidono dopo, sulla struttura approvata: è l'ordine che costa meno, perché spostare una sezione ora è un minuto, spostarla a sito fatto è un giorno.</p>
+</div>"""
+
+os.makedirs(OUT, exist_ok=True)
+
+# ─────────────────────────────────────────────── 0 · copertina
+
+cover = f"""<header class="cover">
+  <p class="kick">Sonit Srl · nuovo sito · proposta</p>
   <h1>Come sarà fatto il nuovo sito</h1>
-  <p class="lead">Due cose in un documento: la struttura delle pagine e, per ogni pagina, lo schema di come sarà organizzata con i testi che proponiamo di scriverci dentro. Nessuna scelta grafica: colori, immagini e caratteri arrivano nel passaggio successivo.</p>
+  <p class="lead">Due documenti da leggere in quest'ordine: prima la struttura, cioè quali pagine esistono e come si raggiungono; poi il contenuto di ogni pagina, con lo schema di come sarà organizzata e i testi che proponiamo di scriverci dentro.</p>
   <div class="cmeta">
-    <div><span>Pagine</span>{len(PAGES)}, di cui 9 nel sito pubblico al lancio</div>
-    <div><span>Sezioni disegnate</span>{tot_blocks}</div>
+    <div><span>Pagine</span>{len(PAGES)}, di cui 9 pubbliche al lancio</div>
+    <div><span>Sezioni</span>{tot_blocks}</div>
     <div><span>Testi pronti</span>{tot_blocks - tot_wait} su {tot_blocks}</div>
     <div><span>Aggiornato al</span>{DATA}</div>
   </div>
 </header>
 
-<h2 class="sec" id="come">Come si legge questo documento</h2>
-<p class="intro">Ogni pagina è disegnata come una finestra di browser: le sezioni sono nell'ordine in cui si incontrano scorrendo, con i testi reali dentro. I rettangoli tratteggiati sono gli spazi dove andranno immagini, loghi, mappa o schede: il contenuto arriva dopo, la posizione è quella. I riquadri arancioni segnalano le sezioni che non possiamo completare senza materiali vostri.</p>
-
-<div class="kpis">
-  <div class="kpi"><b>{len(PAGES)}</b><span>pagine progettate</span></div>
-  <div class="kpi"><b>6</b><span>voci di menu</span></div>
-  <div class="kpi"><b>{tot_blocks}</b><span>sezioni con testo</span></div>
-  <div class="kpi"><b>{tot_wait}</b><span>sezioni in attesa di materiali</span></div>
-  <div class="kpi"><b>{tot_m + tot_c}</b><span>cose che ci servono da voi</span></div>
+<h2 class="sec" id="documenti">I due documenti</h2>
+<div class="pick">
+  <a href="/presentazione/struttura">
+    <p class="n">Documento 1</p>
+    <h3>La struttura del sito</h3>
+    <p>Quali pagine esistono, come sono annidate, cosa entra nel menu e cosa no. Il percorso dei privati per il fotovoltaico è tenuto separato: qui si vede dove e perché.</p>
+    <p class="go">Apri la struttura →</p>
+  </a>
+  <a href="/presentazione/pagine">
+    <p class="n">Documento 2</p>
+    <h3>Le pagine e i contenuti</h3>
+    <p>Per ognuna delle {len(PAGES)} pagine: a cosa serve, lo schema delle sezioni nell'ordine in cui si incontrano e i testi proposti dentro ogni blocco. In chiusura, cosa ci serve da voi.</p>
+    <p class="go">Apri le pagine →</p>
+  </a>
 </div>
+
+<h2 class="sec" id="approvazione">Cosa vi chiediamo</h2>
+<p class="intro">Quattro risposte, in questo ordine. Non serve un documento: bastano note a margine o una chiamata.</p>
+<ul class="ck">
+  <li><b>La struttura va bene?</b> Numero di pagine, voci di menu, il fotovoltaico per i privati tenuto separato dal resto. → <a href="/presentazione/struttura">documento 1</a></li>
+  <li><b>L'ordine delle sezioni di ogni pagina è quello giusto?</b> In particolare la home: cosa vedono prima i vostri clienti. → <a href="/presentazione/pagine">documento 2</a></li>
+  <li><b>I testi dicono cose vere e dicono le cose giuste?</b> Segnalate ciò che va corretto, tolto o detto in modo diverso: è il momento in cui costa meno.</li>
+  <li><b>I materiali che ci servono:</b> chi li recupera e in che tempi. Sono {tot_m} documenti da reperire e {tot_c} dati da confermare, elencati <a href="/presentazione/pagine#serve">in fondo al documento 2</a>.</li>
+</ul>
+
+{NO_GRAFICA}
+
+<div class="note">
+  <p><strong>Poi si passa alla grafica.</strong> Con la struttura e i testi approvati prepariamo due proposte di direzione visiva sul blu del vostro marchio, scegliete quella che vi rappresenta e da lì disegniamo tutte le pagine.</p>
+</div>"""
+
+document("index.html", "Sonit · Il nuovo sito: struttura e contenuti",
+         "Proposta per il nuovo sito Sonit Srl: struttura delle pagine e contenuti, in due documenti.",
+         "/presentazione", cover)
+
+# ─────────────────────────────────────────────── 1 · struttura
+
+rows = "".join(
+ f'<tr><td><a href="/presentazione/pagine#p-{p["slug"]}">{H.escape(p["label"])}</a>'
+ + (' <span class="tag t-off">fuori dal menu</span>' if p["slug"] in OFF_MENU else "")
+ + f'</td><td><code>{H.escape(p["url"])}</code></td>'
+ f'<td>{H.escape(PITCH.get(p["slug"], p["goal"]))}</td></tr>' for p in PAGES)
+
+struct = f"""<header class="cover">
+  <p class="kick">Sonit Srl · nuovo sito · documento 1 di 2</p>
+  <h1>La struttura del sito</h1>
+  <p class="lead">Nove pagine pubbliche al lancio, sei voci di menu, un solo livello di sottomenu sotto Soluzioni. Poche pagine, ognuna con un compito preciso: è la richiesta emersa in avvio di progetto.</p>
+  <div class="cmeta">
+    <div><span>Pagine al lancio</span>9, più il percorso privati</div>
+    <div><span>Voci di menu</span>6</div>
+    <div><span>Livelli</span>2 al massimo</div>
+    <div><span>Aggiornato al</span>{DATA}</div>
+  </div>
+</header>
+
+<h2 class="sec" id="menu">Il menu</h2>
+<p class="intro">Sei voci, sempre le stesse su tutte le pagine. Il telefono e l'accesso all'area riservata restano a destra, fuori dal percorso commerciale.</p>
+<div class="menustrip">
+  <b>SONIT</b>{''.join(f'<span>{m}</span>' for m in MENU)}
+  <span class="last">+39 0776 868072 · Area riservata</span>
+</div>
+
+<h2 class="sec" id="albero">L'albero delle pagine</h2>
+<p class="intro">Ogni riquadro è una pagina: cliccandolo si apre il suo contenuto nel documento 2. Sotto Soluzioni stanno le tre aree di attività, allo stesso livello fra loro.</p>
+{tree()}
+
+<h2 class="sec" id="elenco">Le pagine e a cosa servono</h2>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>Pagina</th><th>Indirizzo</th><th>A cosa serve</th></tr></thead>
+  <tbody>{rows}</tbody>
+</table>
+</div>
+
+<h2 class="sec" id="cambia">Cosa cambia rispetto al sito di oggi</h2>
+<ul class="ck">
+  <li><b>Le tre aree di attività hanno una pagina ciascuna.</b> Oggi il fotovoltaico è una voce di elenco dentro "Impianti e Sistemi" e le voci di menu non corrispondono a come lavorate.</li>
+  <li><b>Certificazioni, partner e progetti diventano pagine.</b> Oggi non esistono: sono le prove che un committente strutturato cerca prima di chiamarvi.</li>
+  <li><b>"Lavori" non porta più a una pagina vuota.</b> Diventa Progetti, con i lavori raccontati come casi.</li>
+  <li><b>I privati hanno un percorso proprio.</b> Non attraversano i contenuti industriali e non li disturbano.</li>
+  <li><b>Privacy e cookie policy tornano sul vostro dominio.</b> Oggi l'unica informativa è su un sito di terzi.</li>
+</ul>
+
+<div class="note">
+  <p><strong>La domanda di questo documento.</strong> La struttura va bene? Numero di pagine, voci di menu, il fotovoltaico per i privati tenuto separato dal resto. Se qui è tutto d'accordo, il passo successivo è il contenuto di ogni pagina: <a href="/presentazione/pagine">documento 2</a>.</p>
+</div>"""
+
+document("struttura.html", "Sonit · La struttura del nuovo sito",
+         "Alberatura semplificata del nuovo sito Sonit Srl: pagine, menu e percorsi.",
+         "/presentazione/struttura", struct)
+
+# ─────────────────────────────────────────────── 2 · pagine e contenuti
+
+pag = f"""<header class="cover">
+  <p class="kick">Sonit Srl · nuovo sito · documento 2 di 2</p>
+  <h1>Le pagine e i contenuti</h1>
+  <p class="lead">Per ognuna delle {len(PAGES)} pagine: a cosa serve, lo schema delle sezioni nell'ordine in cui si incontrano scorrendo e i testi che proponiamo di scriverci dentro. La struttura complessiva è nel <a href="/presentazione/struttura" style="color:#fff">documento 1</a>.</p>
+  <div class="cmeta">
+    <div><span>Pagine</span>{len(PAGES)}</div>
+    <div><span>Sezioni</span>{tot_blocks}</div>
+    <div><span>Testi pronti</span>{tot_blocks - tot_wait} su {tot_blocks}</div>
+    <div><span>In attesa di materiali</span>{tot_wait}</div>
+  </div>
+</header>
+
+<h2 class="sec" id="come">Come si legge</h2>
+<p class="intro">Ogni pagina è disegnata come una finestra di browser: le sezioni sono nell'ordine in cui si incontrano scorrendo, con i testi reali dentro. I rettangoli tratteggiati sono gli spazi dove andranno immagini, loghi, mappa o schede: il contenuto arriva dopo, la posizione è quella. I riquadri arancioni segnalano le sezioni che non possiamo completare senza materiali vostri.</p>
 
 <div class="legend">
   <span><i style="background:#e9edf3;border:1px dashed #c3ccda"></i>spazio per immagini, loghi, mappa o schede</span>
@@ -611,54 +756,24 @@ DOC = f"""<!DOCTYPE html>
   <span><i style="background:#003A83"></i>pulsanti e azioni</span>
 </div>
 
-<div class="note">
-  <p><strong>Cosa non c'è, di proposito.</strong> Questo documento non contiene la grafica. Il carattere, i colori pieni, le fotografie e lo stile dei pulsanti si decidono dopo, sulla struttura approvata: è l'ordine che costa meno, perché spostare una sezione qui è un minuto, spostarla a sito fatto è un giorno.</p>
-</div>
-
-<h2 class="sec" id="struttura">La struttura del sito</h2>
-<p class="intro">Nove pagine pubbliche al lancio, sei voci di menu, un solo livello di sottomenu sotto Soluzioni. Il percorso per i privati che vogliono il fotovoltaico sulla propria casa è tenuto separato e non compare nel menu: ci si arriva dai punti dove ha senso.</p>
-
-<div class="menustrip">
-  <b>SONIT</b>{''.join(f'<span>{m}</span>' for m in MENU)}
-  <span class="last">+39 0776 868072 · Area riservata</span>
-</div>
-
-{tree()}
+{NO_GRAFICA}
 
 <h2 class="sec" id="pagine">Le pagine, una per una</h2>
 <div class="jump">{jump}</div>
-<p class="intro">Per ogni pagina: a cosa serve, cosa può fare chi la visita e lo schema con i testi dentro.</p>
 
 {pages_html}
 
 <h2 class="sec" id="serve">Cosa serve da voi</h2>
-<p class="intro">{tot_m} materiali da recuperare e {tot_c} dati da confermare. Sono elencati sotto la pagina che sbloccano: ogni voce che arriva chiude una sezione oggi segnata in arancione. Le sezioni si possono comunque disegnare e approvare prima: cambia cosa ci sta dentro, non dove sta.</p>
+<p class="intro">{tot_m} documenti da reperire e {tot_c} dati da confermare. Sono elencati sotto la pagina che sbloccano: ogni voce che arriva chiude una sezione oggi segnata in arancione. Le sezioni si possono comunque approvare prima: cambia cosa ci sta dentro, non dove sta.</p>
 {needs_html}
 
-<h2 class="sec" id="approvazione">Cosa vi chiediamo</h2>
-<p class="intro">Tre risposte, in questo ordine. Non serve un documento: bastano note a margine o una chiamata.</p>
-<ul class="ck">
-  <li><b>La struttura va bene?</b> Numero di pagine, voci di menu, il fotovoltaico per i privati tenuto separato dal resto.</li>
-  <li><b>L'ordine delle sezioni di ogni pagina è quello giusto?</b> In particolare la home: cosa vedono prima i vostri clienti.</li>
-  <li><b>I testi dicono cose vere e dicono le cose giuste?</b> Segnalate ciò che va corretto, tolto o detto in modo diverso: è il momento in cui costa meno.</li>
-  <li><b>I materiali dell'elenco qui sopra:</b> chi li recupera e in che tempi.</li>
-</ul>
-
 <div class="note">
-  <p><strong>Poi si passa alla grafica.</strong> Con la struttura e i testi approvati prepariamo due proposte di direzione visiva sul blu del vostro marchio, scegliete quella che vi rappresenta e da lì disegniamo tutte le pagine.</p>
-</div>
+  <p><strong>Le domande di questo documento.</strong> L'ordine delle sezioni è quello giusto, a partire dalla home? I testi dicono cose vere e nel modo in cui le direste voi? Segnalate ciò che va corretto, tolto o detto diversamente: ora costa un minuto.</p>
+</div>"""
 
-<footer class="ft">
-  <p><strong>Sonit Srl · nuovo sito.</strong> Presentazione aggiornata al {DATA}. Documento riservato, non indicizzato.</p>
-  <p><a href="/">Documentazione tecnica di progetto</a> · <a href="/docs/architettura-informazioni">Architettura completa</a> · <a href="/docs/contenuti/">Contenuti in versione estesa</a> · <a href="/docs/piano-wireframe">Piano dei wireframe</a></p>
-</footer>
+document("pagine.html", "Sonit · Le pagine del nuovo sito e i contenuti",
+         "Schema di ogni pagina del nuovo sito Sonit Srl con i contenuti proposti.",
+         "/presentazione/pagine", pag)
 
-</div>
-</body>
-</html>
-"""
-
-os.makedirs(OUT, exist_ok=True)
-open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(DOC)
-print(f"presentazione/index.html scritto · {len(PAGES)} pagine · {tot_blocks} sezioni "
-      f"· {tot_wait} in attesa · richieste: {tot_m} materiali, {tot_c} conferme")
+print(f"presentazione: index.html · struttura.html · pagine.html — {len(PAGES)} pagine · "
+      f"{tot_blocks} sezioni · {tot_wait} in attesa · richieste: {tot_m} materiali, {tot_c} conferme")

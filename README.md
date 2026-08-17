@@ -19,7 +19,7 @@ La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag:
 | `docs/architettura-informazioni.html` | **Doc 03** — Nuova alberatura e organizzazione dei contenuti (fase F2, decisioni validate) |
 | `docs/contenuti/` | **Doc 04** — Contenuti del nuovo sito: un file per pagina della nuova alberatura, copy pronto blocco per blocco |
 | `docs/piano-wireframe.html` | **Doc 05** — Piano dei wireframe e punto di ripresa: ordine di produzione, sezioni per pagina, schemi, checklist |
-| `presentazione/index.html` | **Versione cliente** — Documento unico da presentare: alberatura semplificata e wireframe a blocchi con i contenuti dentro |
+| `presentazione/` | **Versione cliente** — Copertina, `struttura.html` (alberatura semplificata) e `pagine.html` (wireframe a blocchi con i contenuti) |
 | `docs/testi/` | Testi estratti dal sito online, un file per pagina, riportati alla lettera |
 | `WORKLOG.md` | Worklog operativo: fasi, attività con stato, decisioni chiuse, materiali attesi, diario delle modifiche |
 | `SONIT _ Kick Off DXP … .docx` | Verbale del kick-off del 28/07/2026 |
@@ -46,7 +46,15 @@ Ogni file contiene i metadati della pagina, il contenuto **riportato alla letter
 
 ### La versione cliente
 
-`presentazione/index.html` è l'unico documento da mettere in mano al cliente: alberatura semplificata delle nove pagine, poi ogni pagina disegnata come una finestra di browser con le sezioni nell'ordine reale e il copy dentro i blocchi. I rettangoli tratteggiati sono gli spazi per immagini, loghi, mappa e schede; i riquadri arancioni sono le sezioni che dipendono dai materiali del cliente, con la richiesta scritta. In chiusura, l'elenco delle richieste raggruppate per pagina e le domande di approvazione. Non contiene codici interni, title tag né conteggi di caratteri.
+Tre file in `presentazione/`, da mettere in mano al cliente in quest'ordine:
+
+```
+/presentazione             copertina: i due documenti, cosa si chiede di approvare
+/presentazione/struttura   alberatura semplificata, menu, elenco pagine, cosa cambia
+/presentazione/pagine      ogni pagina disegnata a blocchi con i testi dentro
+```
+
+Le pagine sono disegnate come una finestra di browser, con le sezioni nell'ordine reale e il copy dentro i blocchi. I rettangoli tratteggiati sono gli spazi per immagini, loghi, mappa e schede; i riquadri arancioni sono le sezioni che dipendono dai materiali del cliente, con la richiesta scritta. In chiusura, l'elenco delle richieste raggruppate per pagina. Non contiene codici interni, title tag né conteggi di caratteri.
 
 Si rigenera con `python3 docs/_genera-presentazione.py`.
 

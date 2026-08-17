@@ -54,7 +54,7 @@ Legenda stato: ✅ fatto · 🔵 in corso · ⏳ atteso dal cliente · ⬜ da fa
 | W-040 | Piano dei wireframe e documento di ripresa (Doc 05 + `RIPRESA.md`) | F3 | W-012 | Team dev | ✅ |
 | W-041 | Approvazione dei contenuti da parte di Giorgio | F3 | W-012 | Cliente | ⏳ |
 | W-013 | Wireframe low fidelity di tutte le pagine | F3 | W-041 | Team design | 🔵 prima passata disegnata nella versione cliente, da rifinire dopo approvazione |
-| W-042 | Versione cliente: alberatura semplificata + wireframe a blocchi con i contenuti dentro | F3 | W-012, W-040 | Team dev | ✅ 17/08/2026 |
+| W-042 | Versione cliente in due documenti: struttura del sito e pagine con i contenuti | F3 | W-012, W-040 | Team dev | ✅ 17/08/2026 |
 | W-043 | Presentazione della versione cliente a Giorgio e Beatrice | F3 | W-042 | Referente progetto | ⬜ |
 | W-014 | Definizione formato case study, senza foto reali di cantiere | F3 | W-011 | Team contenuti | ⬜ |
 | W-015 | Selezione libreria immagini standard coerente con le linee guida | F3 | W-011 | Team design | ⬜ |
@@ -134,6 +134,9 @@ Elenco completo, con severità e rimedio: [Doc 01 · criticità](https://sonitga
 ## Diario delle modifiche
 
 Voci in ordine cronologico inverso.
+
+### 17/08/2026 — Versione cliente separata in due documenti
+Su richiesta, la presentazione al cliente è divisa: `/presentazione` è la copertina con le quattro domande di approvazione, `/presentazione/struttura` contiene la sola alberatura semplificata (menu, albero cliccabile, elenco delle pagine con il loro scopo, cosa cambia rispetto al sito di oggi) e `/presentazione/pagine` i wireframe con i contenuti e il riepilogo dei materiali. Ogni documento porta in chiusura la propria domanda, così si può approvare la struttura senza aver letto tutti i testi. Il link dal Doc 04 punta ora alla pagina corrispondente di `/presentazione/pagine`.
 
 ### 17/08/2026 — Versione cliente: alberatura e wireframe con i contenuti
 Pubblicata `presentazione/index.html`, il documento unico da mostrare al cliente: alberatura semplificata delle nove pagine con il percorso privati tenuto fuori dal menu, poi ogni pagina disegnata come una finestra di browser con le sezioni nell'ordine reale e il copy dentro i blocchi. Rettangoli tratteggiati dove andranno immagini, loghi, mappa, schede progetto e certificazioni; riquadri arancioni sulle sezioni che dipendono dai materiali, con la richiesta esplicita; in chiusura l'elenco delle 19 richieste di materiale e delle 12 conferme, raggruppate per pagina, e le quattro domande di approvazione. Nessun codice interno (W-, D-, A-), nessun title tag, nessun conteggio caratteri: il documento è leggibile in riunione. È generato da `docs/_genera-presentazione.py` sulle stesse sorgenti del Doc 04 e del Doc 05, quindi non può divergere: i layout stanno ora in `docs/_layout.py`, condiviso fra piano wireframe e versione cliente. Aggiunti i link incrociati: card nell'hub, voce `★ Versione cliente` nelle barre di navigazione dei Doc 01, 02, 03, 04 e 05, e dal Doc 04 il link porta direttamente alla pagina corrispondente della presentazione.

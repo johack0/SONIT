@@ -151,7 +151,7 @@ for p in PAGES:
   <a href="/">← Indice dei documenti</a>
   <a href="/docs/contenuti/">← Panoramica contenuti</a>
   <a href="/docs/architettura-informazioni#albero">Alberatura · nodo</a>
-  <a href="/presentazione#p-{p['slug']}">★ Versione cliente</a>
+  <a href="/presentazione/pagine#p-{p['slug']}">★ Versione cliente</a>
   <span>Contenuti · {H.escape(p['label'])}</span>
 </div>
 

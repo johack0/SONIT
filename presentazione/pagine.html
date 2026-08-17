@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sonit · Le pagine del nuovo sito e i contenuti</title>
+<meta name="description" content="Schema di ogni pagina del nuovo sito Sonit Srl con i contenuti proposti.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003A83'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial' font-size='16' font-weight='bold' fill='%23fff' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<style>
+:root{--blu:#003A83;--blu-scuro:#00265a;--blu-chiaro:#CFDDEC;--blu-tenue:#f2f6fb;
+  --ink:#16202e;--ink-soft:#4a5768;--line:#dde4ee;--warn:#b26a00;--ok:#1b6b3a;
+  --wf:#e9edf3;--wf-line:#c3ccda;--wf-ink:#8d99ab;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);background:#fff;line-height:1.6;font-size:15px}
+.shell{max-width:1100px;margin:0 auto;padding:0 26px 90px}
+a{color:var(--blu)}
+code{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+
+/* barra di navigazione del documento */
+.upbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);
+  backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line);
+  margin:0 -26px 0;padding:9px 26px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-size:12.3px}
+.upbar a{text-decoration:none;color:var(--blu);font-weight:600;padding:3px 10px;
+  border:1px solid var(--blu-chiaro);border-radius:20px;background:var(--blu-tenue)}
+.upbar a:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+.upbar a.on{background:var(--blu);color:#fff;border-color:var(--blu)}
+.upbar .sp{margin-left:auto;color:var(--ink-soft);font-weight:400}
+
+/* scelta fra i due documenti */
+.pick{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.pick a{display:block;border:1px solid var(--line);border-radius:11px;padding:22px;text-decoration:none;
+  color:inherit;background:#fff;transition:.16s}
+.pick a:hover{border-color:var(--blu);background:var(--blu-tenue);transform:translateY(-2px)}
+.pick .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--blu);margin:0;text-transform:uppercase}
+.pick h3{margin:5px 0 8px;font-size:21px;letter-spacing:-.02em}
+.pick p{margin:0 0 12px;font-size:13.8px;color:var(--ink-soft)}
+.pick .go{font-size:12.8px;font-weight:700;color:var(--blu);margin:0}
+
+/* copertina */
+header.cover{background:linear-gradient(160deg,var(--blu) 0%,var(--blu-scuro) 100%);color:#fff;
+  margin:0 -26px 34px;padding:52px 26px 44px;position:relative;overflow:hidden}
+header.cover::after{content:"";position:absolute;right:-90px;top:-90px;width:340px;height:340px;
+  border:1px solid rgba(255,255,255,.14);border-radius:50%}
+header.cover .kick{font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:700;opacity:.75;margin:0}
+header.cover h1{font-size:38px;line-height:1.1;letter-spacing:-.03em;margin:10px 0 12px;max-width:24ch}
+header.cover p.lead{margin:0;max-width:66ch;font-size:17px;color:#dbe6f5}
+.cmeta{display:flex;flex-wrap:wrap;gap:26px;margin-top:28px;position:relative;z-index:1;font-size:12.6px}
+.cmeta span{display:block;opacity:.62;text-transform:uppercase;letter-spacing:.1em;font-size:10.5px;margin-bottom:2px}
+
+h2.sec{font-size:12.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--blu);
+  margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h2.sec:first-of-type{margin-top:8px}
+p.intro{max-width:74ch;color:var(--ink-soft)}
+
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0 0 22px}
+.kpi{border:1px solid var(--line);border-radius:9px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;color:var(--blu);letter-spacing:-.02em;line-height:1.05}
+.kpi span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px}
+
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:2.5px 9px;border-radius:20px;white-space:nowrap}
+.t-ok{background:#e7f4ec;color:var(--ok)}
+.t-warn{background:#fff4e0;color:var(--warn)}
+.t-off{background:#eef1f5;color:var(--ink-soft)}
+
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0 0;font-size:12.6px;color:var(--ink-soft)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.note{border:1px solid var(--line);border-left:4px solid var(--blu);background:var(--blu-tenue);
+  padding:15px 18px;border-radius:0 9px 9px 0;margin:20px 0 0;max-width:80ch}
+.note p{margin:0 0 8px}.note p:last-child{margin:0}
+.note.warn{border-left-color:var(--warn);background:#fffaf0}
+
+/* alberatura */
+.tree{border:1px solid var(--line);border-radius:11px;padding:22px 24px;background:#fff}
+.tree ul{list-style:none;margin:0;padding:0}
+.tree .lv0{margin-bottom:6px}
+.tree .lv1{margin-left:16px;border-left:1px solid var(--blu-chiaro);padding-left:0}
+.tree li{position:relative;padding:5px 0 5px 20px}
+.tree .lv1 > li::before{content:"";position:absolute;left:0;top:19px;width:14px;height:1px;background:var(--blu-chiaro)}
+.tree li.sub{padding:0 0 4px 20px}
+.tree li.sub > ul{margin-left:14px;border-left:1px dashed var(--blu-chiaro)}
+.tree a,.tree span{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:9px;text-decoration:none;color:inherit;
+  border:1px solid var(--line);border-radius:8px;padding:6px 12px;background:var(--blu-tenue)}
+.tree a:hover{border-color:var(--blu);background:#fff}
+.tree b{font-size:14px}
+.tree .lv0 a{background:var(--blu);color:#fff;border-color:var(--blu)}
+.tree .lv0 code{color:#cfe0f6}
+.tree em{display:block;font-style:normal;font-size:12.2px;color:var(--ink-soft);margin:4px 0 0 2px;max-width:70ch}
+
+.treeside{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:14px}
+.ts{border:1px solid var(--line);border-radius:10px;padding:15px 17px;font-size:13.4px;color:var(--ink-soft)}
+.ts p{margin:0 0 8px}.ts p:last-child{margin:0}
+.cap{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--blu)}
+.ts .tree{border:0;padding:0}
+
+/* menu di riferimento */
+.menustrip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border:1px solid var(--line);
+  border-radius:10px;padding:12px 16px;margin:0 0 16px;background:var(--blu-tenue);font-size:13px}
+.menustrip b{color:var(--blu);letter-spacing:.06em}
+.menustrip span{background:#fff;border:1px solid var(--line);border-radius:16px;padding:3px 11px}
+.menustrip .last{margin-left:auto;color:var(--ink-soft);font-size:12px;background:none;border:0;padding:0}
+
+/* indice delle pagine */
+.jump{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 8px}
+.jump a{font-size:12.4px;text-decoration:none;color:var(--blu);border:1px solid var(--line);
+  border-radius:16px;padding:4px 11px}
+.jump a:hover{background:var(--blu-tenue);border-color:var(--blu)}
+
+/* blocco pagina */
+.pageblock{margin:34px 0 0;padding-top:26px;border-top:2px solid var(--blu-chiaro);scroll-margin-top:56px}
+.phead{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+.phead .pk{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--blu);font-weight:700;margin:0}
+.phead h3{margin:3px 0 2px;font-size:25px;letter-spacing:-.02em}
+.pmeta{display:flex;gap:7px;flex-wrap:wrap}
+.ppitch{margin:10px 0 14px;font-size:16px;max-width:74ch}
+.pdl{display:grid;grid-template-columns:210px minmax(0,1fr);gap:5px 18px;margin:0 0 20px;font-size:13.4px}
+.pdl dt{color:var(--ink-soft);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+.pdl dd{margin:0}
+
+/* finestra e sito disegnato */
+.screen{border:1px solid var(--wf-line);border-radius:12px;overflow:hidden;background:#fff;
+  box-shadow:0 18px 40px -30px rgba(0,40,90,.5)}
+.chrome{display:flex;align-items:center;gap:7px;background:#eef1f6;border-bottom:1px solid var(--wf-line);padding:9px 14px}
+.chrome i{width:9px;height:9px;border-radius:50%;background:var(--wf-line);display:block}
+.chrome code{margin-left:12px;background:#fff;border:1px solid var(--wf-line);border-radius:20px;
+  padding:2px 12px;font-size:11.5px;color:var(--wf-ink)}
+.site{background:#fff}
+.topnav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--wf-line)}
+.topnav b{font-size:15px;letter-spacing:.06em;color:var(--blu)}
+.topnav .mn{display:flex;flex-wrap:wrap;gap:9px}
+.topnav .mn span{font-size:12.2px;color:var(--wf-ink);background:var(--wf);border-radius:14px;padding:3px 10px}
+.topnav .res{margin-left:auto;font-size:11.5px;color:var(--wf-ink)}
+.sitefoot{background:#0e1a2b;color:#8ea3bf;padding:18px 22px;font-size:11.8px}
+
+.band{position:relative;padding:24px 22px 22px 22px;border-bottom:1px dashed var(--wf-line)}
+.band:last-of-type{border-bottom:0}
+.band.tint{background:var(--blu-tenue)}
+.band.band-hero{background:linear-gradient(150deg,#f6f9fd,#eaf1f9)}
+.band.hl{background:#fff8ec;box-shadow:inset 3px 0 0 var(--warn)}
+.band.ctab{background:var(--blu);color:#fff}
+.band.ctab .wb{background:#fff;color:var(--blu);border-color:#fff}
+.band.ctab .bcap,.band.ctab .blabel .bt{color:#cfe0f6}
+.band.ctab .c-lbl,.band.ctab .c-h1{color:#fff}
+.band.thx{background:#f4f7fb;border-top:2px solid var(--blu-chiaro);text-align:center}
+.band.thx .nar{margin:0 auto}
+.band[data-wait="1"]{box-shadow:inset 3px 0 0 var(--warn)}
+.band.ctab[data-wait="1"]{box-shadow:inset 3px 0 0 #ffd79a}
+
+.blabel{display:flex;align-items:baseline;gap:9px;margin:0 0 12px}
+.blabel .bn{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--blu);
+  background:#fff;border:1px solid var(--blu-chiaro);border-radius:5px;padding:1px 6px}
+.blabel .bt{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--ink-soft)}
+.blabel .bw{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;
+  color:var(--warn);background:#fff4e0;border-radius:20px;padding:1.5px 8px}
+.bcap{margin:14px 0 0;font-size:11.8px;color:var(--wf-ink);font-style:italic}
+
+/* copy dentro il wireframe */
+.binner p{margin:0 0 10px}
+.binner ul,.binner ol{margin:0 0 12px;padding-left:20px}
+.binner li{margin-bottom:5px}
+.nar{max-width:64ch}
+.g2{display:grid;gap:22px;grid-template-columns:1.1fr .9fr;align-items:start}
+.g3{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:12px 0 0}
+.cols2{columns:2;column-gap:34px}
+.cols2 p{break-inside:avoid}
+.c-h1{font-size:25px;font-weight:700;letter-spacing:-.025em;line-height:1.22;margin:0 0 10px!important;color:var(--blu-scuro)}
+.c-sub{font-size:16px;color:var(--ink-soft);max-width:60ch}
+.c-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--blu);margin:0 0 8px!important}
+.c-nums{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:0 0 14px}
+.c-nums div{border:1px solid var(--wf-line);border-radius:8px;padding:12px 14px;background:#fff}
+.c-nums b{display:block;font-size:26px;color:var(--blu);letter-spacing:-.02em;line-height:1.1}
+.c-nums span{display:block;font-size:11.8px;color:var(--ink-soft);margin-top:3px}
+.c-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:0 0 14px}
+.c-cards > div{border:1px solid var(--wf-line);border-radius:9px;padding:15px 16px;background:#fff}
+.c-cards b{display:block;margin-bottom:6px;color:var(--blu-scuro)}
+.c-cards p{font-size:13.4px}
+ol.c-steps{counter-reset:s;list-style:none;padding:0}
+ol.c-steps li{counter-increment:s;position:relative;padding:0 0 12px 40px;margin:0}
+ol.c-steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:1px;
+  font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--blu);
+  background:#fff;border:1px solid var(--blu-chiaro);border-radius:6px;padding:2px 6px}
+ol.c-steps i{color:var(--ink-soft);font-style:italic}
+ul.c-two{columns:2;column-gap:34px}
+ul.c-faq{list-style:none;padding:0}
+.acc ul.c-faq li{border:1px solid var(--wf-line);border-radius:8px;background:#fff;padding:11px 38px 11px 14px;
+  margin-bottom:7px;position:relative}
+.acc ul.c-faq li::after{content:"⌄";position:absolute;right:14px;top:9px;color:var(--wf-ink);font-size:15px}
+.wbtns{margin:14px 0 0!important;display:flex;flex-wrap:wrap;gap:9px}
+.wb{display:inline-block;background:var(--blu);color:#fff;border:1px solid var(--blu);border-radius:7px;
+  padding:8px 15px;font-size:12.8px;font-weight:600}
+.wbtns .wb:nth-child(n+2){background:#fff;color:var(--blu)}
+.wlink{font-size:12.8px;font-weight:700;color:var(--blu);margin:6px 0 0!important}
+.ask{display:inline-block;font-size:11.5px;font-weight:600;color:var(--warn);background:#fff4e0;
+  border-radius:5px;padding:1px 7px}
+
+/* segnaposto */
+.ph{border:1px dashed var(--wf-line);border-radius:9px;background:repeating-linear-gradient(135deg,
+  #f4f6fa 0 9px,#eef1f6 9px 18px);display:flex;align-items:center;justify-content:center;
+  color:var(--wf-ink);font-size:11.5px;text-align:center;padding:10px}
+.ph-lg{min-height:210px}.ph-md{min-height:150px}.ph-sm{min-height:78px}
+.ph-logo{min-height:46px}
+.logos{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));margin:12px 0 0}
+.lgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0 0}
+.lg .cap{display:block;margin-bottom:4px}
+.cert{border:1px dashed var(--wf-line);border-radius:9px;padding:13px 14px;background:#fff}
+.cert i{display:block;height:9px;border-radius:4px;background:var(--wf);margin:8px 0}
+.cert i.s{width:55%}
+.proj{display:grid;gap:16px;grid-template-columns:.8fr 1.2fr;align-items:center;
+  border:1px solid var(--wf-line);border-radius:10px;padding:14px;margin:12px 0 0;background:#fff}
+.proj .lines i{display:block;height:9px;border-radius:4px;background:var(--wf);margin:8px 0}
+.proj .lines i.s{width:60%}
+.fbox{border:1px solid var(--wf-line);border-radius:10px;padding:16px;background:#fff}
+.fgrid{display:grid;gap:10px}
+.fgrid.c1{grid-template-columns:1fr}
+.fgrid.c2{grid-template-columns:1fr 1fr}
+.fgrid i{display:block;height:34px;border-radius:7px;background:var(--wf);border:1px solid var(--wf-line)}
+.fcheck{display:flex;align-items:center;gap:8px;margin:12px 0;font-size:11.8px;color:var(--wf-ink)}
+.fcheck b{width:14px;height:14px;border:1px solid var(--wf-line);border-radius:4px;display:block}
+
+/* richieste al cliente */
+.need{border:1px solid #f0d9ae;border-left:4px solid var(--warn);background:#fffaf0;
+  border-radius:0 9px 9px 0;padding:12px 15px;margin:16px 0 0}
+.need ul{list-style:none;margin:0;padding:0}
+.need li{font-size:12.8px;color:#6b4a12;padding:3px 0}
+.need b{color:var(--warn);text-transform:uppercase;font-size:10.5px;letter-spacing:.06em}
+
+/* riepilogo richieste */
+.nb{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:0 0 12px}
+.nb .cap{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin:0 0 8px}
+.nb .cap a{text-decoration:none}
+.nb ul{list-style:none;margin:0;padding:0}
+.nb li{font-size:13.2px;padding:5px 0;border-top:1px solid var(--line)}
+.nb b{font-weight:600}
+.k{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  border-radius:20px;padding:1.5px 8px;margin-right:8px;vertical-align:1px}
+.km{background:#fff4e0;color:var(--warn)}
+.kc{background:#eef1f5;color:var(--ink-soft)}
+
+ul.ck{list-style:none;padding:0;max-width:80ch}
+ul.ck li{padding:8px 0 8px 28px;border-bottom:1px solid var(--line);position:relative;font-size:14px}
+ul.ck li::before{content:"☐";position:absolute;left:2px;color:var(--blu);font-size:16px}
+
+footer.ft{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12.2px;color:var(--ink-soft)}
+footer.ft p{margin:0 0 6px}
+
+@media (max-width:820px){
+  .g2,.proj{grid-template-columns:1fr}
+  .cols2,ul.c-two{columns:1}
+  .pdl{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .shell{padding:0 15px 60px}
+  .upbar{margin:0 -15px;padding:9px 15px}
+  header.cover{margin:0 -15px 26px;padding:38px 15px 32px}
+  header.cover h1{font-size:27px}
+  .band{padding:18px 14px}
+  .topnav{padding:12px 14px}
+}
+@media print{.upbar,.jump{display:none}.screen{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="upbar"><a href="/presentazione">Copertina</a><a href="/presentazione/struttura">1 · Struttura del sito</a><a href="/presentazione/pagine" class="on">2 · Le pagine e i contenuti</a><span class="sp"><a href="/">Documentazione di progetto →</a></span></div>
+<header class="cover">
+  <p class="kick">Sonit Srl · nuovo sito · documento 2 di 2</p>
+  <h1>Le pagine e i contenuti</h1>
+  <p class="lead">Per ognuna delle 11 pagine: a cosa serve, lo schema delle sezioni nell'ordine in cui si incontrano scorrendo e i testi che proponiamo di scriverci dentro. La struttura complessiva è nel <a href="/presentazione/struttura" style="color:#fff">documento 1</a>.</p>
+  <div class="cmeta">
+    <div><span>Pagine</span>11</div>
+    <div><span>Sezioni</span>67</div>
+    <div><span>Testi pronti</span>48 su 67</div>
+    <div><span>In attesa di materiali</span>19</div>
+  </div>
+</header>
+
+<h2 class="sec" id="come">Come si legge</h2>
+<p class="intro">Ogni pagina è disegnata come una finestra di browser: le sezioni sono nell'ordine in cui si incontrano scorrendo, con i testi reali dentro. I rettangoli tratteggiati sono gli spazi dove andranno immagini, loghi, mappa o schede: il contenuto arriva dopo, la posizione è quella. I riquadri arancioni segnalano le sezioni che non possiamo completare senza materiali vostri.</p>
+
+<div class="legend">
+  <span><i style="background:#e9edf3;border:1px dashed #c3ccda"></i>spazio per immagini, loghi, mappa o schede</span>
+  <span><i style="background:#fff4e0;border:1px solid #f0d9ae"></i>sezione in attesa di materiali vostri</span>
+  <span><i style="background:#003A83"></i>pulsanti e azioni</span>
+</div>
+
+<div class="note">
+  <p><strong>Cosa non c'è, di proposito.</strong> Questi documenti non contengono la grafica. Il carattere, i colori pieni, le fotografie e lo stile dei pulsanti si decidono dopo, sulla struttura approvata: è l'ordine che costa meno, perché spostare una sezione ora è un minuto, spostarla a sito fatto è un giorno.</p>
+</div>
+
+<h2 class="sec" id="pagine">Le pagine, una per una</h2>
+<div class="jump"><a href="#p-home">Home</a><a href="#p-chi-siamo">Chi siamo</a><a href="#p-soluzioni">Soluzioni integrate</a><a href="#p-telecomunicazioni">Telecomunicazioni</a><a href="#p-impianti">Impianti civili e industriali</a><a href="#p-fotovoltaico">Fotovoltaico ed efficientamento</a><a href="#p-fotovoltaico-casa">Fotovoltaico per la casa</a><a href="#p-certificazioni">Certificazioni</a><a href="#p-partner">Partner e fornitori</a><a href="#p-progetti">Progetti</a><a href="#p-contatti">Contatti</a></div>
+
+<div class="pageblock" id="p-home">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Home</h3>
+      <code>/</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">4 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">La prima schermata deve dire chi siete e che dimensione avete, prima di elencare i servizi.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>In quindici secondi far capire chi è Sonit, che dimensione ha, cosa sa fare come sistema integrato e a chi si rivolge.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Vai alle soluzioni · Contattaci · (privati) Chiedi un preventivo per la casa</dd>
+    <dt>Sezioni</dt><dd>9, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band band-hero"><div class="blabel"><span class="bn">01</span><span class="bt">Hero</span></div><div class="binner"><div class="g2"><div><p class="c-h1">Una sola regia su reti, impianti ed energia.</p>
+<p class="c-sub">Progettiamo, realizziamo e manteniamo infrastrutture di telecomunicazione, impianti civili e industriali e impianti fotovoltaici. Squadre interne, un unico responsabile per commessa, dall'analisi al collaudo.</p>
+<p class="wbtns"><span class="wb">Sono un&#x27;impresa</span><span class="wb">Sono un privato e voglio il fotovoltaico</span></p></div><div class="ph ph-lg"><span>spazio visivo</span></div></div></div><p class="bcap">Hero a piena larghezza, testo a sinistra, spazio visivo a destra</p></section><section class="band tint" data-wait="1"><div class="blabel"><span class="bn">02</span><span class="bt">Sonit in numeri</span><span class="bw">in attesa di materiali</span></div><div class="binner"><div class="c-nums">
+  <div><b>45</b><span>dipendenti diretti</span></div>
+  <div><b>5 anni</b><span>per passare da 2 a 45 persone</span></div>
+  <div><b>2</b><span>sedi operative: Arpino e Roma</span></div>
+  <div><b>Italia</b><span>area di intervento</span></div>
+</div>
+<p>Cresciamo mantenendo dentro l'azienda le competenze che contano: direzione generale, capicantiere e maestranze sono nostri. È la ragione per cui possiamo assumere la responsabilità di una commessa dall'inizio alla fine.</p><div class="need"><ul><li><b>Da confermare</b> · i quattro dati vanno confermati da Giorgio prima della pubblicazione: sono la prova principale della home</li></ul></div></div><p class="bcap">Fascia numeri, 4 colonne su desktop, 2 su tablet, 1 su mobile</p></section><section class="band "><div class="blabel"><span class="bn">03</span><span class="bt">Le tre business unit come sistema</span></div><div class="binner"><p class="c-lbl">Tre competenze, un solo interlocutore</p>
+<p>Le nostre tre aree non sono servizi separati: si incontrano nello stesso cantiere. Un impianto elettrico e un impianto fotovoltaico sono lo stesso lavoro visto da due lati; una rete in fibra ha bisogno di opere civili e di impianti. Chi ci affida un intervento parla con una sola struttura.</p>
+<div class="c-cards">
+  <div><b>Telecomunicazioni</b>
+   <p>Cablaggi strutturati e reti in fibra ottica: pianificazione, opere civili, posa, giunzione e collaudo. È il nostro core business.</p>
+   <p class="wlink">Scopri le telecomunicazioni →</p></div>
+  <div><b>Impianti civili e industriali</b>
+   <p>Impianti elettrici, videosorveglianza, allarme, domotica e automazione, idraulico e climatizzazione, per edifici residenziali e industriali.</p>
+   <p class="wlink">Scopri gli impianti →</p></div>
+  <div><b>Fotovoltaico ed efficientamento</b>
+   <p>Impianti fotovoltaici, solare termico e pompe di calore, con la gestione completa di incentivi e detrazioni.</p>
+   <p class="wlink">Scopri il fotovoltaico →</p></div>
+</div></div><p class="bcap">Introduzione + 3 card affiancate</p></section><section class="band "><div class="blabel"><span class="bn">04</span><span class="bt">Come lavoriamo, in cinque passi</span></div><div class="binner"><p class="c-lbl">Come lavoriamo</p>
+<ol class="c-steps">
+  <li><b>Analisi e progettazione</b> — pianifichiamo l'impianto più adatto alle esigenze del committente e realizziamo i progetti esecutivi.</li>
+  <li><b>Opere civili</b> — eseguiamo tutte le opere edili e strutturali necessarie, compresi scavi e ripristini.</li>
+  <li><b>Infrastrutture</b> — installiamo e configuriamo apparati e dispositivi.</li>
+  <li><b>Incentivi e pratiche</b> — gestiamo incentivi fiscali, detrazioni e pratiche autorizzative, per massimizzare il beneficio economico del cliente.</li>
+  <li><b>Manutenzione e pronto intervento</b> — restiamo il riferimento dopo la consegna, su danni e malfunzionamenti.</li>
+</ol></div><p class="bcap">Cinque passi in orizzontale su desktop, verticali su mobile</p></section><section class="band tint" data-wait="1"><div class="blabel"><span class="bn">05</span><span class="bt">Certificazioni</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Lavoriamo secondo norma, e ce lo facciamo verificare</p>
+<p>Le nostre qualifiche e certificazioni sono la parte del lavoro che il committente non vede in cantiere ma che determina se possiamo esserci.</p>
+<p class="wbtns"><span class="wb">Vedi le certificazioni</span></p><div class="need"><ul><li><b>Serve da voi</b> · elenco certificazioni con enti ed estremi, per mostrare qui le 3–4 principali</li></ul></div></div><p class="bcap">Fascia su fondo pieno, loghi o sigle + CTA</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">06</span><span class="bt">Partner e fornitori</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Con chi lavoriamo</p>
+<p>Lavoriamo con produttori e fornitori selezionati: la qualità di un impianto dipende anche da chi fornisce i materiali e da quanto è solida la catena che ce li porta in cantiere.</p>
+<p class="wbtns"><span class="wb">Vedi partner e fornitori</span></p><div class="logos"><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · loghi e nomi pubblicabili, con autorizzazione all&#x27;uso</li></ul></div></div><p class="bcap">Striscia loghi su una riga, scroll orizzontale su mobile</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">07</span><span class="bt">Un progetto in evidenza</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Un lavoro raccontato per intero</p>
+<p>Ogni cantiere cambia mentre lo esegui. La differenza la fa cosa si riesce a fare quando cambia.</p>
+<p class="wbtns"><span class="wb">Leggi il progetto</span><span class="wb">Tutti i progetti</span></p><div class="proj"><div class="ph ph-md"><span>immagine di contesto</span></div><div class="lines"><span class="cap">titolo del progetto</span><i></i><i></i><i class="s"></i><span class="wb">Leggi il progetto</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · il progetto scelto tra i 3–5 candidati a case study</li></ul></div></div><p class="bcap">Card progetto larga, 2 colonne testo + spazio schema</p></section><section class="band hl"><div class="blabel"><span class="bn">08</span><span class="bt">Fotovoltaico per i privati</span></div><div class="binner"><div class="g2"><div><p class="c-lbl">Sei un privato?</p>
+<p>Installiamo impianti fotovoltaici anche per le abitazioni, con sopralluogo gratuito, progetto su misura e gestione completa delle detrazioni. Un percorso dedicato, separato dai nostri impianti industriali.</p>
+<p class="wbtns"><span class="wb">Fotovoltaico per la casa</span></p></div><div class="ph ph-md"><span>immagine residenziale</span></div></div></div><p class="bcap">Blocco distinto, fondo diverso dal resto della pagina</p></section><section class="band "><div class="blabel"><span class="bn">09</span><span class="bt">Contatti rapidi</span></div><div class="binner"><div class="g2"><div><p class="c-lbl">Parliamone</p>
+<p>Sede operativa principale: Via S. Altissimo snc, 03033 Arpino (FR).<br>
+Sede operativa di Roma: Via Pescara 2, 00182 Roma.<br>
+Telefono: +39 0776 868072 · Email: info@sonit.it</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div><div class="ph ph-md"><span>mappa delle due sedi</span></div></div><div class="need"><ul><li><b>Da confermare</b> · orari di apertura</li></ul></div></div><p class="bcap">Due colonne: dati sedi a sinistra, CTA e mappa a destra</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-chi-siamo">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Chi siamo</h3>
+      <code>/chi-siamo</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">2 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">La pagina che regge il posizionamento: struttura, crescita, sedi, documenti scaricabili.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Dimostrare solidità e struttura organizzativa: è la pagina che sostiene il posizionamento.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Scarica brochure e company profile · Contattaci</dd>
+    <dt>Sezioni</dt><dd>6, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/chi-siamo</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Chi siamo oggi</span></div><div class="binner"><div class="nar"><p>Sonit Srl progetta, realizza e mantiene reti di telecomunicazione, impianti civili e industriali e impianti fotovoltaici su tutto il territorio nazionale, con due sedi operative in Lazio.</p>
+<p>Siamo nati come squadra di tecnici e siamo diventati un'organizzazione: oggi la direzione generale, i capicantiere e le maestranze sono personale nostro. È quello che ci permette di prendere in carico un lavoro per intero, senza scaricare il coordinamento sul committente.</p></div><div class="need"><ul><li><b>Da confermare</b> · anno di costituzione da usare nel title tag</li></ul></div></div><p class="bcap">Intro su una colonna stretta, max 65 caratteri per riga</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">02</span><span class="bt">Crescita e struttura</span><span class="bw">in attesa di materiali</span></div><div class="binner"><div class="cols2"><p class="c-lbl">Come siamo cresciuti</p>
+<p>In cinque anni siamo passati da 2 a 45 dipendenti diretti, e continuiamo ad assumere. La crescita è stata una scelta di struttura, non solo di numeri: abbiamo aggiunto figure di coordinamento e tecnici qualificati per poter dire di sì a commesse più grandi senza abbassare gli standard.</p>
+<ul>
+  <li><b>Direzione e coordinamento</b> — gestione delle commesse e rapporto diretto con il committente.</li>
+  <li><b>Capicantiere</b> — presidio operativo su ogni cantiere, tutti interni.</li>
+  <li><b>Maestranze specializzate</b> — squadre per reti, impianti ed energia.</li>
+  <li><b>Formazione continua</b> — investiamo sulla qualità dell'esecuzione più che sul numero di cantieri aperti.</li>
+</ul></div><div class="need"><ul><li><b>Serve da voi</b> · numeri aggiornati di organico e ripartizione dei ruoli</li><li><b>Da confermare</b> · la previsione 50–55 persone con il subappalto: pubblicabile?</li></ul></div></div><p class="bcap">Testo + elenco ruoli in 2 colonne</p></section><section class="band tint"><div class="blabel"><span class="bn">03</span><span class="bt">Valori e responsabilità</span></div><div class="binner"><p class="c-lbl">Come stiamo in cantiere</p>
+<p>Siamo una squadra di professionisti con esperienza, competenza e mentalità innovativa. Il nostro obiettivo è l'erogazione di un servizio professionale, rispettoso dell'ambiente, della salute e della sicurezza dei lavoratori.</p>
+<p>Poniamo attenzione costante all'attuazione della compliance legislativa e al miglioramento continuo delle nostre performance.</p></div><p class="bcap">Blocco valori su fondo tenue, una colonna</p></section><section class="band "><div class="blabel"><span class="bn">04</span><span class="bt">Dove siamo</span></div><div class="binner"><div class="cols2"><p class="c-lbl">Due sedi operative, una copertura nazionale</p>
+<p><b>Sede operativa principale</b><br>Via S. Altissimo snc, 03033 Arpino (FR)</p>
+<p><b>Sede operativa di Roma</b><br>Via Pescara 2, 00182 Roma</p>
+<p>Operiamo su tutto il territorio nazionale. Il presidio in provincia di Frosinone e quello a Roma ci permettono di intervenire rapidamente nel Lazio e di seguire cantieri fuori regione con squadre nostre.</p></div><div class="need"><ul><li><b>Da confermare</b> · la sede legale, oggi presente solo nei dati strutturati, va mostrata anche all&#x27;utente?</li></ul></div></div><p class="bcap">Due schede sedi affiancate + nota copertura nazionale</p></section><section class="band tint" data-wait="1"><div class="blabel"><span class="bn">05</span><span class="bt">Download brochure e company profile</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Documenti</p>
+<p>Brochure aziendale e company profile in formato PDF, con l'inquadramento completo dell'azienda, le competenze e i riferimenti.</p>
+<p class="wbtns"><span class="wb">Scarica la brochure · PDF</span><span class="wb">Scarica il company profile · PDF</span></p><div class="need"><ul><li><b>Serve da voi</b> · i due PDF definitivi. Richiesta emersa in kick-off: nel 90% delle relazioni commerciali sostituiscono il cartaceo</li></ul></div></div><p class="bcap">Fascia download con due pulsanti file</p></section><section class="band ctab"><div class="blabel"><span class="bn">06</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Se state valutando un fornitore per una commessa su reti, impianti o energia, il modo più rapido per capire se siamo la struttura giusta è parlarne.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura, larghezza piena</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-soluzioni">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Soluzioni integrate</h3>
+      <code>/soluzioni</code>
+    </div>
+    <div class="pmeta"><span class="tag t-ok">contenuti completi</span></div>
+  </div>
+  <p class="ppitch">Spiega l&#x27;ecosistema e distribuisce verso le tre aree. Da qui non si esce a mani vuote.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Spiegare l&#x27;ecosistema: una sola regia su reti, impianti ed energia, con squadre interne e un unico responsabile di commessa.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Entra nella business unit pertinente · Contattaci</dd>
+    <dt>Sezioni</dt><dd>7, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/soluzioni</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">L&#x27;ecosistema integrato</span></div><div class="binner"><div class="nar"><p>La maggior parte dei lavori che ci vengono affidati non sta dentro una sola specializzazione. Una rete in fibra ha bisogno di scavi e di opere civili. Un impianto fotovoltaico è anche un impianto elettrico. Un edificio industriale mette insieme energia, sicurezza e automazione.</p>
+<p>Le nostre tre business unit lavorano sullo stesso cantiere, con una sola direzione. Per il committente significa tre cose concrete: un solo responsabile a cui chiedere, nessun tempo perso a far parlare fornitori diversi tra loro, nessuna zona grigia di responsabilità quando qualcosa va rifatto.</p></div></div><p class="bcap">Apertura su colonna stretta, senza elementi laterali</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">Cosa realizziamo</span></div><div class="binner"><p class="c-lbl">Le nostre competenze</p>
+<ul class="c-two">
+  <li>Impianti per le telecomunicazioni</li>
+  <li>Impianti tecnologici</li>
+  <li>Impianti di pubblica illuminazione e reti elettriche</li>
+  <li>Impianti di videosorveglianza</li>
+  <li>Impianti idraulici</li>
+  <li>Impianti per l'efficientamento energetico</li>
+</ul></div><p class="bcap">Elenco competenze su 2 colonne</p></section><section class="band "><div class="blabel"><span class="bn">03</span><span class="bt">Le tre business unit</span></div><div class="binner"><div class="c-cards">
+  <div><b>Telecomunicazioni</b>
+   <p>Cablaggi strutturati e reti in fibra ottica su tutto il territorio nazionale: pianificazione, opere civili, posa, giunzione, collaudo. Il nostro core business.</p>
+   <p class="wlink">Telecomunicazioni →</p></div>
+  <div><b>Impianti civili e industriali</b>
+   <p>Impianti elettrici, videosorveglianza e allarme, domotica e automazione, idraulico, climatizzazione e purificazione dell'aria, per edifici residenziali e industriali.</p>
+   <p class="wlink">Impianti civili e industriali →</p></div>
+  <div><b>Fotovoltaico ed efficientamento</b>
+   <p>Impianti fotovoltaici, solare termico e pompe di calore, riqualificazione energetica degli edifici e gestione degli incentivi.</p>
+   <p class="wlink">Fotovoltaico ed efficientamento →</p></div>
+</div></div><p class="bcap">3 card business unit affiancate, pari altezza</p></section><section class="band "><div class="blabel"><span class="bn">04</span><span class="bt">Come lavoriamo, in cinque passi</span></div><div class="binner"><ol class="c-steps">
+  <li><b>Analisi e progettazione</b> — pianificazione dell'impianto più idoneo alle esigenze del cliente e realizzazione dei progetti esecutivi.</li>
+  <li><b>Opere civili</b> — realizzazione di tutte le opere edili e strutturali necessarie.</li>
+  <li><b>Infrastrutture</b> — installazione e configurazione degli apparati e dei dispositivi.</li>
+  <li><b>Incentivi e detrazioni</b> — gestione completa degli incentivi fiscali e delle detrazioni per miglioramenti energetici e ristrutturazioni.</li>
+  <li><b>Manutenzioni</b> — pronto intervento su danni e malfunzionamenti.</li>
+</ol></div><p class="bcap">Cinque passi verticali con numerazione</p></section><section class="band "><div class="blabel"><span class="bn">05</span><span class="bt">Consulenza e pratiche autorizzative</span></div><div class="binner"><div class="g2"><div><p class="c-lbl" id="consulenza">Consulenza e pratiche</p>
+<p>Il nostro servizio di consulenza accompagna il cliente quando progetta, costruisce o riqualifica un immobile civile o industriale: dalla scelta dei componenti per gli impianti al supporto nella gestione delle pratiche autorizzative.</p>
+<p>Non è un servizio a sé: è il modo in cui seguiamo ogni commessa. Ci occupiamo della documentazione tecnica, dei rapporti con gli enti e della gestione delle autorizzazioni, così il committente non deve inseguire due interlocutori diversi.</p></div><div class="ph ph-md"><span>spazio visivo</span></div></div></div><p class="bcap">Blocco con ancora #consulenza, 2 colonne</p></section><section class="band tint"><div class="blabel"><span class="bn">06</span><span class="bt">Manutenzione e pronto intervento</span></div><div class="binner"><p class="c-lbl">Dopo la consegna</p>
+<p>La manutenzione degli impianti e il pronto intervento su danni e malfunzionamenti fanno parte del servizio. Restiamo il riferimento anche quando il cantiere è chiuso.</p><div class="need"><ul><li><b>Da confermare</b> · esistono contratti di manutenzione programmata da comunicare? tempi di intervento garantiti?</li></ul></div></div><p class="bcap">Blocco breve su fondo tenue</p></section><section class="band ctab"><div class="blabel"><span class="bn">07</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Se il lavoro che avete in mente tocca più di una di queste aree, è esattamente il caso in cui conviene parlare con noi.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-telecomunicazioni">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Telecomunicazioni</h3>
+      <code>/soluzioni/telecomunicazioni</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">2 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">Il core business raccontato per intero, fase per fase, con il beneficio per il committente.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Presidiare il core business con la filiera completa, da pianificazione a collaudo.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Contatto qualificato con indicazione del tipo di lavorazione</dd>
+    <dt>Sezioni</dt><dd>6, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/soluzioni/telecomunicazioni</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="g2"><div><p>La nostra mission è contribuire agli obiettivi previsti dall'Agenda Digitale Europea e dalla Strategia italiana per la banda ultra-larga della Gigabit Society: un piano che permetterà di stabilire livelli minimi di connettività in tutti i Paesi europei.</p>
+<p>Lavoriamo su tutta la filiera con squadre nostre: dalla pianificazione del cantiere al collaudo strumentale della tratta. È il ramo in cui siamo nati e in cui oggi operiamo come partner strutturato dei principali operatori infrastrutturali.</p></div><div class="ph ph-md"><span>spazio visivo</span></div></div></div><p class="bcap">Apertura 2 colonne: testo + spazio visivo</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">La filiera completa</span></div><div class="binner"><p class="c-lbl">Cosa facciamo, fase per fase</p>
+<ol class="c-steps">
+  <li><b>Pianificazione e controllo</b> — implementazione e gestione di tutti i servizi logistici e di coordinamento del cantiere.<br>
+      <i>Per il committente: un cantiere che non si ferma e un referente unico sull'avanzamento.</i></li>
+  <li><b>Analisi progettuali</b> — gestione dei progetti, degli as-built e dei software per la rendicontazione delle lavorazioni.<br>
+      <i>Per il committente: documentazione allineata alla realtà del posato, rendicontazione senza rilavorazioni.</i></li>
+  <li><b>Opere civili</b> — scavi in minitrincea e microtrincea, scavi tradizionali, scavi su superfici pregiate e relativi ripristini.<br>
+      <i>Per il committente: la tecnica di scavo scelta in base al contesto, con ripristini che tengono nel tempo.</i></li>
+  <li><b>Infrastrutture</b> — sotto-tubazione, posa di cavi in fibra ottica interrati con tecnica blowing, posa su palificazione e su facciata.<br>
+      <i>Per il committente: la stessa squadra sulle tratte interrate e su quelle aeree.</i></li>
+  <li><b>Giunzione</b> — giunzione a caldo delle fibre ottiche con giuntatrici specifiche, che saldano le estremità dei cavi e permettono il passaggio del segnale con una perdita di efficienza impercettibile.<br>
+      <i>Per il committente: attenuazioni entro specifica, verificate una per una.</i></li>
+  <li><b>Collaudi</b> — strumentazione elettronica all'avanguardia per verificare la qualità degli impianti.<br>
+      <i>Per il committente: certificati di collaudo consegnati insieme alla tratta.</i></li>
+</ol></div><p class="bcap">Sei fasi in sequenza verticale, con la riga di beneficio rientrata</p></section><section class="band "><div class="blabel"><span class="bn">03</span><span class="bt">Consulenza e pratiche</span></div><div class="binner"><div class="nar"><p class="c-lbl">Anche la parte che non si vede</p>
+<p>Gestiamo la documentazione tecnica, gli as-built e i rapporti con gli enti per permessi e occupazioni di suolo pubblico. Il committente riceve la tratta e il fascicolo che la accompagna.</p></div></div><p class="bcap">Blocco richiamo consulenza, una colonna</p></section><section class="band tint" data-wait="1"><div class="blabel"><span class="bn">04</span><span class="bt">Certificazioni pertinenti</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Le nostre qualifiche</p>
+<p>Le certificazioni e le qualifiche che riguardano lavori su reti in fibra e opere civili.</p>
+<p class="wbtns"><span class="wb">Tutte le certificazioni</span></p><div class="need"><ul><li><b>Serve da voi</b> · quali certificazioni sono pertinenti a questo ramo</li></ul></div></div><p class="bcap">Fascia certificazioni pertinenti + CTA</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">05</span><span class="bt">Progetti collegati</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="wbtns"><span class="wb">Vedi i progetti di telecomunicazioni</span></p><div class="proj"><div class="ph ph-md"><span>immagine di contesto</span></div><div class="lines"><span class="cap">titolo del progetto</span><i></i><i></i><i class="s"></i><span class="wb">Leggi il progetto</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · almeno un case study su una tratta in fibra</li></ul></div></div><p class="bcap">Una o due card progetto</p></section><section class="band ctab"><div class="blabel"><span class="bn">06</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Se avete una tratta da realizzare, un lotto da subappaltare o una rete da mantenere, diteci il tipo di lavorazione e i tempi: vi rispondiamo con chi seguirebbe il lavoro.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura contestuale</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-impianti">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Impianti civili e industriali</h3>
+      <code>/soluzioni/impianti</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">2 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">Distingue il contesto civile da quello industriale, che oggi sono mescolati.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Coprire l&#x27;impiantistica generale distinguendo il contesto civile da quello industriale.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Contatto qualificato</dd>
+    <dt>Sezioni</dt><dd>7, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/soluzioni/impianti</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="g2"><div><p>Il nostro obiettivo è la realizzazione e la protezione degli impianti, dei sistemi e delle reti presso edifici residenziali e industriali.</p>
+<p>Lo stesso impianto cambia completamente a seconda del contesto: in un edificio residenziale conta la convivenza con chi lo abita, in un contesto industriale contano continuità di servizio, sicurezza e fermo macchina. Progettiamo e realizziamo tenendo conto di quale dei due stiamo affrontando.</p></div><div class="ph ph-md"><span>spazio visivo</span></div></div></div><p class="bcap">Apertura 2 colonne</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">Ambiti di intervento</span></div><div class="binner"><ul class="c-two">
+  <li>Impianti elettrici</li>
+  <li>Impianti di videosorveglianza</li>
+  <li>Impianti di allarme</li>
+  <li>Impianti di domotica</li>
+  <li>Impianti di automazione</li>
+  <li>Impianti idraulici</li>
+  <li>Impianti di climatizzazione</li>
+  <li>Impianti di purificazione dell'aria</li>
+  <li>Manutenzione impianti</li>
+</ul></div><p class="bcap">Elenco ambiti su 2 colonne</p></section><section class="band "><div class="blabel"><span class="bn">03</span><span class="bt">Civile e industriale</span></div><div class="binner"><div class="cols2"><p class="c-lbl">Due contesti, due modi di lavorare</p>
+<p><b>Edifici civili e residenziali</b> — impianti elettrici e tecnologici, videosorveglianza e allarme, domotica, climatizzazione. Lavoriamo su nuove costruzioni e su ristrutturazioni, coordinandoci con le altre imprese in cantiere.</p>
+<p><b>Contesti industriali</b> — impianti di potenza, automazione, sicurezza e continuità di servizio, con interventi programmati per ridurre al minimo il fermo delle attività.</p></div><div class="need"><ul><li><b>Da confermare</b> · esempi di taglie o di tipologie di intervento tipiche, per rendere concreta la distinzione</li></ul></div></div><p class="bcap">Due blocchi affiancati: civile / industriale</p></section><section class="band "><div class="blabel"><span class="bn">04</span><span class="bt">Consulenza e pratiche</span></div><div class="binner"><div class="nar"><p>Ci occupiamo della documentazione tecnica, delle dichiarazioni di conformità e delle pratiche autorizzative, oltre alla gestione di incentivi e detrazioni quando l'intervento ne può usufruire.</p></div></div><p class="bcap">Blocco richiamo consulenza</p></section><section class="band tint" data-wait="1"><div class="blabel"><span class="bn">05</span><span class="bt">Certificazioni pertinenti</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="wbtns"><span class="wb">Tutte le certificazioni</span></p><div class="need"><ul><li><b>Serve da voi</b> · qualifiche pertinenti agli impianti elettrici e tecnologici</li></ul></div></div><p class="bcap">Fascia certificazioni + CTA</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">06</span><span class="bt">Progetti collegati</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="wbtns"><span class="wb">Vedi i progetti di impiantistica</span></p><div class="proj"><div class="ph ph-md"><span>immagine di contesto</span></div><div class="lines"><span class="cap">titolo del progetto</span><i></i><i></i><i class="s"></i><span class="wb">Leggi il progetto</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · almeno un case study impiantistico</li></ul></div></div><p class="bcap">Card progetto</p></section><section class="band ctab"><div class="blabel"><span class="bn">07</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Descriveteci l'edificio e cosa serve: vi diciamo come lo affronteremmo e con quali tempi.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-fotovoltaico">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Fotovoltaico ed efficientamento</h3>
+      <code>/soluzioni/fotovoltaico</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">2 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">La business unit in crescita, con taglia industriale evidente e il varco verso i privati in coda.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Dare alla business unit che guida la transizione una pagina propria, chiaramente industriale e commerciale.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Contatto B2B. Il privato viene dirottato in modo esplicito.</dd>
+    <dt>Sezioni</dt><dd>7, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/soluzioni/fotovoltaico</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="g2"><div><p>Offriamo soluzioni per edifici esistenti e di nuova costruzione, progettando e realizzando sistemi ad alta efficienza energetica. L'obiettivo è un risparmio energetico misurabile, non una dichiarazione di intenti.</p>
+<p>È l'area in cui stiamo crescendo di più, e quella in cui la sinergia con la nostra divisione elettrica pesa: chi realizza il quadro e chi realizza il campo fotovoltaico sono la stessa squadra.</p></div><div class="ph ph-md"><span>spazio visivo</span></div></div></div><p class="bcap">Apertura 2 colonne</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">Ambiti di intervento</span></div><div class="binner"><ul class="c-two">
+  <li>Impianti fotovoltaici</li>
+  <li>Impianti solari termici</li>
+  <li>Pompe di calore</li>
+  <li>Riqualificazione energetica degli edifici</li>
+  <li>Manutenzione degli impianti</li>
+</ul></div><p class="bcap">Elenco ambiti su 2 colonne</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">03</span><span class="bt">Taglie e contesti</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Per chi lavoriamo</p>
+<p>Impianti per capannoni e siti produttivi, coperture commerciali, immobili in gestione e impianti a terra. Progettiamo in funzione del profilo di consumo, non del solo tetto disponibile.</p><div class="g3"><div class="ph ph-sm"><span>esempio di impianto</span></div><div class="ph ph-sm"><span>esempio di impianto</span></div><div class="ph ph-sm"><span>esempio di impianto</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · taglie tipiche degli impianti realizzati, per rendere leggibile la differenza rispetto al residenziale</li></ul></div></div><p class="bcap">Blocco taglie e contesti, 3 esempi affiancati</p></section><section class="band tint"><div class="blabel"><span class="bn">04</span><span class="bt">Incentivi e detrazioni</span></div><div class="binner"><p class="c-lbl">La parte burocratica la gestiamo noi</p>
+<p>Gestione completa degli incentivi fiscali e delle detrazioni per miglioramenti energetici e ristrutturazioni, per massimizzare i benefici economici a favore dei nostri clienti. Dalla verifica dei requisiti alla presentazione delle pratiche.</p></div><p class="bcap">Blocco incentivi su fondo tenue</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">05</span><span class="bt">Il nostro ruolo nella filiera dell&#x27;energia</span><span class="bw">in attesa di materiali</span></div><div class="binner"><div class="nar"><p>Stiamo costruendo rapporti diretti con le società di vendita di energia per seguire l'impianto senza intermediazioni: significa tempi più corti e un solo responsabile dal contratto alla messa in esercizio.</p></div><div class="need"><ul><li><b>Serve da voi</b> · gli accordi sono comunicabili? con quale livello di dettaglio? Emersi in kick-off come leva della transizione a general contractor</li></ul></div></div><p class="bcap">Blocco filiera energia, una colonna</p></section><section class="band hl"><div class="blabel"><span class="bn">06</span><span class="bt">Sei un privato?</span></div><div class="binner"><div class="g2"><div><p class="c-lbl">Impianti per la casa</p>
+<p>Questa pagina parla di impianti per imprese e immobili commerciali. Se cerchi un impianto fotovoltaico per la tua abitazione, il percorso è un altro: sopralluogo gratuito, progetto su misura, detrazioni gestite da noi.</p>
+<p class="wbtns"><span class="wb">Fotovoltaico per la casa</span></p></div><div class="ph ph-md"><span>immagine residenziale</span></div></div></div><p class="bcap">Blocco varco B2C, fondo diverso, in coda alla pagina</p></section><section class="band ctab"><div class="blabel"><span class="bn">07</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Se avete una copertura, un sito produttivo o un portafoglio immobiliare da valutare, partiamo dai consumi e vi diciamo cosa ha senso fare.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura B2B</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-fotovoltaico-casa">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Fotovoltaico per la casa</h3>
+      <code>/fotovoltaico-casa</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">1 sezione in attesa di materiali</span><span class="tag t-off">fuori dal menu</span></div>
+  </div>
+  <p class="ppitch">Percorso separato per i privati: il form è protagonista, nessun contenuto industriale.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Raccogliere richieste di preventivo e sopralluogo dai privati, senza mescolarsi agli impianti industriali.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Compila il form preventivo o telefona</dd>
+    <dt>Sezioni</dt><dd>7, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/fotovoltaico-casa</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band band-hero"><div class="blabel"><span class="bn">01</span><span class="bt">Apertura e form in evidenza</span></div><div class="binner"><div class="g2"><div><p class="c-h1">Il fotovoltaico per la tua casa, dal sopralluogo all'accensione.</p>
+<p class="c-sub">Veniamo a vedere il tetto, ti diciamo quanto puoi produrre e quanto risparmi, installiamo con squadre nostre e ci occupiamo noi delle detrazioni. Un solo interlocutore, dall'inizio alla fine.</p>
+<p class="wbtns"><span class="wb">Chiedi un preventivo gratuito</span><span class="wb">Chiama +39 0776 868072</span></p></div><div class="fbox"><div class="fgrid c1"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fcheck"><b></b><span>consenso privacy</span></div><span class="wb">Richiedi il sopralluogo</span></div></div></div><p class="bcap">Hero con form visibile a destra già alla prima schermata</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">Come funziona</span></div><div class="binner"><p class="c-lbl">Quattro passi, nessuna sorpresa</p>
+<ol class="c-steps">
+  <li><b>Sopralluogo gratuito</b> — veniamo a casa tua, guardiamo tetto, esposizione e quadro elettrico, e leggiamo insieme una bolletta.</li>
+  <li><b>Progetto e preventivo</b> — ti proponiamo la dimensione giusta per i tuoi consumi, con costi, produzione stimata e tempi. Scritti.</li>
+  <li><b>Installazione</b> — installiamo con squadre nostre, non con subappaltatori. Cantiere in casa: sappiamo che va lasciata pulita.</li>
+  <li><b>Attivazione e pratiche</b> — ci occupiamo di allacciamento, pratiche e detrazioni. Tu firmi, il resto lo seguiamo noi.</li>
+</ol></div><p class="bcap">Quattro passi in orizzontale su desktop</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">03</span><span class="bt">Quanto serve per una casa</span><span class="bw">in attesa di materiali</span></div><div class="binner"><div class="g2"><div><p class="c-lbl">Che impianto ti serve</p>
+<p>Un'abitazione tipo si risolve con un impianto di qualche kilowatt: la dimensione giusta dipende da quanto consumi, da quando consumi e da se vuoi accumulare energia per la sera.</p>
+<p>Nel sopralluogo partiamo dalla tua bolletta, non da un listino.</p></div><div class="ph ph-md"><span>spazio visivo</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · taglie residenziali tipiche, con eventuale range di prezzo e produzione stimata. Senza questi dati il blocco resta generico</li><li><b>Da confermare</b> · si parla di accumulo? di colonnina per l&#x27;auto elettrica?</li></ul></div></div><p class="bcap">Blocco dimensionamento, testo + spazio per schema</p></section><section class="band tint"><div class="blabel"><span class="bn">04</span><span class="bt">Detrazioni e pratiche</span></div><div class="binner"><p class="c-lbl">Le detrazioni le gestiamo noi</p>
+<p>Verifichiamo a quali detrazioni e incentivi hai diritto, prepariamo la documentazione e seguiamo le pratiche fino in fondo. È la parte che scoraggia più spesso chi ci pensa da mesi: per noi è ordinaria amministrazione.</p><div class="need"><ul><li><b>Da confermare</b> · quali incentivi sono attivi al momento della pubblicazione: il testo va verificato prima del go-live</li></ul></div></div><p class="bcap">Blocco detrazioni su fondo tenue</p></section><section class="band "><div class="blabel"><span class="bn">05</span><span class="bt">Perché noi</span></div><div class="binner"><div class="cols2"><p class="c-lbl">Chi viene a installare</p>
+<p>Sonit installa impianti fotovoltaici per imprese e siti industriali. Sulle case portiamo la stessa organizzazione: tecnici nostri, un responsabile per il tuo impianto e la certezza di trovarci anche dopo, se serve manutenzione.</p>
+<p>Siamo in provincia di Frosinone, con una sede anche a Roma.</p></div></div><p class="bcap">Blocco chi installa, 2 colonne</p></section><section class="band "><div class="blabel"><span class="bn">06</span><span class="bt">Domande frequenti</span></div><div class="binner"><div class="acc"><ul class="c-faq">
+  <li><b>Il sopralluogo è impegnativo?</b> No, è gratuito e senza impegno. Serve a capire se conviene, anche a noi.</li>
+  <li><b>Quanto tempo passa dal preventivo all'accensione?</b> Dipende dalle pratiche di allacciamento. <span class="ask">da confermare: tempi medi reali</span></li>
+  <li><b>Chi installa l'impianto?</b> Squadre Sonit, personale nostro.</li>
+  <li><b>E se dopo serve assistenza?</b> Facciamo manutenzione e pronto intervento sugli impianti che installiamo.</li>
+  <li><b>Fate anche pompe di calore o solare termico?</b> Sì, e in molti casi conviene valutarli insieme al fotovoltaico.</li>
+  <li><b>Lavorate solo in provincia di Frosinone?</b> <span class="ask">da confermare: raggio di intervento per il residenziale: solo Lazio o oltre?</span></li>
+</ul></div></div><p class="bcap">FAQ a fisarmonica</p></section><section class="band "><div class="blabel"><span class="bn">07</span><span class="bt">Form preventivo</span></div><div class="binner"><div class="nar"><p class="c-lbl">Chiedi un preventivo</p>
+<p>Campi: nome e cognome · comune · telefono · email · tipo di abitazione · consumo o bolletta indicativa · messaggio · consenso privacy.</p>
+<p class="wbtns"><span class="wb">Richiedi il sopralluogo gratuito</span></p></div><div class="fbox"><div class="fgrid c2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fcheck"><b></b><span>consenso privacy</span></div><span class="wb">Invia la richiesta</span></div></div><p class="bcap">Form completo a piena larghezza in chiusura</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-certificazioni">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Certificazioni</h3>
+      <code>/certificazioni</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">3 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">Risponde in anticipo alla domanda di qualifica che ogni committente strutturato pone.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Rispondere in anticipo alla domanda di qualifica che ogni committente strutturato pone.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Fiducia e passaggio al contatto</dd>
+    <dt>Sezioni</dt><dd>5, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/certificazioni</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="nar"><p>Poniamo attenzione costante all'attuazione della compliance legislativa e al miglioramento continuo delle nostre performance. Le certificazioni sono il modo in cui questo impegno viene verificato da qualcuno che non siamo noi.</p>
+<p>Per un committente strutturato sono la prima domanda, non un dettaglio: qui trovate tutto quello che serve per la fase di qualifica fornitore.</p></div></div><p class="bcap">Apertura una colonna</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">02</span><span class="bt">Le nostre certificazioni</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Elenco</p>
+<p>Per ogni certificazione: sigla e norma di riferimento, ente certificatore, ambito coperto, numero e data di rilascio, eventuale scadenza, PDF scaricabile se pubblicabile.</p><div class="g3"><div class="cert"><span class="cap">sigla e norma</span><i></i><i class="s"></i><i class="s"></i><span class="wlink">PDF →</span></div><div class="cert"><span class="cap">sigla e norma</span><i></i><i class="s"></i><i class="s"></i><span class="wlink">PDF →</span></div><div class="cert"><span class="cap">sigla e norma</span><i></i><i class="s"></i><i class="s"></i><span class="wlink">PDF →</span></div><div class="cert"><span class="cap">sigla e norma</span><i></i><i class="s"></i><i class="s"></i><span class="wlink">PDF →</span></div><div class="cert"><span class="cap">sigla e norma</span><i></i><i class="s"></i><i class="s"></i><span class="wlink">PDF →</span></div><div class="cert"><span class="cap">sigla e norma</span><i></i><i class="s"></i><i class="s"></i><span class="wlink">PDF →</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · elenco completo delle certificazioni con enti ed estremi: senza questa la pagina dichiarata prioritaria non si può scrivere</li></ul></div></div><p class="bcap">Griglia certificazioni: scheda per certificazione</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">03</span><span class="bt">Cosa significano per il committente</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Perché contano</p>
+<p>Una riga per certificazione, che spiega cosa garantisce in cantiere: non la definizione della norma, l'effetto pratico per chi ci affida il lavoro.</p><div class="need"><ul><li><b>Serve da voi</b> · una volta noto l&#x27;elenco, questo blocco si scrive senza altri materiali</li></ul></div></div><p class="bcap">Elenco a due colonne: certificazione + effetto pratico</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">04</span><span class="bt">Sicurezza e formazione</span><span class="bw">in attesa di materiali</span></div><div class="binner"><div class="nar"><p class="c-lbl">Sicurezza sul lavoro</p>
+<p>Formazione del personale, dispositivi di protezione, procedure di cantiere e gestione documentale della sicurezza.</p></div><div class="need"><ul><li><b>Serve da voi</b> · come è organizzata la sicurezza: RSPP interno o esterno, piani di formazione, eventuali certificazioni dedicate</li></ul></div></div><p class="bcap">Blocco sicurezza, una colonna</p></section><section class="band ctab"><div class="blabel"><span class="bn">05</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Se state qualificando un fornitore e vi serve documentazione che qui non trovate, chiedetecela: rispondiamo con i documenti, non con una promessa.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-partner">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Partner e fornitori</h3>
+      <code>/partner</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">2 sezioni in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">Con chi lavorate: la catena di fornitura come indicatore di affidabilità.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Mostrare con chi Sonit lavora: catena di fornitura e relazioni come indicatore di affidabilità.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Fiducia; contatto per proposte di partnership</dd>
+    <dt>Sezioni</dt><dd>4, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/partner</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="nar"><p>La qualità di un impianto dipende anche da chi fornisce i materiali e dalla solidità della catena che li porta in cantiere. Scegliamo produttori e fornitori con cui possiamo avere un rapporto diretto: significa disponibilità dei materiali nei tempi, assistenza tecnica quando serve e garanzie che valgono davvero.</p></div></div><p class="bcap">Apertura una colonna</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">02</span><span class="bt">Partner e fornitori</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">I nostri partner</p>
+<p>Loghi raggruppati per categoria di fornitura: apparati per telecomunicazioni, materiale elettrico, moduli e inverter fotovoltaici, sistemi di sicurezza, climatizzazione.</p><div class="lgrid"><div class="lg"><span class="cap">Telecomunicazioni</span><div class="logos"><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div></div></div><div class="lg"><span class="cap">Materiale elettrico</span><div class="logos"><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div></div></div><div class="lg"><span class="cap">Fotovoltaico</span><div class="logos"><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div></div></div><div class="lg"><span class="cap">Sicurezza</span><div class="logos"><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div><div class="ph ph-logo"><span>logo</span></div></div></div></div><div class="need"><ul><li><b>Serve da voi</b> · elenco e loghi dei partner pubblicabili, con autorizzazione all&#x27;uso del marchio</li></ul></div></div><p class="bcap">Griglia loghi per categoria di fornitura</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">03</span><span class="bt">Committenti</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Per chi lavoriamo</p>
+<p>Le categorie di committenti con cui operiamo: operatori e general contractor delle telecomunicazioni, imprese di costruzione, amministrazioni, proprietà immobiliari e industriali.</p><div class="need"><ul><li><b>Serve da voi</b> · quali committenti sono nominabili sul sito. In kick-off sono stati citati player nazionali: senza autorizzazione si lavora per categorie anonime</li></ul></div></div><p class="bcap">Elenco categorie di committenti</p></section><section class="band ctab"><div class="blabel"><span class="bn">04</span><span class="bt">Vuoi lavorare con noi come partner?</span></div><div class="binner"><div class="nar"><p>Valutiamo collaborazioni con fornitori, studi di progettazione e imprese che cercano un partner esecutivo su reti, impianti o energia. Scriveteci indicando l'ambito: vi mettiamo in contatto con la persona giusta.</p>
+<p class="wbtns"><span class="wb">Proponi una collaborazione</span></p></div></div><p class="bcap">Blocco proposta di collaborazione + CTA</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-progetti">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Progetti</h3>
+      <code>/progetti</code>
+    </div>
+    <div class="pmeta"><span class="tag t-warn">1 sezione in attesa di materiali</span></div>
+  </div>
+  <p class="ppitch">I lavori raccontati come casi, con l&#x27;imprevisto affrontato. Non un album di foto.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Dimostrare capacità di esecuzione raccontando ostacoli e riprogettazione in corso d&#x27;opera.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Contatto con riferimento a un caso simile</dd>
+    <dt>Sezioni</dt><dd>4, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/progetti</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="nar"><p>Un cantiere che va esattamente come da progetto non esiste. Cambia il contesto, cambia un vincolo autorizzativo, si scopre qualcosa sotto il suolo che nessuno aveva previsto. La differenza tra un fornitore e un partner è cosa succede in quel momento.</p>
+<p>Per questo raccontiamo i nostri lavori partendo dagli ostacoli: cosa ci siamo trovati davanti, come abbiamo riprogettato in corso d'opera e cosa ne ha ottenuto il committente.</p></div></div><p class="bcap">Apertura una colonna stretta</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">Formato della scheda progetto</span></div><div class="binner"><p class="c-lbl">Come è fatta ogni scheda</p>
+<ol class="c-steps">
+  <li><b>Contesto</b> — che tipo di committente, che tipo di opera, dove e con quali vincoli. Senza nomi, se non autorizzati.</li>
+  <li><b>Il problema</b> — l'ostacolo reale: un vincolo tecnico, un'autorizzazione, una condizione del suolo, una scadenza.</li>
+  <li><b>Cosa abbiamo fatto</b> — la scelta tecnica e organizzativa, spiegata in modo comprensibile anche a chi non è del settore.</li>
+  <li><b>Esito</b> — cosa è stato consegnato e cosa ne ha ricavato il committente in tempi, costi o continuità di servizio.</li>
+</ol></div><p class="bcap">Spiegazione del formato in quattro passi</p></section><section class="band " data-wait="1"><div class="blabel"><span class="bn">03</span><span class="bt">I progetti</span><span class="bw">in attesa di materiali</span></div><div class="binner"><p class="c-lbl">Schede</p>
+<p>Da 3 a 5 schede, distribuite sulle tre business unit, così ogni pagina di soluzione può richiamare un caso pertinente.</p><div class="proj"><div class="ph ph-sm"><span>immagine</span></div><div class="lines"><span class="cap">titolo del progetto</span><i></i><i class="s"></i><span class="wlink">Apri la scheda →</span></div></div><div class="proj"><div class="ph ph-sm"><span>immagine</span></div><div class="lines"><span class="cap">titolo del progetto</span><i></i><i class="s"></i><span class="wlink">Apri la scheda →</span></div></div><div class="proj"><div class="ph ph-sm"><span>immagine</span></div><div class="lines"><span class="cap">titolo del progetto</span><i></i><i class="s"></i><span class="wlink">Apri la scheda →</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · 3–5 progetti candidabili, con contesto, imprevisto affrontato ed esito. Senza questi materiali la pagina non esiste</li></ul></div></div><p class="bcap">Elenco schede progetto, una per riga su desktop</p></section><section class="band ctab"><div class="blabel"><span class="bn">04</span><span class="bt">Chiusura</span></div><div class="binner"><div class="nar"><p>Se avete un lavoro simile a uno di questi, il confronto parte da un punto molto più concreto.</p>
+<p class="wbtns"><span class="wb">Contattaci</span></p></div></div><p class="bcap">CTA di chiusura</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div><div class="pageblock" id="p-contatti">
+  <div class="phead">
+    <div>
+      <p class="pk">Pagina</p>
+      <h3>Contatti</h3>
+      <code>/contatti</code>
+    </div>
+    <div class="pmeta"><span class="tag t-ok">contenuti completi</span></div>
+  </div>
+  <p class="ppitch">Converte qualificando la richiesta, così arriva già smistata alla persona giusta.</p>
+  <dl class="pdl">
+    <dt>A cosa serve</dt><dd>Convertire, qualificando la richiesta e indirizzandola alla persona giusta.</dd>
+    <dt>Cosa può fare chi la visita</dt><dd>Invio del form, con conferma su /grazie</dd>
+    <dt>Sezioni</dt><dd>5, nell'ordine in cui si incontrano scorrendo</dd>
+  </dl>
+  <div class="screen">
+  <div class="chrome"><i></i><i></i><i></i><code>sonit.it/contatti</code></div>
+  <div class="site">
+    <div class="topnav"><b>SONIT</b><div class="mn"><span>Chi siamo</span><span>Soluzioni</span><span>Certificazioni</span><span>Partner</span><span>Progetti</span><span>Contatti</span></div><span class="res">+39 0776 868072 · Area riservata</span></div>
+    <section class="band "><div class="blabel"><span class="bn">01</span><span class="bt">Apertura</span></div><div class="binner"><div class="nar"><p>Descriveteci il lavoro e i tempi: vi risponde chi lo seguirebbe, non un centralino. Se serve un sopralluogo, lo fissiamo.</p></div></div><p class="bcap">Apertura una colonna</p></section><section class="band "><div class="blabel"><span class="bn">02</span><span class="bt">Form richiesta</span></div><div class="binner"><div class="nar"><p class="c-lbl">Scrivici</p>
+<p>Campi: nome e cognome · azienda · ruolo · email · telefono · tipo di richiesta (informazioni, gara o preventivo, partnership, altro) · area di interesse (telecomunicazioni, impianti, fotovoltaico) · messaggio · consenso privacy.</p>
+<p class="wbtns"><span class="wb">Invia la richiesta</span></p></div><div class="fbox"><div class="fgrid c2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fcheck"><b></b><span>consenso privacy</span></div><span class="wb">Invia la richiesta</span></div></div><p class="bcap">Form su 2 colonne di campi, larghezza contenuta</p></section><section class="band "><div class="blabel"><span class="bn">03</span><span class="bt">Sedi e riferimenti</span></div><div class="binner"><div class="g2"><div><p><b>Sede operativa principale</b><br>Via S. Altissimo snc, 03033 Arpino (FR)</p>
+<p><b>Sede operativa di Roma</b><br>Via Pescara 2, 00182 Roma</p>
+<p>Telefono: +39 0776 868072<br>Email: info@sonit.it<br>P.IVA 02815390600</p></div><div class="ph ph-md"><span>mappa delle due sedi</span></div></div><div class="need"><ul><li><b>Serve da voi</b> · caselle email distinte per richieste B2B e privati</li><li><b>Da confermare</b> · orari di apertura e sede legale da mostrare?</li></ul></div></div><p class="bcap">Due schede sedi + riferimenti</p></section><section class="band hl"><div class="blabel"><span class="bn">04</span><span class="bt">Sei un privato?</span></div><div class="binner"><div class="g2"><div><p>Se cerchi un impianto fotovoltaico per la tua abitazione, hai un percorso dedicato con sopralluogo gratuito.</p>
+<p class="wbtns"><span class="wb">Fotovoltaico per la casa</span></p></div><div class="ph ph-md"><span>immagine residenziale</span></div></div></div><p class="bcap">Blocco varco privati</p></section><section class="band thx"><div class="blabel"><span class="bn">05</span><span class="bt">Pagina di conferma · /grazie</span></div><div class="binner"><div class="nar"><p class="c-lbl">Grazie, abbiamo ricevuto la richiesta</p>
+<p>Vi risponde una persona, non un automatismo. Se la richiesta è urgente, chiamateci: +39 0776 868072.</p>
+<p class="wbtns"><span class="wb">Torna alla home</span><span class="wb">Vedi le soluzioni</span></p></div></div><p class="bcap">Pagina /grazie separata, layout minimo centrato</p></section>
+    <div class="sitefoot"><span>Sedi · contatti · certificazioni · privacy e cookie</span></div>
+  </div>
+</div>
+</div>
+
+<h2 class="sec" id="serve">Cosa serve da voi</h2>
+<p class="intro">19 documenti da reperire e 12 dati da confermare. Sono elencati sotto la pagina che sbloccano: ogni voce che arriva chiude una sezione oggi segnata in arancione. Le sezioni si possono comunque approvare prima: cambia cosa ci sta dentro, non dove sta.</p>
+<div class="nb"><p class="cap"><a href="#p-home">Home</a><code>/</code></p><ul><li><span class="k kc">conferma</span><b>Sonit in numeri</b> — i quattro dati vanno confermati da Giorgio prima della pubblicazione: sono la prova principale della home</li><li><span class="k km">materiale</span><b>Certificazioni</b> — elenco certificazioni con enti ed estremi, per mostrare qui le 3–4 principali</li><li><span class="k km">materiale</span><b>Partner e fornitori</b> — loghi e nomi pubblicabili, con autorizzazione all&#x27;uso</li><li><span class="k km">materiale</span><b>Un progetto in evidenza</b> — il progetto scelto tra i 3–5 candidati a case study</li><li><span class="k kc">conferma</span><b>Contatti rapidi</b> — orari di apertura</li></ul></div><div class="nb"><p class="cap"><a href="#p-chi-siamo">Chi siamo</a><code>/chi-siamo</code></p><ul><li><span class="k kc">conferma</span><b>Chi siamo oggi</b> — anno di costituzione da usare nel title tag</li><li><span class="k km">materiale</span><b>Crescita e struttura</b> — numeri aggiornati di organico e ripartizione dei ruoli</li><li><span class="k kc">conferma</span><b>Crescita e struttura</b> — la previsione 50–55 persone con il subappalto: pubblicabile?</li><li><span class="k kc">conferma</span><b>Dove siamo</b> — la sede legale, oggi presente solo nei dati strutturati, va mostrata anche all&#x27;utente?</li><li><span class="k km">materiale</span><b>Download brochure e company profile</b> — i due PDF definitivi. Richiesta emersa in kick-off: nel 90% delle relazioni commerciali sostituiscono il cartaceo</li></ul></div><div class="nb"><p class="cap"><a href="#p-soluzioni">Soluzioni integrate</a><code>/soluzioni</code></p><ul><li><span class="k kc">conferma</span><b>Manutenzione e pronto intervento</b> — esistono contratti di manutenzione programmata da comunicare? tempi di intervento garantiti?</li></ul></div><div class="nb"><p class="cap"><a href="#p-telecomunicazioni">Telecomunicazioni</a><code>/soluzioni/telecomunicazioni</code></p><ul><li><span class="k km">materiale</span><b>Certificazioni pertinenti</b> — quali certificazioni sono pertinenti a questo ramo</li><li><span class="k km">materiale</span><b>Progetti collegati</b> — almeno un case study su una tratta in fibra</li></ul></div><div class="nb"><p class="cap"><a href="#p-impianti">Impianti civili e industriali</a><code>/soluzioni/impianti</code></p><ul><li><span class="k kc">conferma</span><b>Civile e industriale</b> — esempi di taglie o di tipologie di intervento tipiche, per rendere concreta la distinzione</li><li><span class="k km">materiale</span><b>Certificazioni pertinenti</b> — qualifiche pertinenti agli impianti elettrici e tecnologici</li><li><span class="k km">materiale</span><b>Progetti collegati</b> — almeno un case study impiantistico</li></ul></div><div class="nb"><p class="cap"><a href="#p-fotovoltaico">Fotovoltaico ed efficientamento</a><code>/soluzioni/fotovoltaico</code></p><ul><li><span class="k km">materiale</span><b>Taglie e contesti</b> — taglie tipiche degli impianti realizzati, per rendere leggibile la differenza rispetto al residenziale</li><li><span class="k km">materiale</span><b>Il nostro ruolo nella filiera dell&#x27;energia</b> — gli accordi sono comunicabili? con quale livello di dettaglio? Emersi in kick-off come leva della transizione a general contractor</li></ul></div><div class="nb"><p class="cap"><a href="#p-fotovoltaico-casa">Fotovoltaico per la casa</a><code>/fotovoltaico-casa</code></p><ul><li><span class="k km">materiale</span><b>Quanto serve per una casa</b> — taglie residenziali tipiche, con eventuale range di prezzo e produzione stimata. Senza questi dati il blocco resta generico</li><li><span class="k kc">conferma</span><b>Quanto serve per una casa</b> — si parla di accumulo? di colonnina per l&#x27;auto elettrica?</li><li><span class="k kc">conferma</span><b>Detrazioni e pratiche</b> — quali incentivi sono attivi al momento della pubblicazione: il testo va verificato prima del go-live</li><li><span class="k kc">conferma</span><b>Domande frequenti</b> — tempi medi reali</li><li><span class="k kc">conferma</span><b>Domande frequenti</b> — raggio di intervento per il residenziale: solo Lazio o oltre?</li></ul></div><div class="nb"><p class="cap"><a href="#p-certificazioni">Certificazioni</a><code>/certificazioni</code></p><ul><li><span class="k km">materiale</span><b>Le nostre certificazioni</b> — elenco completo delle certificazioni con enti ed estremi: senza questa la pagina dichiarata prioritaria non si può scrivere</li><li><span class="k km">materiale</span><b>Cosa significano per il committente</b> — una volta noto l&#x27;elenco, questo blocco si scrive senza altri materiali</li><li><span class="k km">materiale</span><b>Sicurezza e formazione</b> — come è organizzata la sicurezza: RSPP interno o esterno, piani di formazione, eventuali certificazioni dedicate</li></ul></div><div class="nb"><p class="cap"><a href="#p-partner">Partner e fornitori</a><code>/partner</code></p><ul><li><span class="k km">materiale</span><b>Partner e fornitori</b> — elenco e loghi dei partner pubblicabili, con autorizzazione all&#x27;uso del marchio</li><li><span class="k km">materiale</span><b>Committenti</b> — quali committenti sono nominabili sul sito. In kick-off sono stati citati player nazionali: senza autorizzazione si lavora per categorie anonime</li></ul></div><div class="nb"><p class="cap"><a href="#p-progetti">Progetti</a><code>/progetti</code></p><ul><li><span class="k km">materiale</span><b>I progetti</b> — 3–5 progetti candidabili, con contesto, imprevisto affrontato ed esito. Senza questi materiali la pagina non esiste</li></ul></div><div class="nb"><p class="cap"><a href="#p-contatti">Contatti</a><code>/contatti</code></p><ul><li><span class="k km">materiale</span><b>Sedi e riferimenti</b> — caselle email distinte per richieste B2B e privati</li><li><span class="k kc">conferma</span><b>Sedi e riferimenti</b> — orari di apertura e sede legale da mostrare?</li></ul></div>
+
+<div class="note">
+  <p><strong>Le domande di questo documento.</strong> L'ordine delle sezioni è quello giusto, a partire dalla home? I testi dicono cose vere e nel modo in cui le direste voi? Segnalate ciò che va corretto, tolto o detto diversamente: ora costa un minuto.</p>
+</div>
+
+<footer class="ft">
+  <p><strong>Sonit Srl · nuovo sito.</strong> Aggiornato al 17/08/2026. Documento riservato, non indicizzato.</p>
+  <p><a href="/presentazione">Copertina</a> · <a href="/presentazione/struttura">Struttura del sito</a> · <a href="/presentazione/pagine">Le pagine e i contenuti</a> · <a href="/">Documentazione tecnica di progetto</a></p>
+</footer>
+
+</div>
+</body>
+</html>
