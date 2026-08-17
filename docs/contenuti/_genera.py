@@ -151,6 +151,7 @@ for p in PAGES:
   <a href="/">← Indice dei documenti</a>
   <a href="/docs/contenuti/">← Panoramica contenuti</a>
   <a href="/docs/architettura-informazioni#albero">Alberatura · nodo</a>
+  <a href="/presentazione#p-{p['slug']}">★ Versione cliente</a>
   <span>Contenuti · {H.escape(p['label'])}</span>
 </div>
 
@@ -237,6 +238,7 @@ panor = f"""<!DOCTYPE html>
 <div class="upbar">
   <a href="/">← Indice dei documenti</a>
   <a href="/docs/architettura-informazioni">← Doc 03 · Architettura</a>
+  <a href="/presentazione">★ Versione cliente</a>
   <span>Stai leggendo: Doc 04 · Contenuti del nuovo sito</span>
 </div>
 

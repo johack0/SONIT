@@ -4,7 +4,7 @@ Registro operativo del progetto di restyling di [sonit.it](https://www.sonit.it/
 Se stai riprendendo il lavoro dopo una pausa, parti da [`RIPRESA.md`](RIPRESA.md).
 Documentazione online: <https://sonit-jhkstudio.vercel.app> · Indice generale: [README.md](README.md)
 
-Ultimo aggiornamento: **05/08/2026** — contenuti scritti, wireframe pianificati, progetto documentato per la ripresa
+Ultimo aggiornamento: **17/08/2026** — versione cliente pubblicata: alberatura semplificata e wireframe con i contenuti
 
 ---
 
@@ -15,7 +15,7 @@ Ultimo aggiornamento: **05/08/2026** — contenuti scritti, wireframe pianificat
 | **F0** | Kick-off | Verbale, obiettivi condivisi, governance | ✅ completata 28/07/2026 |
 | **F1** | Stato dell'arte | Doc 01, Doc 02, testi estratti | ✅ completata 05/08/2026 |
 | **F2** | Architettura delle informazioni | Doc 03, decisioni D-01 → D-07 validate | ✅ completata 05/08/2026 |
-| **F3** | Contenuti e wireframe | Doc 04 (contenuti, 11 pagine), Doc 05 (piano wireframe) | 🔵 contenuti in approvazione, wireframe pianificati |
+| **F3** | Contenuti e wireframe | Doc 04 (contenuti, 11 pagine), Doc 05 (piano wireframe), versione cliente (alberatura + wireframe) | 🔵 in approvazione presso il cliente |
 | **F4** | Direzione visiva | **Due** proposte di design | ⬜ da avviare |
 | **F5** | Design completo | Tutte le pagine, desktop e mobile | ⬜ da avviare |
 | **F6** | Sviluppo | Ambiente di staging | ⬜ da avviare |
@@ -53,7 +53,9 @@ Legenda stato: ✅ fatto · 🔵 in corso · ⏳ atteso dal cliente · ⬜ da fa
 | W-039 | Chiusura dei 19 blocchi in attesa di materiali dal cliente | F3 | W-007 | Team contenuti | ⏳ |
 | W-040 | Piano dei wireframe e documento di ripresa (Doc 05 + `RIPRESA.md`) | F3 | W-012 | Team dev | ✅ |
 | W-041 | Approvazione dei contenuti da parte di Giorgio | F3 | W-012 | Cliente | ⏳ |
-| W-013 | Wireframe low fidelity di tutte le pagine | F3 | W-041 | Team design | 🔵 prossimo, pianificato nel Doc 05 |
+| W-013 | Wireframe low fidelity di tutte le pagine | F3 | W-041 | Team design | 🔵 prima passata disegnata nella versione cliente, da rifinire dopo approvazione |
+| W-042 | Versione cliente: alberatura semplificata + wireframe a blocchi con i contenuti dentro | F3 | W-012, W-040 | Team dev | ✅ 17/08/2026 |
+| W-043 | Presentazione della versione cliente a Giorgio e Beatrice | F3 | W-042 | Referente progetto | ⬜ |
 | W-014 | Definizione formato case study, senza foto reali di cantiere | F3 | W-011 | Team contenuti | ⬜ |
 | W-015 | Selezione libreria immagini standard coerente con le linee guida | F3 | W-011 | Team design | ⬜ |
 | W-016 | Due proposte di direzione visiva su base blu `#003A83` | F4 | W-013 | Team design | ⬜ |
@@ -132,6 +134,9 @@ Elenco completo, con severità e rimedio: [Doc 01 · criticità](https://sonit-j
 ## Diario delle modifiche
 
 Voci in ordine cronologico inverso.
+
+### 17/08/2026 — Versione cliente: alberatura e wireframe con i contenuti
+Pubblicata `presentazione/index.html`, il documento unico da mostrare al cliente: alberatura semplificata delle nove pagine con il percorso privati tenuto fuori dal menu, poi ogni pagina disegnata come una finestra di browser con le sezioni nell'ordine reale e il copy dentro i blocchi. Rettangoli tratteggiati dove andranno immagini, loghi, mappa, schede progetto e certificazioni; riquadri arancioni sulle sezioni che dipendono dai materiali, con la richiesta esplicita; in chiusura l'elenco delle 19 richieste di materiale e delle 12 conferme, raggruppate per pagina, e le quattro domande di approvazione. Nessun codice interno (W-, D-, A-), nessun title tag, nessun conteggio caratteri: il documento è leggibile in riunione. È generato da `docs/_genera-presentazione.py` sulle stesse sorgenti del Doc 04 e del Doc 05, quindi non può divergere: i layout stanno ora in `docs/_layout.py`, condiviso fra piano wireframe e versione cliente. Aggiunti i link incrociati: card nell'hub, voce `★ Versione cliente` nelle barre di navigazione dei Doc 01, 02, 03, 04 e 05, e dal Doc 04 il link porta direttamente alla pagina corrispondente della presentazione.
 
 ### 05/08/2026 — Doc 05 e punto di ripresa
 Documentato tutto il necessario per riprendere il progetto da fermo dopo l'approvazione. `RIPRESA.md` è il file da leggere per primo: stato per fase, decisioni già chiuse da non rimettere in discussione, alberatura approvata, materiali attesi in ordine di priorità, difetti del sito attuale da non dimenticare in sviluppo, mappa di dove sta cosa e comandi di rigenerazione. Il [Doc 05](https://sonit-jhkstudio.vercel.app/docs/piano-wireframe) contiene il piano dei wireframe: cosa va approvato prima e cosa invece non li blocca, criteri e tre breakpoint, dodici componenti ricorrenti da disegnare una volta sola, ordine di produzione in otto blocchi di lavoro, le 67 sezioni con il layout previsto pagina per pagina, gli schemi testuali di home, template business unit e landing B2C, e una checklist di validazione in tredici punti. Il documento è generato dalla stessa sorgente dei contenuti, quindi l'elenco delle sezioni non può divergere.

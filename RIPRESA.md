@@ -1,13 +1,14 @@
 # Punto di ripresa — SONIT · Progetto DXP
 
 Documento da leggere **per primo** quando si riprende il lavoro dopo l'approvazione dei contenuti.
-Ultimo aggiornamento: **05/08/2026**
+Ultimo aggiornamento: **17/08/2026**
 
 ---
 
 ## In una pagina
 
-Struttura del nuovo sito **decisa e validata**, contenuti delle 11 pagine **scritti**, piano dei wireframe **pronto**.
+Struttura del nuovo sito **decisa e validata**, contenuti delle 11 pagine **scritti**, piano dei wireframe **pronto**,
+versione da mostrare al cliente **pubblicata** su [`/presentazione`](https://sonit-jhkstudio.vercel.app/presentazione): alberatura semplificata e wireframe a blocchi con i contenuti dentro.
 Il lavoro è fermo in attesa di due cose, indipendenti tra loro:
 
 1. **Approvazione dei contenuti** da parte di Giorgio — sblocca i wireframe.
@@ -37,7 +38,8 @@ I wireframe si possono iniziare con la sola approvazione: la struttura delle sez
 | F1 | Stato dell'arte, alberatura attuale, testi estratti | ✅ 05/08/2026 |
 | F2 | Architettura delle informazioni + 7 decisioni validate | ✅ 05/08/2026 |
 | F3 | Contenuti: 11 pagine, 67 blocchi | 🔵 scritti, in attesa di approvazione |
-| F3 | Wireframe low fidelity | ⬜ pianificati (Doc 05), da produrre |
+| F3 | Wireframe low fidelity | 🔵 prima passata disegnata nella versione cliente, da rifinire dopo approvazione |
+| F3 | Versione cliente (alberatura + wireframe + contenuti) | ✅ 17/08/2026, da presentare |
 | F4 | Due proposte di direzione visiva | ⬜ |
 | F5 | Design completo di tutte le pagine | ⬜ |
 | F6 | Sviluppo | ⬜ |
@@ -132,6 +134,9 @@ Difetti del sito attuale che il nuovo sito deve chiudere. A distanza di settiman
 | `docs/contenuti/_sorgente_testi.py` | **sorgente dei testi**: si modifica qui |
 | `docs/contenuti/_genera.py` | rigenera i file di contenuto |
 | `docs/piano-wireframe.html` | Doc 05 — piano dei wireframe, sezioni pagina per pagina, checklist |
+| `presentazione/index.html` | **Versione cliente**: alberatura semplificata + wireframe con i contenuti |
+| `docs/_genera-presentazione.py` | rigenera la versione cliente |
+| `docs/_layout.py` | layout e forma dei blocchi, condivisi da Doc 05 e versione cliente |
 | `docs/_genera-piano-wireframe.py` | rigenera il Doc 05 dalle stesse sorgenti |
 | `docs/testi/` | testi del sito attuale, riportati alla lettera |
 
@@ -142,6 +147,7 @@ python3 -m http.server 4000
 # rigenerare contenuti e piano wireframe dopo una modifica ai testi
 python3 docs/contenuti/_genera.py
 python3 docs/_genera-piano-wireframe.py
+python3 docs/_genera-presentazione.py
 
 # pubblicare
 vercel deploy --prod

@@ -19,6 +19,7 @@ La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag:
 | `docs/architettura-informazioni.html` | **Doc 03** — Nuova alberatura e organizzazione dei contenuti (fase F2, decisioni validate) |
 | `docs/contenuti/` | **Doc 04** — Contenuti del nuovo sito: un file per pagina della nuova alberatura, copy pronto blocco per blocco |
 | `docs/piano-wireframe.html` | **Doc 05** — Piano dei wireframe e punto di ripresa: ordine di produzione, sezioni per pagina, schemi, checklist |
+| `presentazione/index.html` | **Versione cliente** — Documento unico da presentare: alberatura semplificata e wireframe a blocchi con i contenuti dentro |
 | `docs/testi/` | Testi estratti dal sito online, un file per pagina, riportati alla lettera |
 | `WORKLOG.md` | Worklog operativo: fasi, attività con stato, decisioni chiuse, materiali attesi, diario delle modifiche |
 | `SONIT _ Kick Off DXP … .docx` | Verbale del kick-off del 28/07/2026 |
@@ -42,6 +43,12 @@ docs/testi/privacy.html                    ← privacy.php
 ```
 
 Ogni file contiene i metadati della pagina, il contenuto **riportato alla lettera** (refusi compresi, non corretti), i blocchi ripetuti del template, gli attributi `alt`, i campi dei form e i link. È il materiale di partenza per la riscrittura in fase F3.
+
+### La versione cliente
+
+`presentazione/index.html` è l'unico documento da mettere in mano al cliente: alberatura semplificata delle nove pagine, poi ogni pagina disegnata come una finestra di browser con le sezioni nell'ordine reale e il copy dentro i blocchi. I rettangoli tratteggiati sono gli spazi per immagini, loghi, mappa e schede; i riquadri arancioni sono le sezioni che dipendono dai materiali del cliente, con la richiesta scritta. In chiusura, l'elenco delle richieste raggruppate per pagina e le domande di approvazione. Non contiene codici interni, title tag né conteggi di caratteri.
+
+Si rigenera con `python3 docs/_genera-presentazione.py`.
 
 ### I contenuti del nuovo sito
 
@@ -85,7 +92,7 @@ Tutti i documenti sono collegati tra loro:
 | F0 | Kick-off, obiettivi e governance | ✅ completata 28/07/2026 |
 | F1 | Stato dell'arte, alberatura attuale, testi estratti | ✅ completata 05/08/2026 |
 | F2 | Architettura delle informazioni | ✅ completata 05/08/2026, decisioni validate |
-| F3 | Contenuti e wireframe low fidelity | 🔵 contenuti scritti (11 pagine), wireframe pianificati (Doc 05) |
+| F3 | Contenuti e wireframe low fidelity | 🔵 contenuti scritti (11 pagine), versione cliente pubblicata, wireframe di dettaglio dopo l'approvazione |
 | F4 | Due proposte di direzione visiva | ⬜ da avviare |
 | F5 | Design completo di tutte le pagine | ⬜ da avviare |
 | F6 | Sviluppo | ⬜ da avviare |
@@ -137,5 +144,6 @@ vercel deploy --prod
 - Ogni modifica sostanziale va registrata nel **diario delle modifiche** del Doc 01 e in `WORKLOG.md`, aggiungendo la voce in cima.
 - I testi estratti da `docs/testi/` **non si correggono**: sono la fotografia del sito attuale. Le correzioni si fanno nei nuovi contenuti.
 - I contenuti in `docs/contenuti/` sono **generati**: i testi stanno in `docs/contenuti/_sorgente_testi.py`, si modificano lì e si rigenera con `python3 docs/contenuti/_genera.py`. Non si editano i singoli HTML, altrimenti la prossima rigenerazione li sovrascrive.
-- Il Doc 05 legge le stesse sorgenti: dopo ogni modifica ai testi, rigenerare anche con `python3 docs/_genera-piano-wireframe.py` così l'elenco delle sezioni resta allineato.
+- Il Doc 05 e la versione cliente leggono le stesse sorgenti: dopo ogni modifica ai testi rigenerare anche con `python3 docs/_genera-piano-wireframe.py` e `python3 docs/_genera-presentazione.py`, così sezioni e wireframe restano allineati.
+- I layout dei blocchi stanno in `docs/_layout.py` (`LAY` = layout previsto, `SHAPE` = forma del wireframe disegnato): si modificano lì, sono condivisi dai due documenti.
 - Nuovi documenti: si aggiunge la card in `index.html` e i link incrociati nelle barre di navigazione degli altri documenti.
