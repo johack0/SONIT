@@ -8,7 +8,7 @@ Ultimo aggiornamento: **17/08/2026**
 ## In una pagina
 
 Struttura del nuovo sito **decisa e validata**, contenuti delle 11 pagine **scritti**, piano dei wireframe **pronto**,
-versione da mostrare al cliente **pubblicata** su [`/presentazione`](https://sonit-jhkstudio.vercel.app/presentazione): alberatura semplificata e wireframe a blocchi con i contenuti dentro.
+versione da mostrare al cliente **pubblicata** su [`/presentazione`](https://sonitgamma.vercel.app/presentazione): alberatura semplificata e wireframe a blocchi con i contenuti dentro.
 Il lavoro è fermo in attesa di due cose, indipendenti tra loro:
 
 1. **Approvazione dei contenuti** da parte di Giorgio — sblocca i wireframe.
@@ -16,7 +16,7 @@ Il lavoro è fermo in attesa di due cose, indipendenti tra loro:
 
 I wireframe si possono iniziare con la sola approvazione: la struttura delle sezioni non cambia con i materiali, cambia solo cosa ci sta dentro.
 
-**Prossimo deliverable:** wireframe strutturali low fidelity, secondo l'ordine di produzione del [Doc 05](https://sonit-jhkstudio.vercel.app/docs/piano-wireframe#ordine).
+**Prossimo deliverable:** wireframe strutturali low fidelity, secondo l'ordine di produzione del [Doc 05](https://sonitgamma.vercel.app/docs/piano-wireframe#ordine).
 
 ---
 
@@ -49,7 +49,7 @@ I wireframe si possono iniziare con la sola approvazione: la struttura delle sez
 
 ## Cosa è già deciso e non va rimesso in discussione
 
-Le sette decisioni di struttura sono state validate il 05/08/2026. Dettaglio in [`WORKLOG.md`](WORKLOG.md) e nel [Doc 03](https://sonit-jhkstudio.vercel.app/docs/architettura-informazioni#decisioni).
+Le sette decisioni di struttura sono state validate il 05/08/2026. Dettaglio in [`WORKLOG.md`](WORKLOG.md) e nel [Doc 03](https://sonitgamma.vercel.app/docs/architettura-informazioni#decisioni).
 
 | # | Decisione |
 |---|---|
@@ -115,7 +115,7 @@ Difetti del sito attuale che il nuovo sito deve chiudere. A distanza di settiman
 - `/partner.php` è dichiarata in `sitemap.xml` e risponde **404** → la nuova pagina partner lo chiude, sitemap da rigenerare dalle pagine reali.
 - **GA4 e Search Console vanno attivati prima del go-live**, per avere una baseline di confronto (W-026). Oggi non esiste alcun analytics.
 - Testi legali **su dominio proprio**: oggi l'unica informativa è un popup su `sitofelice.it` (W-025).
-- Redirect 301 da tutti i vecchi URL `.php`, mappa nel [Doc 03](https://sonit-jhkstudio.vercel.app/docs/architettura-informazioni#slug) (W-027).
+- Redirect 301 da tutti i vecchi URL `.php`, mappa nel [Doc 03](https://sonitgamma.vercel.app/docs/architettura-informazioni#slug) (W-027).
 - `user-scalable=no` nel viewport, immagini senza `alt`, 2,57 MB di immagini in home: da non replicare (W-023, W-024).
 - Il refuso "Effic**e**ntamento" non deve tornare: slug corretto `/soluzioni/fotovoltaico`.
 
@@ -160,4 +160,4 @@ vercel deploy --prod
 - **Approvazione documenti ufficiali:** Giorgio.
 - **Riferimenti operativi:** Giorgio e Beatrice.
 - Ogni comunicazione e ogni deliverable vanno inviati a **entrambi** gli indirizzi.
-- La documentazione online è su Vercel con protezione attiva: per condividerla col cliente va disattivata la Vercel Authentication o generato un link di bypass.
+- La documentazione online è su Vercel, non indicizzabile ma raggiungibile senza autenticazione: il link si manda al cliente così com'è. Da mostrare in riunione: [`/presentazione`](https://sonitgamma.vercel.app/presentazione).

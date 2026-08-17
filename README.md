@@ -3,8 +3,8 @@
 Documentazione di progetto per il rifacimento del sito **[sonit.it](https://www.sonit.it/)** di Sonit Srl.
 Repo di lavoro: contiene analisi, alberature, testi estratti dal sito attuale e l'architettura validata del nuovo sito.
 
-**Documentazione online:** <https://sonit-jhkstudio.vercel.app>
-La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag: noindex`). La protezione Vercel Authentication è attiva: per condividerla con il cliente va disattivata o va generato un link di bypass.
+**Documentazione online:** <https://sonitgamma.vercel.app>
+La documentazione è pubblicata su Vercel e non è indicizzabile (`X-Robots-Tag: noindex`), ma è raggiungibile senza autenticazione: il link si può mandare al cliente così com'è. La versione da mostrare in riunione è <https://sonitgamma.vercel.app/presentazione>.
 
 ---
 
